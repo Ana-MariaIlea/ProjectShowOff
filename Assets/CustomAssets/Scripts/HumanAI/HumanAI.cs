@@ -16,22 +16,12 @@ public class HumanAI : MonoBehaviour
 {
     [SerializeField]
     GameObject stateHolder;
-   // List<BaseState> states;
+    [SerializeField]
+    GameObject house;
     BaseState currentState;
     // Start is called before the first frame update
     void Start()
     {
-        ////states.Add(stateHolder.GetComponent<MoveInGarden>());
-
-        //Debug.Log(stateHolder.GetComponent<PickFlowers>());
-        //PickFlowers pe = stateHolder.GetComponent<PickFlowers>();
-        //Debug.Log(pe);
-        ////states.Add(pe);
-        ////states.Add(stateHolder.GetComponent<SprayPesticides>());
-
-        //currentState = stateHolder.GetComponent<CutGrass>();
-        //Debug.Log(currentState);
-
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATE, OnStateChange);
     }
 
