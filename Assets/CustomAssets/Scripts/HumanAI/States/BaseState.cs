@@ -77,7 +77,7 @@ public abstract class BaseState : MonoBehaviour
         }
     }
 
-    public void SearchWalkPoint()
+    public virtual void SearchWalkPoint()
     {
         walkPoint++;
         if (walkPoint > path.Count - 1 || walkPoint < 0) walkPoint = 0;
@@ -91,7 +91,7 @@ public abstract class BaseState : MonoBehaviour
         return isStateFinished;
     }
 
-    public void FinishState()
+    public virtual void FinishState()
     {
         isStateFinished = true;
     }

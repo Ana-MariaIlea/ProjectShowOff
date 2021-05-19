@@ -53,7 +53,16 @@ public class CutGrass : BaseState
             {
                 launge.SetActive(true);
             }
+
+            FinishState();
         }
         base.HandleTargetreached();
+    }
+
+
+    public override void FinishState()
+    {
+        base.FinishState();
+        EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
     }
 }

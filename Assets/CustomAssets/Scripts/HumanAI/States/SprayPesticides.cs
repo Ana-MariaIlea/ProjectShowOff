@@ -37,4 +37,24 @@ public class SprayPesticides : BaseState
         }
     }
 
+    public override void SearchWalkPoint()
+    {
+        walkPoint++;
+       // if (walkPoint > path.Count - 1 || walkPoint < 0) walkPoint = 0;
+        if (walkPoint > path.Count - 1) FinishState();
+        else
+        {
+            target = path[walkPoint].pathHolder.transform;
+            timer = path[walkPoint].timeToStay;
+            walkPointSet = true;
+        }
+        
+    }
+
+    public override void FinishState()
+    {
+        base.FinishState();
+        EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
+    }
+
 }

@@ -6,16 +6,31 @@ public class GoToHouse : BaseState
 {
 
     [SerializeField]
-    GameObject house;
-    // Start is called before the first frame update
-    void Start()
+    GameObject houseLocation;
+
+
+    public override void UpdateBehavior()
     {
-        
+        agent.SetDestination(target.position);
+
+
+        Vector3 distanceToLocation = self.position - target.position;
+
+
+        if (distanceToLocation.magnitude < 1f)
+        {
+            FinishState();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResetTarget()
     {
-        
+        target = houseLocation.transform;
+    }
+
+    public override void FinishState()
+    {
+        base.FinishState();
+        target = self;
     }
 }

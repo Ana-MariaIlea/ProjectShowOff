@@ -11,6 +11,7 @@ public class PickFlowers : BaseState
     {
         if (path.Count > 0)
             Patroling();
+        else FinishState();
     }
 
 
@@ -35,5 +36,12 @@ public class PickFlowers : BaseState
         GameObject f = path[walkPoint].pathHolder;
         path.RemoveAt(walkPoint);
         Destroy(f);
+    }
+
+
+    public override void FinishState()
+    {
+        base.FinishState();
+        EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
     }
 }

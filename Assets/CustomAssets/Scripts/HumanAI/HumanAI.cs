@@ -9,15 +9,14 @@ public enum HumanStates
     WalkInTheGarden,
     PickFlowes,
     SprayGarden,
-    CutGrass
+    CutGrass,
+    GoToHouse
 }
 
 public class HumanAI : MonoBehaviour
 {
     [SerializeField]
     GameObject stateHolder;
-    [SerializeField]
-    GameObject house;
     BaseState currentState;
     // Start is called before the first frame update
     void Start()
