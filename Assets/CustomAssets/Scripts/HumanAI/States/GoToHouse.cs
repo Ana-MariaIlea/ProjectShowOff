@@ -6,9 +6,16 @@ public class GoToHouse : BaseState
 {
 
     [SerializeField]
-    GameObject houseLocation;
+    Transform houseLocation;
 
+    private void OnDrawGizmos()
+    {
 
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(houseLocation.position, .3f);
+        
+
+    }
     public override void UpdateBehavior()
     {
         agent.SetDestination(target.position);
@@ -25,7 +32,7 @@ public class GoToHouse : BaseState
 
     public void ResetTarget()
     {
-        target = houseLocation.transform;
+        target = houseLocation;
     }
 
     public override void FinishState()

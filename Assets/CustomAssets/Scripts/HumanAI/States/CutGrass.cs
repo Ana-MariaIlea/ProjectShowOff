@@ -18,6 +18,9 @@ public class CutGrass : BaseState
     [Tooltip("Add The GameObject that represents the launge area")]
     [SerializeField]
     private GameObject launge;
+    [Tooltip("Add The GameObject that represents the gradd to be eliminated")]
+    [SerializeField]
+    private GameObject grass;
 
     private void OnDrawGizmos()
     {
@@ -52,6 +55,10 @@ public class CutGrass : BaseState
             if (launge.activeSelf == false)
             {
                 launge.SetActive(true);
+            }
+            if (grass.activeSelf == true)
+            {
+                grass.SetActive(false);
             }
 
             FinishState();
