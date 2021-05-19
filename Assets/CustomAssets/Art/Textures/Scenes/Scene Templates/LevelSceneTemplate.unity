@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -763,8 +763,6 @@ MonoBehaviour:
   isStateFinished: 0
   state: 2
   path: []
-  agent: {fileID: 0}
-  self: {fileID: 0}
   particles: {fileID: 0}
 --- !u!114 &943979391
 MonoBehaviour:
@@ -781,8 +779,6 @@ MonoBehaviour:
   isStateFinished: 0
   state: 1
   path: []
-  agent: {fileID: 0}
-  self: {fileID: 0}
 --- !u!114 &943979392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,8 +794,6 @@ MonoBehaviour:
   isStateFinished: 0
   state: 0
   path: []
-  agent: {fileID: 0}
-  self: {fileID: 0}
 --- !u!4 &943979393
 Transform:
   m_ObjectHideFlags: 0
@@ -831,8 +825,6 @@ MonoBehaviour:
   path: []
   pointToStartCutting: {fileID: 0}
   pointToEndCutting: {fileID: 0}
-  agent: {fileID: 0}
-  self: {fileID: 0}
   particles: {fileID: 0}
   lawnmower: {fileID: 0}
   launge: {fileID: 0}
@@ -1098,6 +1090,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1600761866990000962, guid: 8d994028a32f08943a1f97be22126e85,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 645725311}
     - target: {fileID: 9207179467135139375, guid: 8d994028a32f08943a1f97be22126e85,
         type: 3}
       propertyPath: m_Name
@@ -1682,7 +1679,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977275788}
-  m_LocalRotation: {x: 0.11508167, y: -0.000000017092065, z: 0.0000000019801392, w: 0.99335605}
+  m_LocalRotation: {x: 0.11508167, y: 0.000000017092063, z: -0.000000001980139, w: 0.99335605}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
