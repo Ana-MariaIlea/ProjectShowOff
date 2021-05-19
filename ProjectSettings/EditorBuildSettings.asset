@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/DefaultAssets/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
-    path: Assets/CustomAssets/Art/Textures/Scenes/TestScenes/NectarCollectionTestScene.unity
+    path: Assets/CustomAssets/Scenes/TestScenes/NectarCollectionTestScene.unity
     guid: 5a8279434bb85ac46a90bda12d26cf20
   m_configObjects: {}
