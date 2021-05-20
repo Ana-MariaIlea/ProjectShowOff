@@ -39,13 +39,21 @@ public class HumanAI : MonoBehaviour
             switch (e.state)
             {
                 case HumanStates.PickFlowes:
+                    Debug.Log("Change state to pick Flowers");
                     currentState = stateHolder.GetComponent<PickFlowers>();
                     break;
                 case HumanStates.SprayGarden:
+                    Debug.Log("Change state to spray garden");
                     currentState = stateHolder.GetComponent<SprayPesticides>();
                     break;
                 case HumanStates.CutGrass:
+                    Debug.Log("Change state to cut grass");
                     currentState = stateHolder.GetComponent<CutGrass>();
+                    break;
+                case HumanStates.GoToHouse:
+                    Debug.Log("Change state to go to house");
+                    stateHolder.GetComponent<GoToHouse>().ResetTarget();
+                    currentState = stateHolder.GetComponent<GoToHouse>();
                     break;
             }
 
