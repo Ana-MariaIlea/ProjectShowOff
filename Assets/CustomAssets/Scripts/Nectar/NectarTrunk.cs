@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NectarTrunk : MonoBehaviour
 {
     [SerializeField]
     int nectarAmount = 0;
+    [SerializeField]
+    TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,7 @@ public class NectarTrunk : MonoBehaviour
     {
         nectarAmount += amount;
         Debug.Log("New nectar amount in trunk: " + nectarAmount);
+        text.text = "Nectar in deposit: " + nectarAmount.ToString();
     }
 
     public void OnNectarIsStored(EventData eventData)

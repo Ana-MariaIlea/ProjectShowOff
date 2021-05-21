@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NectarCollect : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class NectarCollect : MonoBehaviour
     int nectarAmount = 0;
     [SerializeField]
     int maxNectarAmount;
+    [SerializeField]
+    TextMeshProUGUI text;
 
     private void Start()
     {
@@ -52,10 +55,12 @@ public class NectarCollect : MonoBehaviour
     {
         nectarAmount += amount;
         Debug.Log("New nectar amount in player: " + nectarAmount);
+        text.text = "Nectar on bee: " + nectarAmount.ToString();
     }
 
     private void resetNectarAmount()
     {
         nectarAmount = 0;
+        text.text = "Nectar on bee: "+nectarAmount.ToString();
     }
 }
