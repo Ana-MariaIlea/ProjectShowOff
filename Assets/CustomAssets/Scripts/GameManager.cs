@@ -1,39 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager gameManager;
-    [SerializeField]
-    private HumanStates playerPosition;
+    public static GameManager instance;
+    public int titleScreenInterger;
+    public int mainScreenInterger;
+    public GameObject loadingScreen;
+    public Action StartGame;
+
 
     private void Awake()
     {
-        if (gameManager == null)
-            gameManager = this;
+        if (instance == null)
+            instance = this;
+
+        SceneManager.LoadSceneAsync(titleScreenInterger, LoadSceneMode.Additive);
     }
     private void Start()
     {
-        EventQueue.eventQueue.Subscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
+        loadingScreen.SetActive(false);
+        
     }
 
-    public void OnPlayerZoneChanged(EventData eventData)
+    private void Update()
     {
-        if(eventData is ChangePlayerLocationEventData)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ChangePlayerLocationEventData e = eventData as ChangePlayerLocationEventData;
-            SetPlayerPositionZone(e.zone);
+            Application.Quit();
         }
     }
 
-    public void SetPlayerPositionZone(HumanStates newZone)
+    List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
+    public void LoadGame()
     {
-        playerPosition = newZone;
-    }    
-    
-    public HumanStates GetPlayerPositionZone()
+        loadingScreen.SetActive(true);
+        scenesLoading.Add(SceneManager.UnloadSceneAsync(titleScreenInterger));
+        scenesLoading.Add(SceneManager.LoadSceneAsync(mainScreenInterger, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgress());
+    }
+
+    public IEnumerator GetSceneLoadProgress()
     {
-        return playerPosition;
+        for (int i = 0; i < scenesLoading.Count; i++)
+        {
+            while (!scenesLoading[i].isDone)
+            {
+                yield return null;
+
+            }
+        }
+        loadingScreen.SetActive(false);
+
+        yield return new WaitForSeconds(3);
+
+        StartGame.Invoke();
+        //intro.
     }
 }

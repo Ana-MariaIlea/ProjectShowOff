@@ -4,5 +4,14 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    public void PlayGame()
+    {
+        //SceneManager.LoadScene(3);
+        GameManager.instance.LoadGame();
+    }
 
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
