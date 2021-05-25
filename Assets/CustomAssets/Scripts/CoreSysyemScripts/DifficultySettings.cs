@@ -12,6 +12,7 @@ public class DifficultySettings:ScriptableObject
     public PlayerEfectsStats PlayerEfectsStats;
     public bool FlowersGlow;
     public bool FlowersHaveParticles;
+    public bool MinigameActive;
     public int NectarCooldownTime;
 }
 
@@ -21,4 +22,10 @@ public class DifficultyCheck
     public int minutes;
     public int seconds;
     public int nectar;
+    float time;
+
+    public void Initiallize()
+    {
+        time = minutes * 60 + seconds;
+    }
 }

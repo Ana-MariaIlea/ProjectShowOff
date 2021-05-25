@@ -37,7 +37,7 @@ public class GlobalTimer : MonoBehaviour
 
     [Tooltip("Do NOT modify, preview avaliable for testing only")]
     [SerializeField]
-    float timer;
+    float timer = 0;
 
     [System.Serializable]
     public class EventStates
@@ -69,13 +69,15 @@ public class GlobalTimer : MonoBehaviour
     bool secondEventFired=false;
     bool thirdEventFired=false;
 
+    float MaxTimer;
+
     private void Awake()
     {
-        timer = minutes * 60 + seconds;
+        MaxTimer = minutes * 60 + seconds;
 
-        timeForFirstEvent =timer-( minutesForFirstEvent * 60 + secondsForFirstEvent);
-        timeForSecondEvent = timer - (minutesForSecondEvent * 60 + secondsForSecondEvent);
-        timeForThirdEvent = timer - (minutesForThirdEvent * 60 + secondsForThirdEvent);
+        timeForFirstEvent =minutesForFirstEvent * 60 + secondsForFirstEvent;
+        timeForSecondEvent = minutesForSecondEvent * 60 + secondsForSecondEvent;
+        timeForThirdEvent = minutesForThirdEvent * 60 + secondsForThirdEvent;
     }
     // Start is called before the first frame update
     void Start()
@@ -86,23 +88,23 @@ public class GlobalTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer > 0)
-            timer -= Time.deltaTime;
+        if (timer < MaxTimer)
+            timer += Time.deltaTime;
 
 
-        if (timer < timeForFirstEvent&&firstEventFired==false)
+        if (timer > timeForFirstEvent&&firstEventFired==false)
         {
             Debug.Log("FirstEvent");
             ChangeStateEvent(eventStates[0]);
             firstEventFired = true;
         }
-        if (timer < timeForSecondEvent && secondEventFired == false)
+        if (timer > timeForSecondEvent && secondEventFired == false)
         {
             Debug.Log("SecondEvent");
             ChangeStateEvent(eventStates[1]);
             secondEventFired = true;
         }
-        if (timer < timeForThirdEvent && thirdEventFired == false)
+        if (timer > timeForThirdEvent && thirdEventFired == false)
         {
             Debug.Log("ThirdtEvent");
             ChangeStateEvent(eventStates[2]);
