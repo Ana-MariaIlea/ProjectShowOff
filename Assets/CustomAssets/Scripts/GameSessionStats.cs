@@ -12,6 +12,12 @@ public class GameSessionStats : MonoBehaviour
     private int playerScore;
     private string playerName;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
     void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
