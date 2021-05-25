@@ -61,4 +61,9 @@ public class GameManager : MonoBehaviour
         StartGame.Invoke();
         //intro.
     }
+
+    public void SceneTest()
+    {
+        Debug.Log("hello from the scene");
+    }
 }
