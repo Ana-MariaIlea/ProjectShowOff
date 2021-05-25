@@ -23,6 +23,6 @@ public class SceneInformationTest : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         GameManager.instance.BackToMenu();
-        //HighscoreTable.instance.AddTestEntry();
+        HighscoreTable.instance.AddTestEntry();
     }
 }
