@@ -7,6 +7,10 @@ public class GameSessionStats : MonoBehaviour
     public static GameSessionStats instance;
     [SerializeField]
     private HumanStates playerPosition;
+    [SerializeField]
+    private List<DifficultySettings> settings;
+    [SerializeField]
+    private List<DifficultyCheck> checksForDifficulty;
 
     private int playerScore;
     private string playerName;
