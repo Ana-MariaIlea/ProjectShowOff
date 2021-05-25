@@ -44,6 +44,15 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GetSceneLoadProgress());
     }
 
+    public void BackToMenu()
+    {
+        loadingScreen.SetActive(true);
+        scenesLoading.Add(SceneManager.UnloadSceneAsync(mainScreenInterger));
+        scenesLoading.Add(SceneManager.LoadSceneAsync(titleScreenInterger, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgress());
+    }
+
     public IEnumerator GetSceneLoadProgress()
     {
         for (int i = 0; i < scenesLoading.Count; i++)
@@ -56,9 +65,14 @@ public class GameManager : MonoBehaviour
         }
         loadingScreen.SetActive(false);
 
-        yield return new WaitForSeconds(3);
-
-        StartGame.Invoke();
+        // yield return new WaitForSeconds(3);
+        scenesLoading = new List<AsyncOperation>();
+        //StartGame.Invoke();
         //intro.
+    }
+
+    public void SceneTest()
+    {
+        Debug.Log("hello from the scene");
     }
 }

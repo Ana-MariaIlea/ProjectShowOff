@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameSessionStats : MonoBehaviour
 {
-
     public static GameSessionStats instance;
     [SerializeField]
     private HumanStates playerPosition;

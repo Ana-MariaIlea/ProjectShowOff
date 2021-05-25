@@ -6,7 +6,7 @@ using TMPro;
 
 public class HighscoreTable : MonoBehaviour
 {
-    public static HighscoreTable highscoreTable;
+    public static HighscoreTable instance;
     //[SerializeField]
     private Transform entryContainer;
     [SerializeField]
@@ -17,8 +17,8 @@ public class HighscoreTable : MonoBehaviour
     private List<Transform> highscoreEntryTransformList=new List<Transform>();
     private void Awake()
     {
-        if (highscoreTable == null)
-            highscoreTable = this;
+        if (instance == null)
+            instance = this;
 
         entryContainer = transform.Find("HighScoreEntryContainer");
 
@@ -90,7 +90,12 @@ public class HighscoreTable : MonoBehaviour
         string json = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString("highscoreTable", json);
         PlayerPrefs.Save();
+    }
 
+
+    public void AddHighScoreEntryAndReset(int score, string name)
+    {
+        AddHighScoreEntry(score, name);
         ResetHighscoreTable();
     }
 
@@ -128,7 +133,7 @@ public class HighscoreTable : MonoBehaviour
         transformList.Add(entryTransform);
     }
 
-    private void resetScores()
+    public void ResetScores()
     {
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
@@ -136,6 +141,11 @@ public class HighscoreTable : MonoBehaviour
         string json = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString("highscoreTable", json);
         PlayerPrefs.Save();
+    }
+
+    public void AddTestEntry()
+    {
+        AddHighScoreEntry(1000, "Scene good");
     }
 
     private class Highscores
