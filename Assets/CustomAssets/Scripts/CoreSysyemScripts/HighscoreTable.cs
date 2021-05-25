@@ -140,7 +140,7 @@ public class HighscoreTable : MonoBehaviour
 
     public void AddTestEntry()
     {
-        AddHighScoreEntry(100, "Scene");
+        AddHighScoreEntry(1000, "Scene good");
     }
 
     private class Highscores

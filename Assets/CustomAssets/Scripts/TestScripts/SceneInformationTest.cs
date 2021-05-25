@@ -13,12 +13,16 @@ public class SceneInformationTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            test();
+        }
     }
 
     public void test()
     {
-        GameManager.instance.SceneTest();
-        HighscoreTable.instance.AddTestEntry();
+        Cursor.lockState = CursorLockMode.None;
+        GameManager.instance.BackToMenu();
+        //HighscoreTable.instance.AddTestEntry();
     }
 }
