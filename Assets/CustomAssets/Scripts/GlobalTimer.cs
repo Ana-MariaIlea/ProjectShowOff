@@ -112,7 +112,7 @@ public class GlobalTimer : MonoBehaviour
 
     private static void ChangeStateEvent(EventStates customState)
     {
-        HumanStates state = GameManager.instance.GetPlayerPositionZone();
+        HumanStates state = GameSessionStats.instance.GetPlayerPositionZone();
         if (customState.overridePlayerPosition)
         {
             int r = Random.Range(0, 100);
