@@ -7,29 +7,9 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField]
     private Transform cam;
     [SerializeField]
-    private float ForwardSpeed = 6f;
+    private PlayerControllerStats ControllerStats;
     [SerializeField]
-    private float UpSpeed = 3f;
-    [SerializeField]
-    private float UpSpeedSpam = 6f;
-    [SerializeField]
-    private float DownSpeed = 1f;
-    [SerializeField]
-    private float turnSmoothTime = 0.1f;
-    [SerializeField]
-    private bool spamSpaceKey = false;
-
-    [Tooltip("Slowd forward speed when coliding with particles")]
-    [SerializeField]
-    private float ForwardSpeedSlowed = 6f;
-    [Tooltip("Slowd up speed when coliding with particles, while pressing space")]
-    [SerializeField]
-    private float UpSpeedSlowed = 3f;
-    [Tooltip("Slowd up speed when coliding with particles, while spamming space")]
-    [SerializeField]
-    private float UpSpeedSpamSlowed = 6f;
-    [SerializeField]
-    private int slowedTimer;
+    private PlayerEfectsStats EffectStats;
     [Tooltip("Do NOT modify. Exposed parameter for testing purposes ONLY")]
     [SerializeField]
     private float fSpeed;
@@ -39,14 +19,13 @@ public class PlayerMotor : MonoBehaviour
     bool slowed = false;
     private float sTimer;
     private CharacterController controller;
-    private float directionY = 0f;
     // Start is called before the first frame update
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        fSpeed = ForwardSpeed;
-        uSpeed = UpSpeed;
-        sTimer = slowedTimer;
+        fSpeed = ControllerStats.ForwardSpeed;
+        uSpeed = ControllerStats.UpSpeed;
+        sTimer = EffectStats.slowedTimer;
     }
     private void Start()
     {
@@ -63,8 +42,8 @@ public class PlayerMotor : MonoBehaviour
             if (sTimer < 0)
             {
                 slowed = false;
-                sTimer = slowedTimer;
-                fSpeed = ForwardSpeed;
+                sTimer = EffectStats.slowedTimer;
+                fSpeed = ControllerStats.ForwardSpeed;
             }
             else
             {
@@ -81,15 +60,15 @@ public class PlayerMotor : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            spamSpaceKey = !spamSpaceKey;
+            ControllerStats.spamSpaceKey = !ControllerStats.spamSpaceKey;
         }
 
-        if (spamSpaceKey == false)
+        if (ControllerStats.spamSpaceKey == false)
         {
             if (Input.GetKey(KeyCode.Space))
             {
                 //directionY += UpSpeed;
-                controller.Move(Vector3.up * UpSpeed * Time.deltaTime);
+                controller.Move(Vector3.up * ControllerStats.UpSpeed * Time.deltaTime);
             }
         }
         else
@@ -97,7 +76,7 @@ public class PlayerMotor : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 //directionY += UpSpeed;
-                controller.Move(Vector3.up * UpSpeedSpam * Time.deltaTime);
+                controller.Move(Vector3.up * ControllerStats.UpSpeedSpam * Time.deltaTime);
 
             }
         }
@@ -105,7 +84,7 @@ public class PlayerMotor : MonoBehaviour
         if (!controller.isGrounded)
         {
             //directionY -= DownSpeed;
-            controller.Move(Vector3.up * DownSpeed * -1 * Time.deltaTime);
+            controller.Move(Vector3.up * ControllerStats.DownSpeed * -1 * Time.deltaTime);
         }
 
 
@@ -114,7 +93,7 @@ public class PlayerMotor : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, ControllerStats.turnSmoothTime);
             transform.rotation = Quaternion.Euler(0, angle, 0);
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
@@ -127,7 +106,7 @@ public class PlayerMotor : MonoBehaviour
     {
         if (eventData is PlayerPesticideCollisionEventData)
         {
-            fSpeed = ForwardSpeedSlowed;
+            fSpeed = EffectStats.ForwardSpeedSlowed;
             slowed = true;
         }
     }
