@@ -110,4 +110,14 @@ public class PlayerMotor : MonoBehaviour
             slowed = true;
         }
     }
+
+    public void OnChangeCooldoenTime(EventData eventData)
+    {
+        if (eventData is ChangeDifficultyEventData)
+        {
+            ChangeDifficultyEventData e = eventData as ChangeDifficultyEventData;
+            ControllerStats = e.Difficulty.PlayerControllerStats;
+            EffectStats = e.Difficulty.PlayerEfectsStats;
+        }
+    }
 }

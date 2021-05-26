@@ -6,10 +6,18 @@ public class NectarDistributor : MonoBehaviour
 {
     [SerializeField]
     private int nectarAmount;
+    [SerializeField]
+    private float cooldown;
+    private float cooldownTimer=0;
 
     private void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+    }
+
+    private void Update()
+    {
+        if (cooldownTimer > 0) cooldownTimer -= Time.deltaTime;
     }
 
     public void OnNectarIsCollected(EventData eventData)
@@ -19,10 +27,22 @@ public class NectarDistributor : MonoBehaviour
             NectarCollectStartEventData e = eventData as NectarCollectStartEventData;
             if (e.dis == this)
             {
-                EventQueue.eventQueue.AddEvent(new NectarCollectEndEventData(nectarAmount));
-                EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
-                Destroy(gameObject);
+                if (cooldownTimer <= 0)
+                {
+                    EventQueue.eventQueue.AddEvent(new NectarCollectEndEventData(nectarAmount));
+                    cooldownTimer = cooldown;
+                }
             }
+        }
+    }
+
+
+    public void OnChangeCooldoenTime(EventData eventData)
+    {
+        if(eventData is ChangeDifficultyEventData)
+        {
+            ChangeDifficultyEventData e = eventData as ChangeDifficultyEventData;
+            cooldown = e.Difficulty.NectarCooldownTime;
         }
     }
 }
