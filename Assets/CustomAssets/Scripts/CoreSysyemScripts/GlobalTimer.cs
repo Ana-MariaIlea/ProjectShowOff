@@ -35,6 +35,9 @@ public class GlobalTimer : MonoBehaviour
     [SerializeField]
     List<EventStates> eventStates;
 
+    [SerializeField]
+    private List<DifficultyCheck> checksForDifficulty;
+
     [Tooltip("Do NOT modify, preview avaliable for testing only")]
     [SerializeField]
     float timer = 0;
@@ -65,19 +68,38 @@ public class GlobalTimer : MonoBehaviour
     float timeForSecondEvent;
     float timeForThirdEvent;
 
-    bool firstEventFired=false;
-    bool secondEventFired=false;
-    bool thirdEventFired=false;
+    bool firstEventFired = false;
+    bool secondEventFired = false;
+    bool thirdEventFired = false;
 
     float MaxTimer;
+    int difficultyCheckIndex = 0;
 
     private void Awake()
     {
         MaxTimer = minutes * 60 + seconds;
 
-        timeForFirstEvent =minutesForFirstEvent * 60 + secondsForFirstEvent;
-        timeForSecondEvent = minutesForSecondEvent * 60 + secondsForSecondEvent;
-        timeForThirdEvent = minutesForThirdEvent * 60 + secondsForThirdEvent;
+        timeForFirstEvent = timer - (minutesForFirstEvent * 60 + secondsForFirstEvent);
+        timeForSecondEvent = timer - (minutesForSecondEvent * 60 + secondsForSecondEvent);
+        timeForThirdEvent = timer - (minutesForThirdEvent * 60 + secondsForThirdEvent);
+
+        foreach (var item in checksForDifficulty)
+        {
+            item.Initiallize();
+        }
+
+        for (int i = 0; i < checksForDifficulty.Count; i++)
+        {
+            for (int j = i + 1; j < checksForDifficulty.Count; j++)
+            {
+                if (checksForDifficulty[j].time > checksForDifficulty[i].time)
+                {
+                    DifficultyCheck aux = checksForDifficulty[i];
+                    checksForDifficulty[i] = checksForDifficulty[j];
+                    checksForDifficulty[j] = aux;
+                }
+            }
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -88,27 +110,33 @@ public class GlobalTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer < MaxTimer)
-            timer += Time.deltaTime;
+        if (timer > 0)
+            timer -= Time.deltaTime;
 
 
-        if (timer > timeForFirstEvent&&firstEventFired==false)
+        if (timer < timeForFirstEvent && firstEventFired == false)
         {
             Debug.Log("FirstEvent");
             ChangeStateEvent(eventStates[0]);
             firstEventFired = true;
         }
-        if (timer > timeForSecondEvent && secondEventFired == false)
+        if (timer < timeForSecondEvent && secondEventFired == false)
         {
             Debug.Log("SecondEvent");
             ChangeStateEvent(eventStates[1]);
             secondEventFired = true;
         }
-        if (timer > timeForThirdEvent && thirdEventFired == false)
+        if (timer < timeForThirdEvent && thirdEventFired == false)
         {
             Debug.Log("ThirdtEvent");
             ChangeStateEvent(eventStates[2]);
             thirdEventFired = true;
+        }
+
+        if (timer < timer - checksForDifficulty[difficultyCheckIndex].time)
+        {
+            difficultyCheckIndex++;
+            EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
         }
     }
 
@@ -131,7 +159,7 @@ public class GlobalTimer : MonoBehaviour
             {
                 state = customState.eventType;
             }
-                
+
         }
         Debug.Log(state);
         EventQueue.eventQueue.AddEvent(new ChangeStateEventData(state));

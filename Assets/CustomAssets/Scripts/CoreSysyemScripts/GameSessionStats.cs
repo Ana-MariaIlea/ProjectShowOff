@@ -7,10 +7,9 @@ public class GameSessionStats : MonoBehaviour
     public static GameSessionStats instance;
     [SerializeField]
     private HumanStates playerPosition;
+
     [SerializeField]
-    private List<DifficultySettings> settings;
-    [SerializeField]
-    private List<DifficultyCheck> checksForDifficulty;
+    private DifficultySettings currentDifficulty;
 
     private int playerScore;
     private string playerName;
@@ -65,6 +64,22 @@ public class GameSessionStats : MonoBehaviour
     public int GetPlayerScore()
     {
         return playerScore;
+    }
+
+
+    public void CheckDifficulty(EventData eventData)
+    {
+        if(eventData is CheckDifficultyEventData)
+        {
+            CheckDifficultyEventData e = eventData as CheckDifficultyEventData;
+            if (playerScore < e.DifficultyCheck.nectarMin)
+            {
+                EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(e.DifficultyCheck.easierDifficulty));
+            }else if (playerScore > e.DifficultyCheck.nectarMax)
+            {
+                EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(e.DifficultyCheck.harderDifficulty));
+            }
+        }
     }
 
 }

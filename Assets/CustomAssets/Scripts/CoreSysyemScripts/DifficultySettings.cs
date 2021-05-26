@@ -21,8 +21,12 @@ public class DifficultyCheck
 {
     public int minutes;
     public int seconds;
-    public int nectar;
-    float time;
+    public int nectarMin;
+    public int nectarMax;
+    public DifficultySettings easierDifficulty;
+    public DifficultySettings harderDifficulty;
+    [HideInInspector]
+    public float time;
 
     public void Initiallize()
     {
