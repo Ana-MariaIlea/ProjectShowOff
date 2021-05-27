@@ -112,6 +112,20 @@ public class QTESystem : MonoBehaviour
 
     IEnumerator CountDown()
     {
+        yield return new WaitForSeconds(3.5f);
+        if (CountingDown == 1)
+        {
+            QTEGen = 4;
+            CountingDown = 2;
+            //fail update on the screen
 
+            yield return new WaitForSeconds(1.5f);
+            CorrectKey = 0;
+            //Reset texts
+            WaitingForKey = 0;
+            CountingDown = 1;
+        }
+
+        yield return new WaitForSeconds(1.5f);
     }
 }

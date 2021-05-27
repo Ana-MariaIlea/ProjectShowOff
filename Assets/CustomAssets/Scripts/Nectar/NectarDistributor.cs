@@ -8,7 +8,10 @@ public class NectarDistributor : MonoBehaviour
     private int nectarAmount;
     [SerializeField]
     private float cooldown;
-    private float cooldownTimer=0;
+    [SerializeField]
+    private ParticleSystem polen;
+    private bool showParticles = false;
+    private float cooldownTimer = 0;
 
     private void Start()
     {
@@ -18,6 +21,13 @@ public class NectarDistributor : MonoBehaviour
     private void Update()
     {
         if (cooldownTimer > 0) cooldownTimer -= Time.deltaTime;
+        else
+        {
+            if (showParticles == true && !polen.isPlaying)
+            {
+                polen.Play();
+            }
+        }
     }
 
     public void OnNectarIsCollected(EventData eventData)
@@ -31,6 +41,10 @@ public class NectarDistributor : MonoBehaviour
                 {
                     EventQueue.eventQueue.AddEvent(new NectarCollectEndEventData(nectarAmount));
                     cooldownTimer = cooldown;
+                    if (showParticles == true && polen.isPlaying)
+                    {
+                        polen.Stop();
+                    }
                 }
             }
         }
@@ -39,10 +53,11 @@ public class NectarDistributor : MonoBehaviour
 
     public void OnChangeCooldoenTime(EventData eventData)
     {
-        if(eventData is ChangeDifficultyEventData)
+        if (eventData is ChangeDifficultyEventData)
         {
             ChangeDifficultyEventData e = eventData as ChangeDifficultyEventData;
             cooldown = e.Difficulty.NectarCooldownTime;
+            showParticles = e.Difficulty.FlowersHaveParticles;
         }
     }
 }
