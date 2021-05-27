@@ -23,6 +23,7 @@ public class GameSessionStats : MonoBehaviour
     void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
+        EventQueue.eventQueue.Subscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
     }
 
 
@@ -67,16 +68,18 @@ public class GameSessionStats : MonoBehaviour
     }
 
 
-    public void CheckDifficulty(EventData eventData)
+    public void OnCheckDifficulty(EventData eventData)
     {
         if(eventData is CheckDifficultyEventData)
         {
             CheckDifficultyEventData e = eventData as CheckDifficultyEventData;
             if (playerScore < e.DifficultyCheck.nectarMin)
             {
+                currentDifficulty = e.DifficultyCheck.easierDifficulty;
                 EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(e.DifficultyCheck.easierDifficulty));
             }else if (playerScore > e.DifficultyCheck.nectarMax)
             {
+                currentDifficulty = e.DifficultyCheck.harderDifficulty;
                 EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(e.DifficultyCheck.harderDifficulty));
             }
         }

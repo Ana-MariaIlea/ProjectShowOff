@@ -83,6 +83,11 @@ public class GlobalTimer : MonoBehaviour
         timeForSecondEvent = timer - (minutesForSecondEvent * 60 + secondsForSecondEvent);
         timeForThirdEvent = timer - (minutesForThirdEvent * 60 + secondsForThirdEvent);
 
+        InitializeDifficultyChecks();
+    }
+
+    private void InitializeDifficultyChecks()
+    {
         foreach (var item in checksForDifficulty)
         {
             item.Initiallize();
@@ -101,6 +106,7 @@ public class GlobalTimer : MonoBehaviour
             }
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
