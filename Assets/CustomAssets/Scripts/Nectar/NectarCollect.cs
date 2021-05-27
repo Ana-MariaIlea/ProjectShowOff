@@ -19,7 +19,7 @@ public class NectarCollect : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetButton("NectarKey"))
         {
             if (other.GetComponent<NectarDistributor>())
             {

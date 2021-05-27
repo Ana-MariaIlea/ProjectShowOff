@@ -65,7 +65,8 @@ public class PlayerMotor : MonoBehaviour
 
         if (ControllerStats.spamSpaceKey == false)
         {
-            if (Input.GetKey(KeyCode.Space))
+            //if (Input.GetKey(KeyCode.Space))
+            if (Input.GetButton("FlyUp"))
             {
                 //directionY += UpSpeed;
                 controller.Move(Vector3.up * ControllerStats.UpSpeed * Time.deltaTime);
@@ -73,7 +74,8 @@ public class PlayerMotor : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            //if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("FlyUp"))
             {
                 //directionY += UpSpeed;
                 controller.Move(Vector3.up * ControllerStats.UpSpeedSpam * Time.deltaTime);
