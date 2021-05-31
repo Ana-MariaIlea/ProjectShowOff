@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GoToHouse : BaseState
 {
 
     [SerializeField]
     Transform houseLocation;
-
+    float timerToStay;
+    public GoToHouse(NavMeshAgent ag, GameObject house,float time) : base(ag)
+    {
+        houseLocation = house.transform;
+        timerToStay = time;
+    }
     private void OnDrawGizmos()
     {
 
@@ -21,7 +27,7 @@ public class GoToHouse : BaseState
         agent.SetDestination(target.position);
 
 
-        Vector3 distanceToLocation = self.position - target.position;
+        Vector3 distanceToLocation = agent.transform.position - target.position;
 
 
         if (distanceToLocation.magnitude < 1f)
@@ -38,6 +44,14 @@ public class GoToHouse : BaseState
     public override void FinishState()
     {
         base.FinishState();
-        target = self;
+        target = agent.transform;
+        if (timerToStay < 0)
+        {
+            EventQueue.eventQueue.AddEvent(new ChangeStateStartEventData());
+        }
+        else
+        {
+            timerToStay -= Time.deltaTime;
+        }
     }
 }
