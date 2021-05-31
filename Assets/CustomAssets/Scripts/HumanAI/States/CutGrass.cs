@@ -22,19 +22,21 @@ public class CutGrass : BaseState
     [SerializeField]
     private GameObject grass;
 
-    private void OnDrawGizmos()
-    {
-        foreach (PathWay waypoint in path)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(waypoint.pathHolder.transform.position, .3f);
-        }
 
-    }
+    public CutGrass(NavMeshAgent ag) : base(ag) { }
+    //private void OnDrawGizmos()
+    //{
+    //    foreach (Waypoint waypoint in path)
+    //    {
+    //        Gizmos.color = Color.green;
+    //        Gizmos.DrawSphere(waypoint.transform.position, .3f);
+    //    }
+
+    //}
 
     public override void HandleTargetreached()
     {
-        if (path[walkPoint].pathHolder == pointToStartCutting)
+        if (path[walkPoint] == pointToStartCutting)
         {
             if (!particles.isPlaying)
                 particles.Play();
@@ -44,7 +46,7 @@ public class CutGrass : BaseState
             }
         }
 
-        if (path[walkPoint].pathHolder == pointToEndCutting)
+        if (path[walkPoint] == pointToEndCutting)
         {
             if (particles.isPlaying)
                 particles.Stop();

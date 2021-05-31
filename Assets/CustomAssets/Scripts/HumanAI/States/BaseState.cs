@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class BaseState : MonoBehaviour
+public abstract class BaseState
 {
     public bool isStateFinished = false;
     public HumanStates state;
@@ -13,30 +13,30 @@ public abstract class BaseState : MonoBehaviour
     }
 
     [SerializeField]
-    protected List<PathWay> path;
+    protected List<Waypoint> path;
 
 
     protected int walkPoint = -1;
     protected bool walkPointSet;
     [HideInInspector]
     protected NavMeshAgent agent;
-    [HideInInspector]
-    protected Transform self;
+    //[HideInInspector]
+   // protected Transform self;
     protected Transform target;
     protected float timer = 5;
 
-    private void Start()
+    public BaseState(NavMeshAgent ag)
     {
-        agent = FindObjectOfType<NavMeshAgent>();
-        self = agent.transform;
+        agent = ag;
+       // self = agent.transform;
 
     }
-    [System.Serializable]
-    public class PathWay
-    {
-        public GameObject pathHolder;
-        public float timeToStay = 4;
-    }
+    //[System.Serializable]
+    //public class PathWay
+    //{
+    //    public GameObject pathHolder;
+    //    public float timeToStay = 4;
+    //}
 
     public void Patroling()
     {
@@ -50,7 +50,7 @@ public abstract class BaseState : MonoBehaviour
             agent.SetDestination(target.position);
         }
 
-        Vector3 distanceToLocation = self.position - target.position;
+        Vector3 distanceToLocation = agent.transform.position - target.position;
 
 
         if (distanceToLocation.magnitude < 1f)
@@ -66,7 +66,7 @@ public abstract class BaseState : MonoBehaviour
     }
     public virtual void StayPut()
     {
-        agent.SetDestination(self.position);
+        agent.SetDestination(agent.transform.position);
         if (timer <= 0)
         {
             walkPointSet = false;
@@ -81,7 +81,7 @@ public abstract class BaseState : MonoBehaviour
     {
         walkPoint++;
         if (walkPoint > path.Count - 1 || walkPoint < 0) walkPoint = 0;
-        target = path[walkPoint].pathHolder.transform;
+        target = path[walkPoint].transform;
         timer = path[walkPoint].timeToStay;
         walkPointSet = true;
     }

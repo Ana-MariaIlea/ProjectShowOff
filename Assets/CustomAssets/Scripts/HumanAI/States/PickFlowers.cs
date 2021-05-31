@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class PickFlowers : BaseState
 {
 
+
+    public PickFlowers(NavMeshAgent ag) : base(ag) { }
     public override void UpdateBehavior()
     {
         if (path.Count > 0)
@@ -19,7 +21,7 @@ public class PickFlowers : BaseState
     public override void StayPut()
     {
         Debug.Log("Pick flower-Destination reached");
-        agent.SetDestination(self.position);
+        agent.SetDestination(agent.transform.position);
         if (timer <= 0)
         {
             pickUpFlower();
@@ -35,9 +37,9 @@ public class PickFlowers : BaseState
     {
         Debug.Log("Pick flower");
         target = null;
-        GameObject f = path[walkPoint].pathHolder;
+        GameObject f = path[walkPoint].gameObject;
         path.RemoveAt(walkPoint);
-        Destroy(f);
+        //Destroy(f);
     }
 
 

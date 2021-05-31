@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GoToHouse : BaseState
 {
 
     [SerializeField]
     Transform houseLocation;
+    public GoToHouse(NavMeshAgent ag) : base(ag)
+    {
 
+    }
     private void OnDrawGizmos()
     {
 
@@ -21,7 +25,7 @@ public class GoToHouse : BaseState
         agent.SetDestination(target.position);
 
 
-        Vector3 distanceToLocation = self.position - target.position;
+        Vector3 distanceToLocation = agent.transform.position - target.position;
 
 
         if (distanceToLocation.magnitude < 1f)
@@ -38,6 +42,6 @@ public class GoToHouse : BaseState
     public override void FinishState()
     {
         base.FinishState();
-        target = self;
+        target = agent.transform;
     }
 }
