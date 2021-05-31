@@ -35,9 +35,12 @@ public class GlobalTimer : MonoBehaviour
     [SerializeField]
     List<EventStates> eventStates;
 
+    [SerializeField]
+    private List<DifficultyCheck> checksForDifficulty;
+
     [Tooltip("Do NOT modify, preview avaliable for testing only")]
     [SerializeField]
-    float timer;
+    float timer = 0;
 
     [System.Serializable]
     public class EventStates
@@ -65,18 +68,45 @@ public class GlobalTimer : MonoBehaviour
     float timeForSecondEvent;
     float timeForThirdEvent;
 
-    bool firstEventFired=false;
-    bool secondEventFired=false;
-    bool thirdEventFired=false;
+    bool firstEventFired = false;
+    bool secondEventFired = false;
+    bool thirdEventFired = false;
+
+    float MaxTimer;
+    int difficultyCheckIndex = 0;
 
     private void Awake()
     {
-        timer = minutes * 60 + seconds;
+        MaxTimer = minutes * 60 + seconds;
 
-        timeForFirstEvent =timer-( minutesForFirstEvent * 60 + secondsForFirstEvent);
+        timeForFirstEvent = timer - (minutesForFirstEvent * 60 + secondsForFirstEvent);
         timeForSecondEvent = timer - (minutesForSecondEvent * 60 + secondsForSecondEvent);
         timeForThirdEvent = timer - (minutesForThirdEvent * 60 + secondsForThirdEvent);
+
+       // InitializeDifficultyChecks();
     }
+
+    private void InitializeDifficultyChecks()
+    {
+        foreach (var item in checksForDifficulty)
+        {
+            item.Initiallize();
+        }
+
+        for (int i = 0; i < checksForDifficulty.Count; i++)
+        {
+            for (int j = i + 1; j < checksForDifficulty.Count; j++)
+            {
+                if (checksForDifficulty[j].time > checksForDifficulty[i].time)
+                {
+                    DifficultyCheck aux = checksForDifficulty[i];
+                    checksForDifficulty[i] = checksForDifficulty[j];
+                    checksForDifficulty[j] = aux;
+                }
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,7 +120,7 @@ public class GlobalTimer : MonoBehaviour
             timer -= Time.deltaTime;
 
 
-        if (timer < timeForFirstEvent&&firstEventFired==false)
+        if (timer < timeForFirstEvent && firstEventFired == false)
         {
             Debug.Log("FirstEvent");
             ChangeStateEvent(eventStates[0]);
@@ -107,6 +137,12 @@ public class GlobalTimer : MonoBehaviour
             Debug.Log("ThirdtEvent");
             ChangeStateEvent(eventStates[2]);
             thirdEventFired = true;
+        }
+
+        if (timer < timer - checksForDifficulty[difficultyCheckIndex].time)
+        {
+            difficultyCheckIndex++;
+            EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
         }
     }
 
@@ -129,7 +165,7 @@ public class GlobalTimer : MonoBehaviour
             {
                 state = customState.eventType;
             }
-                
+
         }
         Debug.Log(state);
         EventQueue.eventQueue.AddEvent(new ChangeStateEventData(state));

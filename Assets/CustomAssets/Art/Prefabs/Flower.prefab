@@ -287,6 +287,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NectarDistributor
       objectReference: {fileID: 0}
+    - target: {fileID: 6771905500184198143, guid: c39122f7255a38844986a828fe6197a7,
+        type: 3}
+      propertyPath: cooldown
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c39122f7255a38844986a828fe6197a7, type: 3}
 --- !u!4 &4370243804888236354 stripped

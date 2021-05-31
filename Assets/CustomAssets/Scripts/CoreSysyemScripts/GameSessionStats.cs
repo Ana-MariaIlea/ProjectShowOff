@@ -8,6 +8,12 @@ public class GameSessionStats : MonoBehaviour
     [SerializeField]
     private HumanStates playerPosition;
 
+    [SerializeField]
+    private List<DifficultySettings> settings;
+
+    [SerializeField]
+    private DifficultySettings currentDifficulty;
+
     private int playerScore;
     private string playerName;
     // Start is called before the first frame update
@@ -19,7 +25,20 @@ public class GameSessionStats : MonoBehaviour
     }
     void Start()
     {
+        for (int i = 0; i < settings.Count; i++)
+        {
+            for (int j = i + 1; j < settings.Count; j++)
+            {
+                if (settings[j].DifficultyLevel > settings[i].DifficultyLevel)
+                {
+                    DifficultySettings aux = settings[i];
+                    settings[i] = settings[j];
+                    settings[j] = aux;
+                }
+            }
+        }
         EventQueue.eventQueue.Subscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
+        EventQueue.eventQueue.Subscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
     }
 
 
@@ -61,6 +80,31 @@ public class GameSessionStats : MonoBehaviour
     public int GetPlayerScore()
     {
         return playerScore;
+    }
+
+
+    public void OnCheckDifficulty(EventData eventData)
+    {
+        if (eventData is CheckDifficultyEventData)
+        {
+            CheckDifficultyEventData e = eventData as CheckDifficultyEventData;
+            if (playerScore < e.DifficultyCheck.nectarMin)
+            {
+                if (settings.IndexOf(currentDifficulty) - 1 >= 0)
+                {
+                    currentDifficulty = settings[settings.IndexOf(currentDifficulty) - 1];
+                    EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
+                }
+            }
+            else if (playerScore > e.DifficultyCheck.nectarMax)
+            {
+                if (settings.IndexOf(currentDifficulty) + 1 <= settings.Count-1)
+                {
+                    currentDifficulty = settings[settings.IndexOf(currentDifficulty) + 1];
+                    EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
+                }
+            }
+        }
     }
 
 }
