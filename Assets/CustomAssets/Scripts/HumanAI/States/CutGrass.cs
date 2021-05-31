@@ -23,16 +23,15 @@ public class CutGrass : BaseState
     private GameObject grass;
 
 
-    public CutGrass(NavMeshAgent ag) : base(ag) { }
-    //private void OnDrawGizmos()
-    //{
-    //    foreach (Waypoint waypoint in path)
-    //    {
-    //        Gizmos.color = Color.green;
-    //        Gizmos.DrawSphere(waypoint.transform.position, .3f);
-    //    }
+    public CutGrass(NavMeshAgent ag, ParticleSystem particles, GameObject mawer, GameObject launge,GameObject plants, List<GameObject> path) : base(ag)
+    {
+        this.particles = particles;
+        this.lawnmower = mawer;
+        this.launge = launge;
+        this.grass = plants;
+        this.path = path;
+    }
 
-    //}
 
     public override void HandleTargetreached()
     {
@@ -72,6 +71,6 @@ public class CutGrass : BaseState
     public override void FinishState()
     {
         base.FinishState();
-        EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
+        //EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
     }
 }

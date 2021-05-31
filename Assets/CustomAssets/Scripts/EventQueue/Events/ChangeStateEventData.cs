@@ -5,8 +5,9 @@ using UnityEngine;
 public class ChangeStateEventData : EventData
 {
     public HumanStates state;
-    public ChangeStateEventData(HumanStates newState) : base(EventType.CHANGESTATE)
+    public ZoneSettings zoneSettings;
+    public ChangeStateEventData(ZoneSettings newZoneSettings=null) : base(EventType.CHANGESTATE)
     {
-        state = newState;
+        zoneSettings = newZoneSettings;
     }
 }

@@ -8,9 +8,9 @@ public class GoToHouse : BaseState
 
     [SerializeField]
     Transform houseLocation;
-    public GoToHouse(NavMeshAgent ag) : base(ag)
+    public GoToHouse(NavMeshAgent ag, GameObject house) : base(ag)
     {
-
+        houseLocation = house.transform;
     }
     private void OnDrawGizmos()
     {

@@ -12,16 +12,13 @@ public class SprayPesticides : BaseState
     private ParticleSystem particles;
 
 
-    public SprayPesticides(NavMeshAgent ag) : base(ag) { }
-    //private void OnDrawGizmos()
-    //{
-    //    foreach (Waypoint waypoint in path)
-    //    {
-    //        Gizmos.color = Color.green;
-    //        Gizmos.DrawSphere(waypoint.transform.position, .3f);
-    //    }
+    public SprayPesticides(NavMeshAgent ag,ParticleSystem particle, List<GameObject> path) : base(ag)
+    {
+        this.particles = particle;
+        this.path = path;
+    }
 
-    //}
+
     public override void StayPut()
     {
         agent.SetDestination(agent.transform.position);
@@ -47,7 +44,7 @@ public class SprayPesticides : BaseState
         else
         {
             target = path[walkPoint].transform;
-            timer = path[walkPoint].timeToStay;
+            timer = 2f;
             walkPointSet = true;
         }
         
@@ -56,7 +53,7 @@ public class SprayPesticides : BaseState
     public override void FinishState()
     {
         base.FinishState();
-        EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
+        //EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
     }
 
 }

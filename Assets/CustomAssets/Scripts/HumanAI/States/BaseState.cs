@@ -13,7 +13,7 @@ public abstract class BaseState
     }
 
     [SerializeField]
-    protected List<Waypoint> path;
+    protected List<GameObject> path;
 
 
     protected int walkPoint = -1;
@@ -28,15 +28,7 @@ public abstract class BaseState
     public BaseState(NavMeshAgent ag)
     {
         agent = ag;
-       // self = agent.transform;
-
     }
-    //[System.Serializable]
-    //public class PathWay
-    //{
-    //    public GameObject pathHolder;
-    //    public float timeToStay = 4;
-    //}
 
     public void Patroling()
     {
@@ -82,7 +74,7 @@ public abstract class BaseState
         walkPoint++;
         if (walkPoint > path.Count - 1 || walkPoint < 0) walkPoint = 0;
         target = path[walkPoint].transform;
-        timer = path[walkPoint].timeToStay;
+        timer = 2f;
         walkPointSet = true;
     }
 

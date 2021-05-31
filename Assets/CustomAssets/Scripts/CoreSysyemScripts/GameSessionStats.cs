@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameSessionStats : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class GameSessionStats : MonoBehaviour
     [SerializeField]
     private DifficultySettings currentDifficulty;
 
+
+    private List<ZoneSettings> zones;
+
+
     private int playerScore;
     private string playerName;
     // Start is called before the first frame update
@@ -22,6 +27,9 @@ public class GameSessionStats : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+
+        zones = FindObjectsOfType<ZoneSettings>().ToList();
+
     }
     void Start()
     {
@@ -39,6 +47,8 @@ public class GameSessionStats : MonoBehaviour
         }
         EventQueue.eventQueue.Subscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
         EventQueue.eventQueue.Subscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
+
+        
     }
 
 
@@ -107,4 +117,11 @@ public class GameSessionStats : MonoBehaviour
         }
     }
 
+
+    private void OnChangeStateEvent()
+    {
+        int rand = Random.Range(0, zones.Count);
+
+        EventQueue.eventQueue.AddEvent(new ChangeStateEventData(zones[rand]));
+    }
 }

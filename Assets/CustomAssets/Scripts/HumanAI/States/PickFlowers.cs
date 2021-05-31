@@ -8,7 +8,10 @@ public class PickFlowers : BaseState
 {
 
 
-    public PickFlowers(NavMeshAgent ag) : base(ag) { }
+    public PickFlowers(NavMeshAgent ag,List<GameObject> path) : base(ag) 
+    {
+        this.path = path;
+    }
     public override void UpdateBehavior()
     {
         if (path.Count > 0)
@@ -46,6 +49,6 @@ public class PickFlowers : BaseState
     public override void FinishState()
     {
         base.FinishState();
-        EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
+        //EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
     }
 }
