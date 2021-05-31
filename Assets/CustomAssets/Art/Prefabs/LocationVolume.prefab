@@ -127,8 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateOfZone: 0
   numberOfTimes: 0
-  launge: {fileID: 0}
-  plants: {fileID: 0}
+  launge: {fileID: 5754801755440340179}
+  plants: {fileID: 3491548598474828012}
   currentFlowers: []
   currentWaypoints: []
 --- !u!1 &2386541510642972698
