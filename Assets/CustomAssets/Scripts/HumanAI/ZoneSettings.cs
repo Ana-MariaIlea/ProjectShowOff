@@ -6,8 +6,8 @@ using System.Linq;
 public class ZoneSettings : MonoBehaviour
 {
     public HumanStates stateOfZone;
-    [SerializeField]
-    int numberOfTimes;
+    
+    public int numberOfTimes;
 
     public GameObject launge;
     public GameObject plants;
@@ -15,7 +15,9 @@ public class ZoneSettings : MonoBehaviour
     List<NectarDistributor> flowers;
     List<Waypoint> waypoints;
 
+    [HideInInspector]
     public List<GameObject> currentFlowers;
+    [HideInInspector]
     public List<GameObject> currentWaypoints;
 
     int numberFlowers;

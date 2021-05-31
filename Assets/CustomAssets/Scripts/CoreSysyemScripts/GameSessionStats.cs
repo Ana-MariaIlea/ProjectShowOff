@@ -47,6 +47,7 @@ public class GameSessionStats : MonoBehaviour
         }
         EventQueue.eventQueue.Subscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
         EventQueue.eventQueue.Subscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
+        EventQueue.eventQueue.Subscribe(EventType.CHANGESTATESTART, OnChangeStateEvent);
 
         
     }
@@ -118,10 +119,16 @@ public class GameSessionStats : MonoBehaviour
     }
 
 
-    private void OnChangeStateEvent()
+    private void OnChangeStateEvent(EventData eventData)
     {
-        int rand = Random.Range(0, zones.Count);
-
-        EventQueue.eventQueue.AddEvent(new ChangeStateEventData(zones[rand]));
+        if (eventData is ChangeStateStartEventData)
+        {
+            int rand = Random.Range(0, zones.Count);
+            if (zones[rand].numberOfTimes == 1)
+            {
+                EventQueue.eventQueue.AddEvent(new ChangeStateEventData(zones[rand]));
+                zones.RemoveAt(rand);
+            }
+        }
     }
 }

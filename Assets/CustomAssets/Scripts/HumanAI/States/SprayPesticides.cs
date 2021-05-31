@@ -53,7 +53,7 @@ public class SprayPesticides : BaseState
     public override void FinishState()
     {
         base.FinishState();
-        //EventQueue.eventQueue.AddEvent(new ChangeStateEventData(HumanStates.GoToHouse));
+        EventQueue.eventQueue.AddEvent(new EndStateEventData());
     }
 
 }

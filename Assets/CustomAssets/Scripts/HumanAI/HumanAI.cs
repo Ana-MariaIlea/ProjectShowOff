@@ -25,11 +25,15 @@ public class HumanAI : MonoBehaviour
     GameObject lawnmower;
     [SerializeField]
     GameObject houseLocation;
+    [Tooltip("Time to stay in the house")]
+    [SerializeField]
+    float time;
     BaseState currentState;
     // Start is called before the first frame update
     void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATE, OnStateChange);
+        EventQueue.eventQueue.Subscribe(EventType.ENDSTATE, OnGoToHouse);
     }
 
     // Update is called once per frame
@@ -71,11 +75,9 @@ public class HumanAI : MonoBehaviour
 
     public void OnGoToHouse(EventData eventData)
     {
-        if (eventData is ChangeStateEventData)
+        if (eventData is EndStateEventData)
         {
-            ChangeStateEventData e = eventData as ChangeStateEventData;
-            currentState = new GoToHouse(GetComponent<NavMeshAgent>(),houseLocation);
-
+            currentState = new GoToHouse(GetComponent<NavMeshAgent>(),houseLocation,time);
         }
     }
 }

@@ -8,9 +8,11 @@ public class GoToHouse : BaseState
 
     [SerializeField]
     Transform houseLocation;
-    public GoToHouse(NavMeshAgent ag, GameObject house) : base(ag)
+    float timerToStay;
+    public GoToHouse(NavMeshAgent ag, GameObject house,float time) : base(ag)
     {
         houseLocation = house.transform;
+        timerToStay = time;
     }
     private void OnDrawGizmos()
     {
@@ -43,5 +45,13 @@ public class GoToHouse : BaseState
     {
         base.FinishState();
         target = agent.transform;
+        if (timerToStay < 0)
+        {
+            EventQueue.eventQueue.AddEvent(new ChangeStateStartEventData());
+        }
+        else
+        {
+            timerToStay -= Time.deltaTime;
+        }
     }
 }
