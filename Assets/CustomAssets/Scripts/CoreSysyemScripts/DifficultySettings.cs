@@ -8,6 +8,8 @@ using UnityEngine;
 public class DifficultySettings:ScriptableObject 
 {
     public string DifficultyLabel;
+    [Tooltip("The difficulties will be sorted by this value")]
+    public int DifficultyLevel;
     public PlayerControllerStats PlayerControllerStats;
     public PlayerEfectsStats PlayerEfectsStats;
     public bool FlowersGlow;
@@ -23,8 +25,6 @@ public class DifficultyCheck
     public int seconds;
     public int nectarMin;
     public int nectarMax;
-    public DifficultySettings easierDifficulty;
-    public DifficultySettings harderDifficulty;
     [HideInInspector]
     public float time;
 

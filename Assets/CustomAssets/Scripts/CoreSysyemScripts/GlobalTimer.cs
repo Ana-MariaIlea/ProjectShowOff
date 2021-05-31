@@ -83,7 +83,7 @@ public class GlobalTimer : MonoBehaviour
         timeForSecondEvent = timer - (minutesForSecondEvent * 60 + secondsForSecondEvent);
         timeForThirdEvent = timer - (minutesForThirdEvent * 60 + secondsForThirdEvent);
 
-        InitializeDifficultyChecks();
+       // InitializeDifficultyChecks();
     }
 
     private void InitializeDifficultyChecks()
