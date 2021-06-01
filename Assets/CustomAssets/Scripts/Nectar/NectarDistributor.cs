@@ -60,4 +60,16 @@ public class NectarDistributor : MonoBehaviour
             showParticles = e.Difficulty.FlowersHaveParticles;
         }
     }
+
+    public void OnFlowerIsPicked(EventData eventData)
+    {
+        if (eventData is PickFlowerEventData)
+        {
+            PickFlowerEventData e = eventData as PickFlowerEventData;
+            if (e.distributor.gameObject == this)
+            {
+                Destroy(this);
+            }
+        }
+    }
 }

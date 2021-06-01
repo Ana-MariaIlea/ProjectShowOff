@@ -10,53 +10,74 @@ public enum HumanStates
     PickFlowes,
     SprayGarden,
     CutGrass,
-    GoToHouse
+    GoToHouse,
+    NoState
 }
 
 public class HumanAI : MonoBehaviour
 {
+
     [SerializeField]
-    GameObject stateHolder;
+    ParticleSystem pesticides;
+    [SerializeField]
+    ParticleSystem smoke;
+    [SerializeField]
+    GameObject lawnmower;
+    [SerializeField]
+    GameObject houseLocation;
+    [Tooltip("Time to stay in the house")]
+    [SerializeField]
+    float time;
     BaseState currentState;
     // Start is called before the first frame update
     void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATE, OnStateChange);
+        EventQueue.eventQueue.Subscribe(EventType.ENDSTATE, OnGoToHouse);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(currentState!=null)
-        currentState.UpdateBehavior();
+        if (currentState != null)
+            currentState.UpdateBehavior();
     }
 
     public void OnStateChange(EventData eventData)
     {
-        if(eventData is ChangeStateEventData)
+        if (eventData is ChangeStateEventData)
         {
             ChangeStateEventData e = eventData as ChangeStateEventData;
-            switch (e.state)
+            switch (e.zoneSettings.stateOfZone)
             {
                 case HumanStates.PickFlowes:
                     Debug.Log("Change state to pick Flowers");
-                    currentState = stateHolder.GetComponent<PickFlowers>();
+                    currentState = new PickFlowers(GetComponent<NavMeshAgent>(),e.zoneSettings.currentFlowers);
+                    e.zoneSettings.InitializeEventStats();
                     break;
                 case HumanStates.SprayGarden:
                     Debug.Log("Change state to spray garden");
-                    currentState = stateHolder.GetComponent<SprayPesticides>();
+                    currentState = new SprayPesticides(GetComponent<NavMeshAgent>(),pesticides, e.zoneSettings.currentWaypoints);
+                    e.zoneSettings.InitializeEventStats();
                     break;
                 case HumanStates.CutGrass:
                     Debug.Log("Change state to cut grass");
-                    currentState = stateHolder.GetComponent<CutGrass>();
+                    currentState = new CutGrass(GetComponent<NavMeshAgent>(),smoke,lawnmower,e.zoneSettings.launge,e.zoneSettings.plants, e.zoneSettings.currentWaypoints);
+                    e.zoneSettings.InitializeEventStats();
                     break;
-                case HumanStates.GoToHouse:
-                    Debug.Log("Change state to go to house");
-                    stateHolder.GetComponent<GoToHouse>().ResetTarget();
-                    currentState = stateHolder.GetComponent<GoToHouse>();
+                default:
+                    currentState = null;
                     break;
             }
 
+        }
+    }
+
+    public void OnGoToHouse(EventData eventData)
+    {
+        if (eventData is EndStateEventData)
+        {
+            currentState = new GoToHouse(GetComponent<NavMeshAgent>(),houseLocation,time);
         }
     }
 }
