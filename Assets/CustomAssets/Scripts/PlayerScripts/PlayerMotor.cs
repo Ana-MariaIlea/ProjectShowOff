@@ -23,7 +23,14 @@ public class PlayerMotor : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        fSpeed = ControllerStats.ForwardSpeed;
+        if (controller.isGrounded)
+        {
+            fSpeed = ControllerStats.ForwardSpeedWalk;
+        }
+        else
+        {
+            fSpeed = ControllerStats.ForwardSpeedFly;
+        }
         uSpeed = ControllerStats.UpSpeed;
         sTimer = EffectStats.slowedTimer;
     }
@@ -36,14 +43,22 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (controller.enabled)
+            Move();
         if (slowed)
         {
             if (sTimer < 0)
             {
                 slowed = false;
                 sTimer = EffectStats.slowedTimer;
-                fSpeed = ControllerStats.ForwardSpeed;
+                if (controller.isGrounded)
+                {
+                    fSpeed = ControllerStats.ForwardSpeedWalk;
+                }
+                else
+                {
+                    fSpeed = ControllerStats.ForwardSpeedFly;
+                }
             }
             else
             {
@@ -58,37 +73,41 @@ public class PlayerMotor : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             ControllerStats.spamSpaceKey = !ControllerStats.spamSpaceKey;
         }
 
         if (ControllerStats.spamSpaceKey == false)
         {
-            //if (Input.GetKey(KeyCode.Space))
             if (Input.GetButton("FlyUp"))
             {
-                //directionY += UpSpeed;
                 controller.Move(Vector3.up * ControllerStats.UpSpeed * Time.deltaTime);
             }
         }
         else
         {
-            //if (Input.GetKeyDown(KeyCode.Space))
             if (Input.GetButtonDown("FlyUp"))
             {
-                //directionY += UpSpeed;
                 controller.Move(Vector3.up * ControllerStats.UpSpeedSpam * Time.deltaTime);
-
             }
         }
 
-        if (!controller.isGrounded)
+        if (Input.GetButton("FlyDown"))
         {
-            //directionY -= DownSpeed;
-            controller.Move(Vector3.up * ControllerStats.DownSpeed * -1 * Time.deltaTime);
+            controller.Move(Vector3.up * -ControllerStats.DownSpeed * Time.deltaTime);
         }
 
+        if (controller.isGrounded)
+        {
+            fSpeed = ControllerStats.ForwardSpeedWalk;
+        }
+        else
+        {
+            if (fSpeed < ControllerStats.ForwardSpeedFly)
+                fSpeed += ControllerStats.Acceleration;
+            controller.Move(Vector3.up * ControllerStats.Gravity * -1 * Time.deltaTime);
+        }
 
         //direction.y = directionY;
 

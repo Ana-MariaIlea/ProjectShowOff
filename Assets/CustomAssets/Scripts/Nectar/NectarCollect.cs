@@ -19,7 +19,7 @@ public class NectarCollect : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetButton("NectarKey"))
+        if (Input.GetButtonDown("NectarKey"))
         {
             if (other.GetComponent<NectarDistributor>())
             {
@@ -62,5 +62,18 @@ public class NectarCollect : MonoBehaviour
     {
         nectarAmount = 0;
         text.text = "Nectar on bee: "+nectarAmount.ToString();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GetComponent<QTESystem>().enabled = false;
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            GetComponent<QTESystem>().enabled = true;
+        }
+
     }
 }

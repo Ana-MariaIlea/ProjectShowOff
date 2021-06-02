@@ -1,45 +1,114 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QTESystem : MonoBehaviour
 {
-
+    [HideInInspector]
     public int QTEGen;
+    [HideInInspector]
     public int WaitingForKey;
+    [HideInInspector]
     public int CorrectKey;
+    [HideInInspector]
     public int CountingDown;
+    [HideInInspector]
+    public float CountDownTimer;
+    public List<Sprite> icons;
+    public Image Frame;
+    public Image Letter;
+    public int numberOfAtemptes;
+    [SerializeField]
+    int atemptes;
+    float timer;
+
+
+    private void Awake()
+    {
+        timer = CountDownTimer;
+        atemptes = numberOfAtemptes;
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log("Script enabled");
+        timer = CountDownTimer;
+        atemptes = numberOfAtemptes;
+    }
 
     void Update()
     {
-        if (WaitingForKey == 0)
+        if (atemptes > 0)
         {
-            QTEGen = Random.Range(1, 4);
-            CountingDown = 1;
-            StartCoroutine(CountDown());
-            switch (QTEGen)
+            if (WaitingForKey == 0)
             {
-                case 1:
-                    WaitingForKey = 1;
-                    //change prefab on the screen
-                    break;
-                case 2:
-                    WaitingForKey = 1;
-                    //change prefab on the screen
-                    break;
-                case 3:
-                    WaitingForKey = 1;
-                    //change prefab on the screen
-                    break;
+                QTEGen = Random.Range(1, 6);
+                CountingDown = 1;
+                StartCoroutine(CountDown());
+                switch (QTEGen)
+                {
+                    case 1:
+                        WaitingForKey = 1;
+                        //change prefab on the screen
+                        timer = CountDownTimer;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+                        Letter.sprite = icons[0];
+                        Frame.fillAmount = 1;
+                        break;
+                    case 2:
+                        WaitingForKey = 1;
+                        //change prefab on the screen
+                        timer = CountDownTimer;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+                        Letter.sprite = icons[1];
+                        Frame.fillAmount = 1;
+                        break;
+                    case 3:
+                        WaitingForKey = 1;
+                        //change prefab on the screen
+                        timer = CountDownTimer;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+                        Letter.sprite = icons[2];
+                        Frame.fillAmount = 1;
+                        break;
+                    case 4:
+                        WaitingForKey = 1;
+                        //change prefab on the screen
+                        timer = CountDownTimer;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+                        Letter.sprite = icons[3];
+                        Frame.fillAmount = 1;
+                        break;
+                    case 5:
+                        WaitingForKey = 1;
+                        //change prefab on the screen
+                        timer = CountDownTimer;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+                        Letter.sprite = icons[4];
+                        Frame.fillAmount = 1;
+                        break;
+                }
+                atemptes--;
             }
         }
+        else
+        {
+            //event completed get the nectar
+        }
+
 
         switch (QTEGen)
         {
             case 1:
                 if (Input.anyKeyDown)
                 {
-                    if (Input.GetButtonDown("RKey"))
+                    if (Input.GetButtonDown("QTEKey1"))
                     {
                         CorrectKey = 1;
                         StartCoroutine(KeyPressing());
@@ -54,7 +123,7 @@ public class QTESystem : MonoBehaviour
             case 2:
                 if (Input.anyKeyDown)
                 {
-                    if (Input.GetButtonDown("FKey"))
+                    if (Input.GetButtonDown("QTEKey2"))
                     {
                         CorrectKey = 1;
                         StartCoroutine(KeyPressing());
@@ -69,7 +138,37 @@ public class QTESystem : MonoBehaviour
             case 3:
                 if (Input.anyKeyDown)
                 {
-                    if (Input.GetButtonDown("TKey"))
+                    if (Input.GetButtonDown("QTEKey3"))
+                    {
+                        CorrectKey = 1;
+                        StartCoroutine(KeyPressing());
+                    }
+                    else
+                    {
+                        CorrectKey = 2;
+                        StartCoroutine(KeyPressing());
+                    }
+                }
+                break;
+            case 4:
+                if (Input.anyKeyDown)
+                {
+                    if (Input.GetButtonDown("QTEKey4"))
+                    {
+                        CorrectKey = 1;
+                        StartCoroutine(KeyPressing());
+                    }
+                    else
+                    {
+                        CorrectKey = 2;
+                        StartCoroutine(KeyPressing());
+                    }
+                }
+                break;
+            case 5:
+                if (Input.anyKeyDown)
+                {
+                    if (Input.GetButtonDown("QTEKey5"))
                     {
                         CorrectKey = 1;
                         StartCoroutine(KeyPressing());
@@ -92,9 +191,13 @@ public class QTESystem : MonoBehaviour
         {
             CountingDown = 2;
             //Screen update correct key;
+            Frame.gameObject.SetActive(false);
+            Letter.gameObject.SetActive(false);
+            Debug.Log("correct key pressed");
             yield return new WaitForSeconds(1.5f);
             CorrectKey = 0;
             //Reset texts
+
             WaitingForKey = 0;
             CountingDown = 1;
         }
@@ -102,9 +205,15 @@ public class QTESystem : MonoBehaviour
         {
             CountingDown = 2;
             //Screen update fail key;
+            Frame.gameObject.SetActive(false);
+            Letter.gameObject.SetActive(false);
+            atemptes = 0;
+            Debug.Log("wrong key pressed");
+
             yield return new WaitForSeconds(1.5f);
             CorrectKey = 0;
             //Reset texts
+
             WaitingForKey = 0;
             CountingDown = 1;
         }
@@ -112,20 +221,32 @@ public class QTESystem : MonoBehaviour
 
     IEnumerator CountDown()
     {
-        yield return new WaitForSeconds(3.5f);
+
+        //yield return new WaitForSeconds(4f);
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            Frame.fillAmount = timer / CountDownTimer;
+            yield return null;
+        }
+
+        timer = CountDownTimer;
+
         if (CountingDown == 1)
         {
-            QTEGen = 4;
+            QTEGen = 14;
             CountingDown = 2;
             //fail update on the screen
-
+            Debug.Log("wrong key time done");
+            Frame.gameObject.SetActive(false);
+            Letter.gameObject.SetActive(false);
+            atemptes = 0;
             yield return new WaitForSeconds(1.5f);
             CorrectKey = 0;
             //Reset texts
+
             WaitingForKey = 0;
             CountingDown = 1;
         }
-
-        yield return new WaitForSeconds(1.5f);
     }
 }

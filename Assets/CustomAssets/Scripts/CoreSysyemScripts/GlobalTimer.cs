@@ -19,6 +19,7 @@ public class Timer
 
 public class GlobalTimer : MonoBehaviour
 {
+    [SerializeField]
     Timer time;
 
     [SerializeField]
@@ -27,7 +28,7 @@ public class GlobalTimer : MonoBehaviour
     [SerializeField]
     private List<DifficultyCheck> checksForDifficulty;
 
-   
+
 
     [Tooltip("Do NOT modify, preview avaliable for testing only")]
     [SerializeField]
@@ -62,10 +63,11 @@ public class GlobalTimer : MonoBehaviour
     {
         MaxTimer = time.minutes * 60 + time.seconds;
         //timeForFirstEvent = timer - (minutesForFirstEvent * 60 + secondsForFirstEvent);
-       // timeForSecondEvent = timer - (minutesForSecondEvent * 60 + secondsForSecondEvent);
-       // timeForThirdEvent = timer - (minutesForThirdEvent * 60 + secondsForThirdEvent);
+        // timeForSecondEvent = timer - (minutesForSecondEvent * 60 + secondsForSecondEvent);
+        // timeForThirdEvent = timer - (minutesForThirdEvent * 60 + secondsForThirdEvent);
+        if (checksForDifficulty.Count != 0)
 
-       // InitializeDifficultyChecks();
+            InitializeDifficultyChecks();
     }
 
     private void InitializeDifficultyChecks()
@@ -95,13 +97,13 @@ public class GlobalTimer : MonoBehaviour
     {
         if (timer > 0)
             timer -= Time.deltaTime;
-
-        if (timer < timer - checksForDifficulty[difficultyCheckIndex].time)
-        {
-            difficultyCheckIndex++;
-            EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
-        }
+        if (checksForDifficulty.Count != 0)
+            if (timer < timer - checksForDifficulty[difficultyCheckIndex].time)
+            {
+                difficultyCheckIndex++;
+                EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
+            }
     }
 
-   
+
 }

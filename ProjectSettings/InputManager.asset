@@ -502,6 +502,22 @@ InputManager:
     axis: 5
     joyNum: 0
   - serializedVersion: 3
+    m_Name: FlyDown
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: l
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 5
+    joyNum: 0
+  - serializedVersion: 3
     m_Name: NectarKey
     descriptiveName: 
     descriptiveNegativeName: 
@@ -518,7 +534,7 @@ InputManager:
     axis: 5
     joyNum: 0
   - serializedVersion: 3
-    m_Name: RKey
+    m_Name: QTEKey1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -534,7 +550,7 @@ InputManager:
     axis: 5
     joyNum: 0
   - serializedVersion: 3
-    m_Name: FKey
+    m_Name: QTEKey2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -550,11 +566,27 @@ InputManager:
     axis: 5
     joyNum: 0
   - serializedVersion: 3
-    m_Name: TKey
+    m_Name: QTEKey3
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: t
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 5
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: QTEKey4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: q
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

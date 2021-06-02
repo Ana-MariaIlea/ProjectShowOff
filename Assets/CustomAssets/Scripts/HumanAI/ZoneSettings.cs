@@ -28,9 +28,11 @@ public class ZoneSettings : MonoBehaviour
     {
         flowers = GetComponentsInChildren<NectarDistributor>().ToList();
         waypoints = GetComponentsInChildren<Waypoint>().ToList();
-
-        numberFlowers = flowers.Count / numberOfTimes;
-        numberWaypoints = waypoints.Count / numberOfTimes;
+        if (numberOfTimes > 0)
+        {
+            numberFlowers = flowers.Count / numberOfTimes;
+            numberWaypoints = waypoints.Count / numberOfTimes;
+        }
         InitializeEventStats();
     }
 
