@@ -120,7 +120,7 @@ public class PlayerMotor : MonoBehaviour
             Debug.Log("flySpeed");
             controller.Move(Vector3.up * ControllerStats.Gravity * -1 * Time.deltaTime);
             if (fSpeed < ControllerStats.ForwardSpeedFly)
-                fSpeed += ControllerStats.Acceleration;
+                fSpeed += ControllerStats.Acceleration * Time.deltaTime;
         }
 
         Debug.Log(isGrounded );
