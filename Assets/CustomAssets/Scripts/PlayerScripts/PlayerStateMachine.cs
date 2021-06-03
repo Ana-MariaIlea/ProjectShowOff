@@ -28,7 +28,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if(eventData is ChangePlayerStateEventData)
         {
-            Debug.Log("Change player state");
+            //Debug.Log("Change player state");
             ChangePlayerStateEventData e = eventData as ChangePlayerStateEventData;
             if (e.state == PlayerStates.Movement)
             {

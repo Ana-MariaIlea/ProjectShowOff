@@ -23,6 +23,9 @@ public class GlobalTimer : MonoBehaviour
     Timer time;
 
     [SerializeField]
+    float timeToStartTheFirstEvent;
+
+    [SerializeField]
     List<EventStates> eventStates;
 
     [SerializeField]
@@ -33,6 +36,7 @@ public class GlobalTimer : MonoBehaviour
     [Tooltip("Do NOT modify, preview avaliable for testing only")]
     [SerializeField]
     float timer = 0;
+
 
     [System.Serializable]
     public class EventStates
@@ -62,12 +66,10 @@ public class GlobalTimer : MonoBehaviour
     private void Awake()
     {
         MaxTimer = time.minutes * 60 + time.seconds;
-        //timeForFirstEvent = timer - (minutesForFirstEvent * 60 + secondsForFirstEvent);
-        // timeForSecondEvent = timer - (minutesForSecondEvent * 60 + secondsForSecondEvent);
-        // timeForThirdEvent = timer - (minutesForThirdEvent * 60 + secondsForThirdEvent);
         if (checksForDifficulty.Count != 0)
-
+        {
             InitializeDifficultyChecks();
+        }
     }
 
     private void InitializeDifficultyChecks()
@@ -91,7 +93,7 @@ public class GlobalTimer : MonoBehaviour
         }
     }
 
-
+    bool firstEventFire = false;
     // Update is called once per frame
     void Update()
     {
@@ -103,6 +105,16 @@ public class GlobalTimer : MonoBehaviour
                 difficultyCheckIndex++;
                 EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
             }
+
+        if (timeToStartTheFirstEvent < 0 && firstEventFire == false)
+        {
+            EventQueue.eventQueue.AddEvent(new ChangeStateStartEventData());
+            firstEventFire = true;
+        }
+        else
+        {
+            timeToStartTheFirstEvent -= Time.deltaTime;
+        }
     }
 
 

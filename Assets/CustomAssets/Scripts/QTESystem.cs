@@ -202,7 +202,7 @@ public class QTESystem : MonoBehaviour
             //Screen update correct key;
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
-            Debug.Log("correct key pressed");
+            //Debug.Log("correct key pressed");
             yield return new WaitForSeconds(2.5f);
             CorrectKey = 0;
             //Reset texts
@@ -218,7 +218,7 @@ public class QTESystem : MonoBehaviour
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             atemptes = 0;
-            Debug.Log("wrong key pressed");
+            //Debug.Log("wrong key pressed");
 
             yield return new WaitForSeconds(2.5f);
             CorrectKey = 0;
@@ -250,7 +250,7 @@ public class QTESystem : MonoBehaviour
             QTEGen = 14;
             CountingDown = 2;
             //fail update on the screen
-            Debug.Log("wrong key time done");
+            //Debug.Log("wrong key time done");
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             atemptes = 0;

@@ -30,6 +30,8 @@ public class CutGrass : BaseState
         this.launge = launge;
         this.grass = plants;
         this.path = path;
+        this.pointToStartCutting = this.path[0];
+        this.pointToEndCutting = this.path[this.path.Count-1];
     }
 
 
