@@ -101,7 +101,7 @@ public class PlayerMotor : MonoBehaviour
         {
             controller.Move(Vector3.up * -ControllerStats.DownSpeed * Time.deltaTime);
         }
-        Debug.Log(controller.isGrounded+" Before check");
+       // Debug.Log(controller.isGrounded+" Before check");
 
         
         if (controller.isGrounded)
@@ -111,19 +111,19 @@ public class PlayerMotor : MonoBehaviour
         }
         if (isGrounded)
         {
-            Debug.Log("walkSpeed");
+            //Debug.Log("walkSpeed");
             fSpeed = ControllerStats.ForwardSpeedWalk;
 
         }
         else
         {
-            Debug.Log("flySpeed");
+            //Debug.Log("flySpeed");
             controller.Move(Vector3.up * ControllerStats.Gravity * -1 * Time.deltaTime);
             if (fSpeed < ControllerStats.ForwardSpeedFly)
                 fSpeed += ControllerStats.Acceleration * Time.deltaTime;
         }
 
-        Debug.Log(isGrounded );
+       // Debug.Log(isGrounded );
 
         //direction.y = directionY;
 
