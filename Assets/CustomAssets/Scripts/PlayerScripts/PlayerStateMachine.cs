@@ -21,12 +21,14 @@ public class PlayerStateMachine : MonoBehaviour
         system = GetComponent<QTESystem>();
         collect = GetComponent<NectarCollect>();
         system.enabled = false;
+        EventQueue.eventQueue.Subscribe(EventType.CHANGEPLAYERSTATE, OnStateChange);
     }
 
-    public void OnstateChange(EventData eventData)
+    public void OnStateChange(EventData eventData)
     {
         if(eventData is ChangePlayerStateEventData)
         {
+            Debug.Log("Change player state");
             ChangePlayerStateEventData e = eventData as ChangePlayerStateEventData;
             if (e.state == PlayerStates.Movement)
             {

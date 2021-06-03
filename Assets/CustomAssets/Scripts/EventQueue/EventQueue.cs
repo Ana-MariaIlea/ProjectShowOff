@@ -65,6 +65,7 @@ public class EventQueue : MonoBehaviour
             }
             else
             {
+                Debug.Log(data.eventType);
                 throw new ArgumentOutOfRangeException("data.eventType", "EventType is not in the dictionary");
             }
 

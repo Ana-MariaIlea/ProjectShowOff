@@ -13,7 +13,6 @@ public class QTESystem : MonoBehaviour
     public int CorrectKey;
     [HideInInspector]
     public int CountingDown;
-    [HideInInspector]
     public float CountDownTimer;
     public List<Sprite> icons;
     public Image Frame;
@@ -102,12 +101,14 @@ public class QTESystem : MonoBehaviour
                         Frame.fillAmount = 1;
                         break;
                 }
-                atemptes--;
+                
             }
         }
         else
         {
-            //EventQueue.eventQueue.AddEvent(new NectarCollectStartEventData(other.GetComponent<NectarDistributor>()));
+            EventQueue.eventQueue.AddEvent(new CollectNectarEventData());
+            EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
+
         }
 
 
@@ -202,12 +203,13 @@ public class QTESystem : MonoBehaviour
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             Debug.Log("correct key pressed");
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2.5f);
             CorrectKey = 0;
             //Reset texts
 
             WaitingForKey = 0;
             CountingDown = 1;
+            atemptes--;
         }
         else if (CorrectKey == 2)
         {
@@ -218,13 +220,14 @@ public class QTESystem : MonoBehaviour
             atemptes = 0;
             Debug.Log("wrong key pressed");
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2.5f);
             CorrectKey = 0;
             //Reset texts
 
             WaitingForKey = 0;
             CountingDown = 1;
-            EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.QTEEvent));
+            atemptes--;
+            EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
 
         }
     }
@@ -257,7 +260,8 @@ public class QTESystem : MonoBehaviour
 
             WaitingForKey = 0;
             CountingDown = 1;
-            EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.QTEEvent));
+            atemptes--;
+            EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
 
         }
     }
