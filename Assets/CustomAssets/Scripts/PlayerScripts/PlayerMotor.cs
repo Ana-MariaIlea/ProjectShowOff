@@ -19,6 +19,7 @@ public class PlayerMotor : MonoBehaviour
     bool slowed = false;
     private float sTimer;
     private CharacterController controller;
+    private bool isGrounded = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -83,6 +84,7 @@ public class PlayerMotor : MonoBehaviour
             if (Input.GetButton("FlyUp"))
             {
                 controller.Move(Vector3.up * ControllerStats.UpSpeed * Time.deltaTime);
+                isGrounded = false;
             }
         }
         else
@@ -90,6 +92,8 @@ public class PlayerMotor : MonoBehaviour
             if (Input.GetButtonDown("FlyUp"))
             {
                 controller.Move(Vector3.up * ControllerStats.UpSpeedSpam * Time.deltaTime);
+                isGrounded = false;
+
             }
         }
 
@@ -97,18 +101,29 @@ public class PlayerMotor : MonoBehaviour
         {
             controller.Move(Vector3.up * -ControllerStats.DownSpeed * Time.deltaTime);
         }
+        Debug.Log(controller.isGrounded+" Before check");
 
+        
         if (controller.isGrounded)
         {
+            isGrounded = true;
+
+        }
+        if (isGrounded)
+        {
+            Debug.Log("walkSpeed");
             fSpeed = ControllerStats.ForwardSpeedWalk;
+
         }
         else
         {
-            
+            Debug.Log("flySpeed");
             controller.Move(Vector3.up * ControllerStats.Gravity * -1 * Time.deltaTime);
             if (fSpeed < ControllerStats.ForwardSpeedFly)
                 fSpeed += ControllerStats.Acceleration;
         }
+
+        Debug.Log(isGrounded );
 
         //direction.y = directionY;
 
