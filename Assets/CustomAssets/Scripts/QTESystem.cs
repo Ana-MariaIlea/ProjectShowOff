@@ -39,11 +39,11 @@ public class QTESystem : MonoBehaviour
         Letter.gameObject.SetActive(true);
     }
 
-    //private void OnDisable()
-    //{
-    //    Frame.gameObject.SetActive(false);
-    //    Letter.gameObject.SetActive(false);
-    //}
+    private void OnDisable()
+    {
+        Frame.gameObject.SetActive(false);
+        Letter.gameObject.SetActive(false);
+    }
 
     void Update()
     {
