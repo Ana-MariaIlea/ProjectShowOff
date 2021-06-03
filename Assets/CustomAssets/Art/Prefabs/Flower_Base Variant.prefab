@@ -62,10 +62,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1808071452669533125, guid: 17dae423f57a6614bb03ee40a945c972,
+        type: 3}
+      propertyPath: m_Name
+      value: Flower_Base Variant
+      objectReference: {fileID: 0}
     - target: {fileID: 2146663437926243679, guid: 17dae423f57a6614bb03ee40a945c972,
         type: 3}
       propertyPath: m_Name
       value: Flower_Base Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104531282078847820, guid: 17dae423f57a6614bb03ee40a945c972,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17dae423f57a6614bb03ee40a945c972, type: 3}
