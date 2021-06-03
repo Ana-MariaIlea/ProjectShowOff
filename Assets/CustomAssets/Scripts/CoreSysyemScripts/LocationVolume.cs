@@ -11,7 +11,7 @@ public class LocationVolume : MonoBehaviour
         if (other.tag == "Player")
         {
             EventQueue.eventQueue.AddEvent(new ChangePlayerLocationEventData(zone));
-            Debug.Log("Hello from the volume.You are in "+zone);
+
         }
     }
 

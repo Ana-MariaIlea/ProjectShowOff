@@ -16,6 +16,11 @@ public class SprayPesticides : BaseState
     {
         this.particles = particle;
         this.path = path;
+        Debug.Log(this.path.Count);
+        for (int i = 0; i < path.Count; i++)
+        {
+            Debug.Log(path[i]);
+        }
     }
 
 
@@ -39,6 +44,8 @@ public class SprayPesticides : BaseState
     public override void SearchWalkPoint()
     {
         walkPoint++;
+
+
        // if (walkPoint > path.Count - 1 || walkPoint < 0) walkPoint = 0;
         if (walkPoint > path.Count - 1) FinishState();
         else

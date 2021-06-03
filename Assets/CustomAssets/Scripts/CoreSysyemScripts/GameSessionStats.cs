@@ -29,12 +29,6 @@ public class GameSessionStats : MonoBehaviour
             instance = this;
 
         zones = FindObjectsOfType<ZoneSettings>().ToList();
-        Debug.Log(zones.Count);
-
-        foreach (var item in zones)
-        {
-            Debug.Log(item.stateOfZone);
-        }
 
     }
     void Start()
@@ -132,7 +126,7 @@ public class GameSessionStats : MonoBehaviour
     {
         if (eventData is ChangeStateStartEventData)
         {
-            int rand = Random.Range(0, zones.Count);
+            int rand = Random.Range(0, zones.Count-1);
             EventQueue.eventQueue.AddEvent(new ChangeStateEventData(zones[rand]));
             if (zones[rand].numberOfTimes == 1)
             {

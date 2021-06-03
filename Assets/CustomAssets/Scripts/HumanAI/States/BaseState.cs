@@ -41,7 +41,8 @@ public abstract class BaseState
         {
             agent.SetDestination(target.position);
         }
-
+        if (agent == null) { Debug.Log("Agent is null"); }
+        if (target == null) { Debug.Log("Target is null"); }
         Vector3 distanceToLocation = agent.transform.position - target.position;
 
 
@@ -76,6 +77,8 @@ public abstract class BaseState
         target = path[walkPoint].transform;
         timer = 2f;
         walkPointSet = true;
+
+        if (target == null) { Debug.Log("Target is null in search walkpoint"); }
     }
 
     public bool IsStateFinished()
