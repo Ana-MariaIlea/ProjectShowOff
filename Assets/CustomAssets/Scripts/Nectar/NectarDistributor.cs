@@ -12,7 +12,12 @@ public class NectarDistributor : MonoBehaviour
     private ParticleSystem polen;
     private bool showParticles = false;
     private float cooldownTimer = 0;
-
+    void OnDrawGizmos()
+    {
+        // Draw a semitransparent blue cube at the transforms position
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(transform.position, transform.localScale/100);
+    }
     private void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);

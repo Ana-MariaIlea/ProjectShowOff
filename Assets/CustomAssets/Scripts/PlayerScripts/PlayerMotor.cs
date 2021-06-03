@@ -104,9 +104,10 @@ public class PlayerMotor : MonoBehaviour
         }
         else
         {
+            
+            controller.Move(Vector3.up * ControllerStats.Gravity * -1 * Time.deltaTime);
             if (fSpeed < ControllerStats.ForwardSpeedFly)
                 fSpeed += ControllerStats.Acceleration;
-            controller.Move(Vector3.up * ControllerStats.Gravity * -1 * Time.deltaTime);
         }
 
         //direction.y = directionY;
