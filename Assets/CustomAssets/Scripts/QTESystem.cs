@@ -35,7 +35,15 @@ public class QTESystem : MonoBehaviour
         Debug.Log("Script enabled");
         timer = CountDownTimer;
         atemptes = numberOfAtemptes;
+        Frame.gameObject.SetActive(true);
+        Letter.gameObject.SetActive(true);
     }
+
+    //private void OnDisable()
+    //{
+    //    Frame.gameObject.SetActive(false);
+    //    Letter.gameObject.SetActive(false);
+    //}
 
     void Update()
     {
@@ -99,7 +107,7 @@ public class QTESystem : MonoBehaviour
         }
         else
         {
-            //event completed get the nectar
+            //EventQueue.eventQueue.AddEvent(new NectarCollectStartEventData(other.GetComponent<NectarDistributor>()));
         }
 
 
@@ -216,6 +224,8 @@ public class QTESystem : MonoBehaviour
 
             WaitingForKey = 0;
             CountingDown = 1;
+            EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.QTEEvent));
+
         }
     }
 
@@ -247,6 +257,8 @@ public class QTESystem : MonoBehaviour
 
             WaitingForKey = 0;
             CountingDown = 1;
+            EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.QTEEvent));
+
         }
     }
 }

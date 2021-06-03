@@ -12,9 +12,12 @@ public class NectarCollect : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI text;
 
+    NectarDistributor lastKnownDistribuitor = null;
+
     private void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTEND, OnNectarIsCollected);
+        EventQueue.eventQueue.Subscribe(EventType.COLECTNECTAR, OnCollectNectar);
     }
 
     private void OnTriggerStay(Collider other)
@@ -23,8 +26,11 @@ public class NectarCollect : MonoBehaviour
         {
             if (other.GetComponent<NectarDistributor>())
             {
-                
-                EventQueue.eventQueue.AddEvent(new NectarCollectStartEventData(other.GetComponent<NectarDistributor>()));
+
+
+                EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.QTEEvent));
+                lastKnownDistribuitor = other.GetComponent<NectarDistributor>();
+
             }
 
             if (other.GetComponent<NectarTrunk>() && nectarAmount > 0)
@@ -35,13 +41,25 @@ public class NectarCollect : MonoBehaviour
         }
     }
 
+    public void OnCollectNectar(EventData eventData)
+    {
+        if (eventData is CollectNectarEventData)
+        {
+            if (lastKnownDistribuitor != null)
+            {
+                EventQueue.eventQueue.AddEvent(new NectarCollectStartEventData(lastKnownDistribuitor));
+                lastKnownDistribuitor = null;
+            }
+        }
+    }
+
     public void OnNectarIsCollected(EventData eventData)
     {
         if (eventData is NectarCollectEndEventData)
         {
             NectarCollectEndEventData e = eventData as NectarCollectEndEventData;
-            if (nectarAmount+ e.nectarAmount < maxNectarAmount)
-            { 
+            if (nectarAmount + e.nectarAmount < maxNectarAmount)
+            {
                 changeNectarAmount(e.nectarAmount);
             }
             else
@@ -61,19 +79,8 @@ public class NectarCollect : MonoBehaviour
     private void resetNectarAmount()
     {
         nectarAmount = 0;
-        text.text = "Nectar on bee: "+nectarAmount.ToString();
+        text.text = "Nectar on bee: " + nectarAmount.ToString();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GetComponent<QTESystem>().enabled = false;
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            GetComponent<QTESystem>().enabled = true;
-        }
 
-    }
 }
