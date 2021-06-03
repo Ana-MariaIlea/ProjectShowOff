@@ -102,12 +102,19 @@ public class QTESystem : MonoBehaviour
                         Frame.fillAmount = 1;
                         break;
                 }
-                
+
             }
         }
         else
         {
-            EventQueue.eventQueue.AddEvent(new CollectNectarEventData());
+            Debug.Log("Get Out");
+            Debug.Log(atemptes);
+            if (atemptes == 0)
+            {
+                Debug.Log("Collect Nectar in QTE");
+                EventQueue.eventQueue.AddEvent(new CollectNectarEventData());
+            }
+            Debug.Log(atemptes);
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
 
         }
@@ -218,7 +225,7 @@ public class QTESystem : MonoBehaviour
             //Screen update fail key;
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
-            atemptes = 0;
+            atemptes = -4;
             //Debug.Log("wrong key pressed");
 
             yield return new WaitForSeconds(WaitTime);
@@ -227,7 +234,6 @@ public class QTESystem : MonoBehaviour
 
             WaitingForKey = 0;
             CountingDown = 1;
-            atemptes--;
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
 
         }
@@ -254,14 +260,14 @@ public class QTESystem : MonoBehaviour
             //Debug.Log("wrong key time done");
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
-            atemptes = 0;
+            atemptes = -4;
             yield return new WaitForSeconds(WaitTime);
             CorrectKey = 0;
             //Reset texts
 
             WaitingForKey = 0;
             CountingDown = 1;
-            atemptes--;
+            
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
 
         }
