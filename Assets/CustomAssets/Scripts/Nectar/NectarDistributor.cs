@@ -16,7 +16,7 @@ public class NectarDistributor : MonoBehaviour
     {
         // Draw a semitransparent blue cube at the transforms position
         Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(transform.position, transform.localScale/100);
+        Gizmos.DrawWireCube(transform.position, transform.localScale);
     }
     private void Start()
     {

@@ -12,6 +12,7 @@ public class GoToHouse : BaseState
     public GoToHouse(NavMeshAgent ag, GameObject house,float time) : base(ag)
     {
         houseLocation = house.transform;
+        target = house.transform;
         timerToStay = time;
     }
     private void OnDrawGizmos()
