@@ -13,6 +13,7 @@ public class QTESystem : MonoBehaviour
     public int CorrectKey;
     [HideInInspector]
     public int CountingDown;
+    public float WaitTime;
     public float CountDownTimer;
     public List<Sprite> icons;
     public Image Frame;
@@ -203,7 +204,7 @@ public class QTESystem : MonoBehaviour
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             //Debug.Log("correct key pressed");
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(WaitTime);
             CorrectKey = 0;
             //Reset texts
 
@@ -220,7 +221,7 @@ public class QTESystem : MonoBehaviour
             atemptes = 0;
             //Debug.Log("wrong key pressed");
 
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(WaitTime);
             CorrectKey = 0;
             //Reset texts
 
@@ -254,7 +255,7 @@ public class QTESystem : MonoBehaviour
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             atemptes = 0;
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(WaitTime);
             CorrectKey = 0;
             //Reset texts
 
