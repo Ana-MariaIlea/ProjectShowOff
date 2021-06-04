@@ -42,6 +42,7 @@ public class PickFlowers : BaseState
         target = null;
         GameObject f = path[walkPoint].gameObject;
         path.RemoveAt(walkPoint);
+        EventQueue.eventQueue.AddEvent(new FlowerDestroyEventData(f));
         //Destroy(f);
     }
 

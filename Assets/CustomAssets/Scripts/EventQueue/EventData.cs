@@ -20,7 +20,8 @@ public enum EventType
     CHECKDIFFICULTY,
     CHANGEDIFFICULTY,
     CHANGEPLAYERSTATE,
-    PICKFLOWER
+    PICKFLOWER,
+    DESTROYFLOWER
 }
 public class EventData 
 {

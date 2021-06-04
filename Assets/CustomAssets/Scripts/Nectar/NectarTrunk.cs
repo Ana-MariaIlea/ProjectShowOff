@@ -19,7 +19,7 @@ public class NectarTrunk : MonoBehaviour
     {
         nectarAmount += amount;
         Debug.Log("New nectar amount in trunk: " + nectarAmount);
-        //text.text = "Nectar in deposit: " + nectarAmount.ToString();
+        text.text = nectarAmount.ToString();
     }
 
     public void OnNectarIsStored(EventData eventData)

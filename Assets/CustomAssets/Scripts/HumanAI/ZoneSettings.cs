@@ -12,7 +12,7 @@ public class ZoneSettings : MonoBehaviour
     public GameObject launge;
     public GameObject plants;
 
-    List<NectarDistributor> flowers;
+    List<TestFlower> flowers;
     List<Waypoint> waypoints;
 
     [HideInInspector]
@@ -26,7 +26,7 @@ public class ZoneSettings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        flowers = GetComponentsInChildren<NectarDistributor>().ToList();
+        flowers = GetComponentsInChildren<TestFlower>().ToList();
         waypoints = GetComponentsInChildren<Waypoint>().ToList();
         if (numberOfTimes > 0)
         {
@@ -88,6 +88,7 @@ public class ZoneSettings : MonoBehaviour
                 {
                     int rand = Random.Range(0, flowers.Count);
                     currentFlowers.Add(flowers[rand].gameObject);
+                    Debug.Log("Flowers to be collected " + currentFlowers.Count);
                     flowers.RemoveAt(rand);
                 }
                 break;

@@ -73,13 +73,13 @@ public class NectarCollect : MonoBehaviour
     {
         nectarAmount += amount;
         Debug.Log("New nectar amount in player: " + nectarAmount);
-        //text.text = "Nectar on bee: " + nectarAmount.ToString();
+        text.text = nectarAmount.ToString();
     }
 
     private void resetNectarAmount()
     {
         nectarAmount = 0;
-        //text.text = "Nectar on bee: " + nectarAmount.ToString();
+        text.text =nectarAmount.ToString();
     }
 
 
