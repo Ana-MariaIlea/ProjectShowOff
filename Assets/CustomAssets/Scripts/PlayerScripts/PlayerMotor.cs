@@ -46,26 +46,7 @@ public class PlayerMotor : MonoBehaviour
     {
         if (controller.enabled)
             Move();
-        if (slowed)
-        {
-            if (sTimer < 0)
-            {
-                slowed = false;
-                sTimer = EffectStats.slowedTimer;
-                if (controller.isGrounded)
-                {
-                    fSpeed = ControllerStats.ForwardSpeedWalk;
-                }
-                else
-                {
-                    fSpeed = ControllerStats.ForwardSpeedFly;
-                }
-            }
-            else
-            {
-                sTimer -= Time.deltaTime;
-            }
-        }
+        
     }
 
     private void Move()
@@ -116,23 +97,28 @@ public class PlayerMotor : MonoBehaviour
                 fSpeed += ControllerStats.Acceleration * Time.deltaTime;
             //isGrounded = false;
         }
-        //if (isGrounded)
-        //{
-        //    //Debug.Log("walkSpeed");
-        //    fSpeed = ControllerStats.ForwardSpeedWalk;
 
-        //}
-        //else
-        //{
-        //    //Debug.Log("flySpeed");
-            
-        //    if (fSpeed < ControllerStats.ForwardSpeedFly)
-        //        fSpeed += ControllerStats.Acceleration * Time.deltaTime;
-        //}
-
-       // Debug.Log(isGrounded );
-
-        //direction.y = directionY;
+        if (slowed)
+        {
+            if (sTimer < 0)
+            {
+                slowed = false;
+                sTimer = EffectStats.slowedTimer;
+                if (controller.isGrounded)
+                {
+                    fSpeed = ControllerStats.ForwardSpeedWalk;
+                }
+                else
+                {
+                    if (fSpeed < ControllerStats.ForwardSpeedFly)
+                        fSpeed += ControllerStats.Acceleration * Time.deltaTime;
+                }
+            }
+            else
+            {
+                sTimer -= Time.deltaTime;
+            }
+        }
 
         if (direction.magnitude >= 0.1f)
         {
