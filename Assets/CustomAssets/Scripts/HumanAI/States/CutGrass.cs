@@ -23,13 +23,16 @@ public class CutGrass : BaseState
     private GameObject grass;
 
 
-    public CutGrass(NavMeshAgent ag, ParticleSystem particles, GameObject mawer, GameObject launge,GameObject plants, List<GameObject> path) : base(ag)
+    public CutGrass(NavMeshAgent ag, ParticleSystem particles, GameObject mawer, GameObject launge,GameObject plants, List<Waypoint> path) : base(ag)
     {
         this.particles = particles;
         this.lawnmower = mawer;
         this.launge = launge;
         this.grass = plants;
-        this.path = path;
+        for (int i = 0; i < path.Count; i++)
+        {
+            this.path.Add(path[i].gameObject);
+        }
         this.pointToStartCutting = this.path[0];
         this.pointToEndCutting = this.path[this.path.Count-1];
     }

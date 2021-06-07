@@ -5,7 +5,7 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
     [Tooltip("Time to stay on the waypoint")]
-    public float timeToStay;
+    public float timeToStay=1f;
 
     private void OnDrawGizmos()
     {

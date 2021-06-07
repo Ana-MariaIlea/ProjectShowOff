@@ -10,25 +10,27 @@ public class SprayPesticides : BaseState
     [Tooltip("Add Pesticide Particle Effect attached to the Human")]
     [SerializeField]
     private ParticleSystem particles;
+    private List<float> times;
 
 
-    public SprayPesticides(NavMeshAgent ag,ParticleSystem particle, List<GameObject> path) : base(ag)
+    public SprayPesticides(NavMeshAgent ag, ParticleSystem particle, List<Waypoint> path) : base(ag)
     {
         this.particles = particle;
-        this.path = path;
-        Debug.Log(this.path.Count);
         for (int i = 0; i < path.Count; i++)
         {
-            Debug.Log(path[i]);
+            this.path.Add(path[i].gameObject);
+            times.Add(path[i].timeToStay);
         }
+        Debug.Log(this.path.Count);
+
     }
 
 
     public override void StayPut()
     {
         agent.SetDestination(agent.transform.position);
-        if(!particles.isPlaying)
-        particles.Play();
+        if (!particles.isPlaying)
+            particles.Play();
         if (timer <= 0)
         {
             if (particles.isPlaying)
@@ -46,15 +48,15 @@ public class SprayPesticides : BaseState
         walkPoint++;
 
 
-       // if (walkPoint > path.Count - 1 || walkPoint < 0) walkPoint = 0;
+        // if (walkPoint > path.Count - 1 || walkPoint < 0) walkPoint = 0;
         if (walkPoint > path.Count - 1) FinishState();
         else
         {
             target = path[walkPoint].transform;
-            timer = 2f;
+            timer = times[walkPoint];
             walkPointSet = true;
         }
-        
+
     }
 
     public override void FinishState()

@@ -18,7 +18,7 @@ public class ZoneSettings : MonoBehaviour
     [HideInInspector]
     public List<GameObject> currentFlowers;
     [HideInInspector]
-    public List<GameObject> currentWaypoints;
+    public List<Waypoint> currentWaypoints;
 
     int numberFlowers;
     int numberWaypoints;
@@ -61,17 +61,17 @@ public class ZoneSettings : MonoBehaviour
                 }
                 break;
             case HumanStates.SprayGarden:
-                currentWaypoints = new List<GameObject>();
+                currentWaypoints = new List<Waypoint>();
                 for (int i = 0; i < waypoints.Count; i++)
                 {
-                    currentWaypoints.Add(waypoints[i].gameObject);
+                    currentWaypoints.Add(waypoints[i]);
                 }
                 break;
             case HumanStates.CutGrass:
-                currentWaypoints = new List<GameObject>();
+                currentWaypoints = new List<Waypoint>();
                 for (int i = 0; i < waypoints.Count; i++)
                 {
-                    currentWaypoints.Add(waypoints[i].gameObject);
+                    currentWaypoints.Add(waypoints[i]);
                 }
                 break;
         }
@@ -93,20 +93,20 @@ public class ZoneSettings : MonoBehaviour
                 }
                 break;
             case HumanStates.SprayGarden:
-                currentWaypoints = new List<GameObject>();
+                currentWaypoints = new List<Waypoint>();
                 for (int i = 0; i < numberWaypoints; i++)
                 {
                     int rand = Random.Range(0, waypoints.Count);
-                    currentWaypoints.Add(waypoints[rand].gameObject);
+                    currentWaypoints.Add(waypoints[rand]);
                     waypoints.RemoveAt(rand);
                 }
                 break;
             case HumanStates.CutGrass:
-                currentWaypoints = new List<GameObject>();
+                currentWaypoints = new List<Waypoint>();
                 for (int i = 0; i < numberWaypoints; i++)
                 {
                     int rand = Random.Range(0, waypoints.Count);
-                    currentWaypoints.Add(waypoints[rand].gameObject);
+                    currentWaypoints.Add(waypoints[rand]);
                     waypoints.RemoveAt(rand);
                 }
                 break;
