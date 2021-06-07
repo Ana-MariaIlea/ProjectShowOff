@@ -214,7 +214,7 @@ public class QTESystem : MonoBehaviour
             yield return new WaitForSeconds(WaitTime);
             CorrectKey = 0;
             //Reset texts
-
+            timer = CountDownTimer;
             WaitingForKey = 0;
             CountingDown = 1;
             atemptes--;
@@ -267,7 +267,7 @@ public class QTESystem : MonoBehaviour
 
             WaitingForKey = 0;
             CountingDown = 1;
-            
+            timer = CountDownTimer;
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
 
         }

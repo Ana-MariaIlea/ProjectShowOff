@@ -98,7 +98,7 @@ public class ZoneSettings : MonoBehaviour
                 {
                     int rand = Random.Range(0, waypoints.Count);
                     currentWaypoints.Add(waypoints[rand]);
-                    waypoints.RemoveAt(rand);
+                   // waypoints.RemoveAt(rand);
                 }
                 break;
             case HumanStates.CutGrass:
@@ -107,7 +107,7 @@ public class ZoneSettings : MonoBehaviour
                 {
                     int rand = Random.Range(0, waypoints.Count);
                     currentWaypoints.Add(waypoints[rand]);
-                    waypoints.RemoveAt(rand);
+                   // waypoints.RemoveAt(rand);
                 }
                 break;
         }
