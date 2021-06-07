@@ -16,17 +16,16 @@ public class SprayPesticides : BaseState
     public SprayPesticides(NavMeshAgent ag, ParticleSystem particle, List<Waypoint> path) : base(ag)
     {
         this.particles = particle;
-        if(particles==null)
-        Debug.Log("particles is null");
-        if (path == null)
-            Debug.Log("path is null");
         
         for (int i = 0; i < path.Count; i++)
         {
-            if (this.path == null)
-                Debug.Log("this.pathpath is null");
             this.path.Add(path[i].gameObject);
             times.Add(path[i].timeToStay);
+        }
+
+        for (int i = 0; i < times.Count; i++)
+        {
+            Debug.Log(times[i]);
         }
         Debug.Log(this.path.Count);
 
@@ -35,23 +34,33 @@ public class SprayPesticides : BaseState
 
     public override void StayPut()
     {
+        Debug.Log(timer);
+        Debug.Log("Waypoint reached");
         agent.SetDestination(agent.transform.position);
         if (!particles.isPlaying)
+        {
+            Debug.Log("Play particles");
             particles.Play();
+        }
         if (timer <= 0)
         {
             if (particles.isPlaying)
+            {
+                Debug.Log("Stop particles");
                 particles.Stop();
+            }
             walkPointSet = false;
         }
         else
         {
-            timer -= Time.fixedDeltaTime;
+            timer -= Time.deltaTime;
         }
     }
 
     public override void SearchWalkPoint()
     {
+        //if(walkPoint>0)
+        //Debug.Log("Waypoint last "+ path[walkPoint].gameObject.name);
         walkPoint++;
 
 
@@ -61,6 +70,8 @@ public class SprayPesticides : BaseState
         {
             target = path[walkPoint].transform;
             timer = times[walkPoint];
+            Debug.Log("Waypoint new " + path[walkPoint].gameObject.name);
+
             walkPointSet = true;
         }
 
