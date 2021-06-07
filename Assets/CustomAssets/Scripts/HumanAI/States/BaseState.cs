@@ -13,7 +13,7 @@ public abstract class BaseState
     }
 
     [SerializeField]
-    protected List<GameObject> path;
+    protected List<GameObject> path=new List<GameObject>();
 
 
     protected int walkPoint = -1;
