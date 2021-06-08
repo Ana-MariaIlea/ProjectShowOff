@@ -10,7 +10,7 @@ public class LocalisationSystem
         Dutch
     }
 
-    public static Language language = Language.Dutch;
+    public static Language language = Language.English;
 
     private static Dictionary<string, string> localisedEN;
     private static Dictionary<string, string> localisedNL;
