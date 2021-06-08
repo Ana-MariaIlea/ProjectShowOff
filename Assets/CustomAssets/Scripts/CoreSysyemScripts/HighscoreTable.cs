@@ -14,6 +14,7 @@ public class HighscoreTable : MonoBehaviour
     [SerializeField]
     float templateHeight = 20f;
 
+
     private List<Transform> highscoreEntryTransformList=new List<Transform>();
     private void Awake()
     {
@@ -26,9 +27,25 @@ public class HighscoreTable : MonoBehaviour
 
 
         string jsonString = PlayerPrefs.GetString("highscoreTable");
+
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
 
-       
+        if (highscores == null)
+        {
+            List<HighscoreEntry> entries = new List<HighscoreEntry>();
+            for (int i = 0; i < 10; i++)
+            {
+                entries.Add(new HighscoreEntry(0, "N/A"));
+            }
+            Highscores h=new Highscores { highscoreEntryList = entries };
+
+            string json = JsonUtility.ToJson(h);
+            PlayerPrefs.SetString("highscoreTable", json);
+            PlayerPrefs.Save();
+        }
+
+        jsonString = PlayerPrefs.GetString("highscoreTable");
+        highscores = JsonUtility.FromJson<Highscores>(jsonString);
         foreach (HighscoreEntry entry in highscores.highscoreEntryList)
         {
             CreateHighscoreEntry(entry, entryContainer, highscoreEntryTransformList);
