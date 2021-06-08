@@ -16,18 +16,30 @@ public class LocalisationSystem
     private static Dictionary<string, string> localisedNL;
 
     public static bool isInit;
+    public static CSVLoader csvLoader;
 
     public static void Init()
     {
-        CSVLoader csvLoader = new CSVLoader();
+        csvLoader = new CSVLoader();
         csvLoader.LoadCSV();
-
-        localisedEN = csvLoader.GetDictionaryValues("en");
-        localisedNL = csvLoader.GetDictionaryValues("nl");
+        UpdateDictionaries();
 
         isInit = true;
     }
 
+    private static void UpdateDictionaries()
+    {
+        localisedEN = csvLoader.GetDictionaryValues("en");
+        localisedNL = csvLoader.GetDictionaryValues("nl");
+    }
+    public static Dictionary<string,string> GetDictionaryForEditor()
+    {
+        if (!isInit)
+        {
+            Init();
+        }
+        return localisedEN;
+    }
     public static string GetLocalisedValue(string key)
     {
         if (!isInit)
@@ -47,5 +59,57 @@ public class LocalisationSystem
         }
 
         return value;
+    }
+
+    public static void Add(string key, string value)
+    {
+        if (value.Contains("\""))
+        {
+            value.Replace('"', '\"');
+        }
+
+        if (csvLoader == null)
+        {
+            csvLoader = new CSVLoader();
+        }
+
+        csvLoader.LoadCSV();
+        csvLoader.Add(key, value);
+        csvLoader.LoadCSV();
+
+        UpdateDictionaries();
+    }
+
+    public static void Replace(string key, string value)
+    {
+        if (value.Contains("\""))
+        {
+            value.Replace('"', '\"');
+        }
+
+        if (csvLoader == null)
+        {
+            csvLoader = new CSVLoader();
+        }
+
+        csvLoader.LoadCSV();
+        csvLoader.Edit(key, value);
+        csvLoader.LoadCSV();
+
+        UpdateDictionaries();
+    }
+
+    public static void Remove(string key)
+    {
+        if (csvLoader == null)
+        {
+            csvLoader = new CSVLoader();
+        }
+
+        csvLoader.LoadCSV();
+        csvLoader.Remove(key);
+        csvLoader.LoadCSV();
+
+        UpdateDictionaries();
     }
 }

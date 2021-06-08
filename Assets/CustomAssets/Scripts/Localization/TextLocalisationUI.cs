@@ -9,13 +9,12 @@ public class TextLocalisationUI : MonoBehaviour
 
     TextMeshProUGUI textField;
     [SerializeField]
-    private string key;
+    private LocalisedString localisedString;
     // Start is called before the first frame update
     void Start()
     {
         textField = GetComponent<TextMeshProUGUI>();
-        string value = LocalisationSystem.GetLocalisedValue(key);
-        textField.text = value;
+        textField.text = localisedString.value;
     }
 
     // Update is called once per frame
