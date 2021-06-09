@@ -23,7 +23,7 @@ public class LocalisedStringDrawer : PropertyDrawer
     {
         EditorGUI.BeginProperty(position, label, property);
         position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive),label);
-        position.width -= 34;
+        position.width -= 40;
         position.height = 18;
 
         Rect valueRect = new Rect(position);
@@ -41,12 +41,12 @@ public class LocalisedStringDrawer : PropertyDrawer
         SerializedProperty key = property.FindPropertyRelative("key");
         key.stringValue = EditorGUI.TextField(position, key.stringValue);
 
-        position.x = position.width + 2;
-        position.width = 17;
-        position.height = 17;
+        position.x += position.width + 2;
+        position.width = 19;
+        position.height = 19;
 
-        Texture searchIcon = (Texture)Resources.Load("search");
-        GUIContent searchContent = new GUIContent(searchIcon);
+       // Texture searchIcon = (Texture)Resources.Load("search");
+        GUIContent searchContent = new GUIContent("S");
 
         if (GUI.Button(position, searchContent))
         {
@@ -56,8 +56,8 @@ public class LocalisedStringDrawer : PropertyDrawer
 
         position.x += position.width + 2;
 
-        Texture storeIcon = (Texture)Resources.Load("edit");
-        GUIContent storeContent = new GUIContent(storeIcon);
+       // Texture storeIcon = (Texture)Resources.Load("edit");
+        GUIContent storeContent = new GUIContent("+");
 
         if (GUI.Button(position, storeContent))
         {
