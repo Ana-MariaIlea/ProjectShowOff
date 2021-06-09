@@ -65,6 +65,7 @@ MonoBehaviour:
     UpSpeedSpamSlowed: 6
     slowedTimer: 0
   fSpeed: 0
+  animator: {fileID: 7671589568647664041}
 --- !u!143 &3127850797399832127
 CharacterController:
   m_ObjectHideFlags: 0
@@ -119,8 +120,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3561321292809073189}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 42222b83406b5b243b6488bda71c30d7, type: 3}
+  m_Controller: {fileID: 9100000, guid: 562b9a5c9f7bdc34faaf4f4ecde0080b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
