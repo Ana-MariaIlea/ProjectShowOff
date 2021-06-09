@@ -18,6 +18,12 @@ public class LocalisationSystem
     public static bool isInit;
     public static CSVLoader csvLoader;
 
+    public static void ChangeLanguage(Language lan)
+    {
+        language = lan;
+        Debug.Log(language);
+    }
+
     public static void Init()
     {
         csvLoader = new CSVLoader();
@@ -37,6 +43,14 @@ public class LocalisationSystem
         if (!isInit)
         {
             Init();
+        }
+
+        switch (language)
+        {
+            case Language.English:
+                return localisedEN;
+            case Language.Dutch:
+                return localisedNL;
         }
         return localisedEN;
     }
@@ -61,6 +75,27 @@ public class LocalisationSystem
         return value;
     }
 
+    public static string GetLocalisedValueBySpecificDictionary(string key,Language language)
+    {
+        if (!isInit)
+        {
+            Init();
+        }
+
+        string value = null;
+        switch (language)
+        {
+            case Language.English:
+                localisedEN.TryGetValue(key, out value);
+                break;
+            case Language.Dutch:
+                localisedNL.TryGetValue(key, out value);
+                break;
+        }
+
+        return value;
+    }
+
     public static void Add(string key, string value)
     {
         if (value.Contains("\""))
@@ -68,9 +103,39 @@ public class LocalisationSystem
             value.Replace('"', '\"');
         }
 
+        Debug.Log("add value");
+        Debug.Log(language);
+
         if (csvLoader == null)
         {
             csvLoader = new CSVLoader();
+        }
+
+        if (language == Language.Dutch)
+        {
+            Debug.Log("dutch language");
+            if (GetLocalisedValueBySpecificDictionary(key, Language.English) != null)
+            {
+                value = string.Format("\"{0}\",\"{1}\"", GetLocalisedValueBySpecificDictionary(key, Language.English), value);
+            }
+            else
+            {
+                value = string.Format("\"{0}\",\"{1}\"", "no_value_for_this_language", value);
+            }
+        }
+
+        if (language == Language.English)
+        {
+            Debug.Log("english language");
+            Debug.Log(GetLocalisedValueBySpecificDictionary(key, Language.Dutch));
+            if (GetLocalisedValueBySpecificDictionary(key, Language.Dutch) != null)
+            {
+                value = string.Format("\"{0}\",\"{1}\"", value, GetLocalisedValueBySpecificDictionary(key, Language.Dutch));
+            }
+            else
+            {
+                value = string.Format("\"{0}\",\"{1}\"", value, "no_value_for_this_language");
+            }
         }
 
         csvLoader.LoadCSV();
