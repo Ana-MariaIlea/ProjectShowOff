@@ -13,6 +13,8 @@ public class PlayerMotor : MonoBehaviour
     [Tooltip("Do NOT modify. Exposed parameter for testing purposes ONLY")]
     [SerializeField]
     private float fSpeed;
+    [SerializeField]
+    Animator animator;
     private float uSpeed;
     private float turnSmoothVelocity = 0.1f;
 
@@ -128,6 +130,13 @@ public class PlayerMotor : MonoBehaviour
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDirection.normalized * fSpeed * Time.deltaTime);
+            animator.SetInteger("condition", 1);
+            Debug.Log(animator.GetInteger("condition"));
+        }
+        else
+        {
+            animator.SetInteger("condition", 0);
+            Debug.Log(animator.GetInteger("condition"));
         }
     }
 
