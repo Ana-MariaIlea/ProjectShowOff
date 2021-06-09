@@ -65,7 +65,7 @@ public class CSVLoader
 
     public void Add(string key, string value)
     {
-        string appended = string.Format("\n\"{0}\",\"{1}\"", key, value);
+        string appended = string.Format("\n\"{0}\",\"{1}\",\"\"", key, value);
         File.AppendAllText("Assets/CustomAssets/Scripts/Localization/Resources/localisation.csv", appended);
 
         UnityEditor.AssetDatabase.Refresh();

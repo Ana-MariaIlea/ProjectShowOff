@@ -45,13 +45,6 @@ public class LocalisationSystem
             Init();
         }
 
-        switch (language)
-        {
-            case Language.English:
-                return localisedEN;
-            case Language.Dutch:
-                return localisedNL;
-        }
         return localisedEN;
     }
     public static string GetLocalisedValue(string key)
@@ -103,39 +96,9 @@ public class LocalisationSystem
             value.Replace('"', '\"');
         }
 
-        Debug.Log("add value");
-        Debug.Log(language);
-
         if (csvLoader == null)
         {
             csvLoader = new CSVLoader();
-        }
-
-        if (language == Language.Dutch)
-        {
-            Debug.Log("dutch language");
-            if (GetLocalisedValueBySpecificDictionary(key, Language.English) != null)
-            {
-                value = string.Format("\"{0}\",\"{1}\"", GetLocalisedValueBySpecificDictionary(key, Language.English), value);
-            }
-            else
-            {
-                value = string.Format("\"{0}\",\"{1}\"", "no_value_for_this_language", value);
-            }
-        }
-
-        if (language == Language.English)
-        {
-            Debug.Log("english language");
-            Debug.Log(GetLocalisedValueBySpecificDictionary(key, Language.Dutch));
-            if (GetLocalisedValueBySpecificDictionary(key, Language.Dutch) != null)
-            {
-                value = string.Format("\"{0}\",\"{1}\"", value, GetLocalisedValueBySpecificDictionary(key, Language.Dutch));
-            }
-            else
-            {
-                value = string.Format("\"{0}\",\"{1}\"", value, "no_value_for_this_language");
-            }
         }
 
         csvLoader.LoadCSV();
