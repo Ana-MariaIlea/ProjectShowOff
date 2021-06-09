@@ -18,6 +18,12 @@ public class LocalisationSystem
     public static bool isInit;
     public static CSVLoader csvLoader;
 
+    public static void ChangeLanguage(Language lan)
+    {
+        language = lan;
+        Debug.Log(language);
+    }
+
     public static void Init()
     {
         csvLoader = new CSVLoader();
@@ -38,6 +44,7 @@ public class LocalisationSystem
         {
             Init();
         }
+
         return localisedEN;
     }
     public static string GetLocalisedValue(string key)
@@ -48,6 +55,27 @@ public class LocalisationSystem
         }
 
         string value = key;
+        switch (language)
+        {
+            case Language.English:
+                localisedEN.TryGetValue(key, out value);
+                break;
+            case Language.Dutch:
+                localisedNL.TryGetValue(key, out value);
+                break;
+        }
+
+        return value;
+    }
+
+    public static string GetLocalisedValueBySpecificDictionary(string key,Language language)
+    {
+        if (!isInit)
+        {
+            Init();
+        }
+
+        string value = null;
         switch (language)
         {
             case Language.English:
