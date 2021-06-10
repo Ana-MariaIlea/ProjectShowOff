@@ -77,4 +77,9 @@ public class NectarDistributor : MonoBehaviour
             }
         }
     }
+
+    public int GetNectarAmount()
+    {
+        return nectarAmount;
+    }
 }

@@ -21,7 +21,8 @@ public enum EventType
     CHANGEDIFFICULTY,
     CHANGEPLAYERSTATE,
     PICKFLOWER,
-    DESTROYFLOWER
+    DESTROYFLOWER,
+    NECTARCOLLECTTUTORIAL
 }
 public class EventData 
 {
