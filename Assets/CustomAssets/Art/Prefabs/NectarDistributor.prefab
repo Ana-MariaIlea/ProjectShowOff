@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6771905500184198137}
   - component: {fileID: 6771905500184198142}
   - component: {fileID: 6771905500184198143}
+  - component: {fileID: 3882105908655549388}
   m_Layer: 0
   m_Name: NectarDistributor
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +83,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6771905500184198142
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109,3 +112,15 @@ MonoBehaviour:
   nectarAmount: 5
   cooldown: 0
   polen: {fileID: 0}
+--- !u!114 &3882105908655549388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6771905500184198140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f764c1cad4c1048a4f9d85a93c85ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

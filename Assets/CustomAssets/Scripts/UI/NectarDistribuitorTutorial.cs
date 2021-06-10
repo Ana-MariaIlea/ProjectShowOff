@@ -5,8 +5,8 @@ using UnityEngine;
 public class NectarDistribuitorTutorial : MonoBehaviour
 {
     private int nectarAmount;
-    [SerializeField]
-    GameObject gameDistribuitor;
+   // [SerializeField]
+    //GameObject gameDistribuitor;
     void OnDrawGizmos()
     {
         // Draw a semitransparent blue cube at the transforms position
@@ -15,10 +15,12 @@ public class NectarDistribuitorTutorial : MonoBehaviour
     }
     private void Start()
     {
-        nectarAmount = gameDistribuitor.GetComponent<NectarDistributor>().GetNectarAmount();
+        nectarAmount = GetComponent<NectarDistributor>().GetNectarAmount();
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTTUTORIAL, OnNectartCollectTutorialDone);
-        gameDistribuitor.SetActive(false);
+        GetComponent<NectarDistributor>().enabled = false;
+
+        //gameDistribuitor.SetActive(false);
 
     }
 
@@ -26,7 +28,7 @@ public class NectarDistribuitorTutorial : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Tutorial.instance.SetIndex(4);
+            Tutorial.instance.SetIndex(3);
         }
     }
 
@@ -35,9 +37,11 @@ public class NectarDistribuitorTutorial : MonoBehaviour
         if (eventData is NectarCollectStartEventData)
         {
             NectarCollectStartEventData e = eventData as NectarCollectStartEventData;
-            if (e.dis == this)
+            if (e.dis == GetComponent<NectarDistributor>())
             {
+                Debug.Log("Tutorial nectar is ending");
                 EventQueue.eventQueue.AddEvent(new NectarCollectEndEventData(nectarAmount));
+                Tutorial.instance.IncreasePanelIndex();
                 EventQueue.eventQueue.AddEvent(new NectarCollectTutorialEventData());
             }
         }
@@ -47,9 +51,13 @@ public class NectarDistribuitorTutorial : MonoBehaviour
     {
         if (eventData is NectarCollectTutorialEventData)
         {
-            gameDistribuitor.SetActive(true);
-            Tutorial.instance.IncreasePanelIndex();
-            Destroy(this);
+            Debug.Log("Tutorial nectar end");
+            //gameDistribuitor.SetActive(true);
+            GetComponent<NectarDistributor>().enabled = true;
+            Debug.Log(this.enabled);
+            this.enabled = false;
+            Debug.Log(this.enabled);
+            //Destroy(this);
         }
     }
 }

@@ -18,7 +18,7 @@ public class Tutorial : MonoBehaviour
     }
     void Start()
     {
-
+        panels[0].panel.SetActive(true);
     }
     bool[] panel1Condition = new bool[2];
     bool[] panel2Condition = new bool[2];
@@ -48,9 +48,9 @@ public class Tutorial : MonoBehaviour
                 case 7:
                     ChackConditionBasedOnTime();
                     break;
-                default:
-                    gameObject.SetActive(false);
-                    break;
+                //default:
+                //    gameObject.SetActive(false);
+                //    break;
 
 
 
@@ -146,6 +146,7 @@ public class Tutorial : MonoBehaviour
         panels[index].panel.SetActive(false);
         index++;
         panels[index].panel.SetActive(true);
+        Debug.Log(panels[index].panel.name);
     }
 
     public void SetIndex(int i)
@@ -153,6 +154,7 @@ public class Tutorial : MonoBehaviour
         panels[index].panel.SetActive(false);
         index = i;
         panels[index].panel.SetActive(true);
+        Debug.Log(panels[index].panel.name);
     }
 
     public void EndTutorial()

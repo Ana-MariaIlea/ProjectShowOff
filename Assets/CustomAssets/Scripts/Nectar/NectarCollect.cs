@@ -47,6 +47,7 @@ public class NectarCollect : MonoBehaviour
         {
             if (lastKnownDistribuitor != null)
             {
+                Debug.Log("Start event " + lastKnownDistribuitor);
                 EventQueue.eventQueue.AddEvent(new NectarCollectStartEventData(lastKnownDistribuitor));
                 lastKnownDistribuitor = null;
             }

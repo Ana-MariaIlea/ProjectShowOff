@@ -9,13 +9,14 @@ public class NectarTrunkTutorial : MonoBehaviour
     int nectarAmount = 0;
     [SerializeField]
     TextMeshProUGUI text;
-    [SerializeField]
-    GameObject gameTrunk;
+    //[SerializeField]
+   // GameObject gameTrunk;
     // Start is called before the first frame update
     void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARSTORED, OnNectarIsStored);
-        gameTrunk.SetActive(false);
+        GetComponent<NectarTrunk>().enabled = false;
+        //gameTrunk.SetActive(false);
     }
 
     private void changeNectarAmount(int amount)
@@ -31,9 +32,10 @@ public class NectarTrunkTutorial : MonoBehaviour
         {
             NectarIsStoredEventData e = eventData as NectarIsStoredEventData;
             changeNectarAmount(e.nectarAmount);
-            gameTrunk.SetActive(true);
+            GetComponent<NectarTrunk>().enabled = true;
             Tutorial.instance.EndTutorial();
-            Destroy(this);
+            this.enabled = false;
+           // Destroy(this);
         }
     }
 }
