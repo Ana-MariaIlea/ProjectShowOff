@@ -44,12 +44,12 @@ public class CutGrass : BaseState
         {
             if (!particles.isPlaying)
             {
-                Debug.Log("particles play");
+               // Debug.Log("particles play");
                 particles.Play();
             }
             else
             {
-                Debug.Log("particles not play "+ particles.isPlaying);
+               // Debug.Log("particles not play "+ particles.isPlaying);
             }
             if (lawnmower.activeSelf == false)
             {
@@ -61,12 +61,12 @@ public class CutGrass : BaseState
         {
             if (particles.isPlaying)
             {
-                Debug.Log("particles stop");
+                //Debug.Log("particles stop");
                 particles.Stop();
             }
             else
             {
-                Debug.Log("particles not stop "+ particles.isPlaying);
+                //Debug.Log("particles not stop "+ particles.isPlaying);
             }
             if (lawnmower.activeSelf == true)
             {
