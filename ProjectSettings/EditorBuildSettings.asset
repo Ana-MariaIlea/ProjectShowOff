@@ -5,13 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/DefaultAssets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
-  - enabled: 0
-    path: Assets/CustomAssets/Scenes/SceneScriptTests/NectarCollectionTestScene.unity
-    guid: 5a8279434bb85ac46a90bda12d26cf20
-  - enabled: 0
+  - enabled: 1
     path: Assets/CustomAssets/Scenes/GoodScenes/PersistentScene.unity
     guid: 5979162216d89d547b83008b281e15c3
   - enabled: 0
@@ -20,6 +14,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/CustomAssets/Scenes/SceneScriptTests/SceneManagmentTest.unity
     guid: 0d8b8ab3f93f1454f9aaeab608b30b5e
+  - enabled: 1
+    path: Assets/CustomAssets/Scenes/GoodScenes/MainMenu_week6_Phuong.unity
+    guid: f1f71bc5e6cfb4a02bccb1a7cd625974
   - enabled: 1
     path: Assets/CustomAssets/Scenes/SceneDesignTests/dupeweek5.unity
     guid: 420e84fb6ec14774e8ff1cce10e37e72

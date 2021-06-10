@@ -5,6 +5,7 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public static bool IsGamePaused = false;
+    public GameObject MenuUI;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -24,11 +25,13 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         IsGamePaused = false;
+        MenuUI.SetActive(false);
     }
 
     public void Pause()
     {
         Time.timeScale = 0f;
         IsGamePaused = true;
+        MenuUI.SetActive(true);
     }
 }
