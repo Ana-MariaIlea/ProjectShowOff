@@ -126,12 +126,19 @@ public class GameSessionStats : MonoBehaviour
     {
         if (eventData is ChangeStateStartEventData)
         {
-            int rand = Random.Range(0, zones.Count-1);
-            EventQueue.eventQueue.AddEvent(new ChangeStateEventData(zones[rand]));
-            if (zones[rand].numberOfTimes == 1)
+            if (zones.Count > 0)
             {
-                
-                zones.RemoveAt(rand);
+                int rand = Random.Range(0, zones.Count - 1);
+                EventQueue.eventQueue.AddEvent(new ChangeStateEventData(zones[rand]));
+                if (zones[rand].numberOfTimes == 0)
+                {
+                    Debug.Log("remove zone " + zones[rand].gameObject.name);
+                    zones.RemoveAt(rand);
+                }
+                else
+                {
+                    Debug.Log("not remove zone " + zones[rand].gameObject.name + " number of times" + zones[rand].numberOfTimes);
+                }
             }
         }
     }

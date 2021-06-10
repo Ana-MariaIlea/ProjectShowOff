@@ -43,7 +43,14 @@ public class CutGrass : BaseState
         if (path[walkPoint] == pointToStartCutting)
         {
             if (!particles.isPlaying)
+            {
+                Debug.Log("particles play");
                 particles.Play();
+            }
+            else
+            {
+                Debug.Log("particles not play "+ particles.isPlaying);
+            }
             if (lawnmower.activeSelf == false)
             {
                 lawnmower.SetActive(true);
@@ -53,7 +60,14 @@ public class CutGrass : BaseState
         if (path[walkPoint] == pointToEndCutting)
         {
             if (particles.isPlaying)
+            {
+                Debug.Log("particles stop");
                 particles.Stop();
+            }
+            else
+            {
+                Debug.Log("particles not stop "+ particles.isPlaying);
+            }
             if (lawnmower.activeSelf == true)
             {
                 lawnmower.SetActive(false);

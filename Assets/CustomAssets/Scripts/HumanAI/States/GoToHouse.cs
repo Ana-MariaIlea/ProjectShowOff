@@ -42,13 +42,18 @@ public class GoToHouse : BaseState
         target = houseLocation;
     }
 
+    bool sendEvent = false;
     public override void FinishState()
     {
         base.FinishState();
         target = agent.transform;
         if (timerToStay < 0)
         {
-            EventQueue.eventQueue.AddEvent(new ChangeStateStartEventData());
+            if (sendEvent == false)
+            {
+                EventQueue.eventQueue.AddEvent(new ChangeStateStartEventData());
+                sendEvent = true;
+            }
         }
         else
         {
