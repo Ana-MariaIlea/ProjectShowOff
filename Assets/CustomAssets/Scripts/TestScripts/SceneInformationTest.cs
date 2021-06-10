@@ -15,7 +15,7 @@ public class SceneInformationTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            test();
+           // test();
         }
     }
 
