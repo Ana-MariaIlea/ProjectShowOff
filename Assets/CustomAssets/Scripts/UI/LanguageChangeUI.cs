@@ -16,8 +16,16 @@ public class LanguageChangeUI : MonoBehaviour
 
     void Start()
     {
-        FlagImage.sprite = englishFlag;
-        LocalisationSystem.language = LocalisationSystem.Language.English;
+        switch (LocalisationSystem.language)
+        {
+            case LocalisationSystem.Language.English:
+                FlagImage.sprite = englishFlag;
+                break;
+            case LocalisationSystem.Language.Dutch:
+                FlagImage.sprite = dutchFlag;
+                break;
+        }
+        //LocalisationSystem.language = LocalisationSystem.Language.English;
 
     }
 

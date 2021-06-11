@@ -68,7 +68,9 @@ public class CSVLoader
         string appended = string.Format("\n\"{0}\",\"{1}\",\"\"", key, value);
         File.AppendAllText("Assets/CustomAssets/Scripts/Localization/Resources/localisation.csv", appended);
 
+#if UNITY_EDITOR
         UnityEditor.AssetDatabase.Refresh();
+#endif
     }
 
     public void Remove(string key)

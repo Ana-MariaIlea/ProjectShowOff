@@ -16,7 +16,7 @@ public class TextLocalisationUI : MonoBehaviour
     {
         textField = GetComponent<TextMeshProUGUI>();
         textField.text = localisedString.value;
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1)|| SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
             LanguageChangeUI.ChangeLanguage += OnLanguageChangeText;
         }
