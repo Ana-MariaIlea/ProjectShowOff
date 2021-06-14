@@ -60,46 +60,51 @@ public class QTESystem : MonoBehaviour
                         WaitingForKey = 1;
                         //change prefab on the screen
                         timer = CountDownTimer;
-                        Frame.gameObject.SetActive(true);
-                        Letter.gameObject.SetActive(true);
                         Letter.sprite = icons[0];
                         Frame.fillAmount = 1;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+
                         break;
                     case 2:
                         WaitingForKey = 1;
                         //change prefab on the screen
                         timer = CountDownTimer;
-                        Frame.gameObject.SetActive(true);
-                        Letter.gameObject.SetActive(true);
                         Letter.sprite = icons[1];
                         Frame.fillAmount = 1;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+
                         break;
                     case 3:
                         WaitingForKey = 1;
                         //change prefab on the screen
                         timer = CountDownTimer;
-                        Frame.gameObject.SetActive(true);
-                        Letter.gameObject.SetActive(true);
                         Letter.sprite = icons[2];
                         Frame.fillAmount = 1;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+
                         break;
                     case 4:
                         WaitingForKey = 1;
                         //change prefab on the screen
                         timer = CountDownTimer;
-                        Frame.gameObject.SetActive(true);
-                        Letter.gameObject.SetActive(true);
                         Letter.sprite = icons[3];
                         Frame.fillAmount = 1;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+
                         break;
                     case 5:
                         WaitingForKey = 1;
                         //change prefab on the screen
                         timer = CountDownTimer;
-                        Frame.gameObject.SetActive(true);
-                        Letter.gameObject.SetActive(true);
                         Letter.sprite = icons[4];
                         Frame.fillAmount = 1;
+                        Frame.gameObject.SetActive(true);
+                        Letter.gameObject.SetActive(true);
+
                         break;
                 }
 
@@ -211,7 +216,9 @@ public class QTESystem : MonoBehaviour
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             //Debug.Log("correct key pressed");
-            yield return new WaitForSeconds(WaitTime);
+            if (atemptes > 0)
+                yield return new WaitForSeconds(WaitTime);
+            else yield return new WaitForSeconds(0.1f);
             CorrectKey = 0;
             //Reset texts
             timer = CountDownTimer;

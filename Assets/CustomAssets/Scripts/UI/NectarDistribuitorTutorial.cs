@@ -57,7 +57,10 @@ public class NectarDistribuitorTutorial : MonoBehaviour
             //gameDistribuitor.SetActive(true);
             GetComponent<NectarDistributor>().enabled = true;
             Debug.Log(this.enabled);
+            EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+            EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTTUTORIAL, OnNectartCollectTutorialDone);
             this.enabled = false;
+
             Debug.Log(this.enabled);
             //Destroy(this);
         }
