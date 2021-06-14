@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject loadingScreen;
     public Action StartGame;
 
-
+    public string playerName = null;
     private void Awake()
     {
         if (instance == null)
@@ -37,11 +37,14 @@ public class GameManager : MonoBehaviour
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     public void LoadGame()
     {
-        loadingScreen.SetActive(true);
-        scenesLoading.Add(SceneManager.UnloadSceneAsync(titleScreenInterger));
-        scenesLoading.Add(SceneManager.LoadSceneAsync(mainScreenInterger, LoadSceneMode.Additive));
+        if (playerName != null)
+        {
+            loadingScreen.SetActive(true);
+            scenesLoading.Add(SceneManager.UnloadSceneAsync(titleScreenInterger));
+            scenesLoading.Add(SceneManager.LoadSceneAsync(mainScreenInterger, LoadSceneMode.Additive));
 
-        StartCoroutine(GetSceneLoadProgress());
+            StartCoroutine(GetSceneLoadProgress());
+        }
     }
 
     public void BackToMenu()
@@ -71,8 +74,10 @@ public class GameManager : MonoBehaviour
         //intro.
     }
 
-    public void SceneTest()
+
+
+    public void ChangeText(string text)
     {
-        Debug.Log("hello from the scene");
+        playerName = text;
     }
 }

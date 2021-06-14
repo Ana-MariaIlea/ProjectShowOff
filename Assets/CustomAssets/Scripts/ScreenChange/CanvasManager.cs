@@ -11,7 +11,8 @@ public enum CanvasType
     MainMenu,
     Leaderboard,
     Settings,
-    Credits
+    Credits,
+    Name
 }
 
 
