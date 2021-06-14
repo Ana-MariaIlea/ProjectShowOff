@@ -26,7 +26,7 @@ public class NectarDistribuitorTutorial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player"&& this.enabled == true)
         {
             Tutorial.instance.SetIndex(3);
         }
@@ -37,6 +37,8 @@ public class NectarDistribuitorTutorial : MonoBehaviour
         if (eventData is NectarCollectStartEventData)
         {
             NectarCollectStartEventData e = eventData as NectarCollectStartEventData;
+            Debug.Log("distribuitor in event: " + e.dis);
+            Debug.Log("distribuitor in gameobject: " + GetComponent<NectarDistributor>());
             if (e.dis == GetComponent<NectarDistributor>())
             {
                 Debug.Log("Tutorial nectar is ending");

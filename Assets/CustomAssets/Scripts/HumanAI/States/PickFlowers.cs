@@ -23,7 +23,7 @@ public class PickFlowers : BaseState
 
     public override void StayPut()
     {
-        Debug.Log("Pick flower-Destination reached");
+        //Debug.Log("Pick flower-Destination reached");
         agent.SetDestination(agent.transform.position);
         if (timer <= 0)
         {
@@ -38,7 +38,7 @@ public class PickFlowers : BaseState
 
     void pickUpFlower()
     {
-        Debug.Log("Pick flower");
+        //Debug.Log("Pick flower");
         target = null;
         GameObject f = path[walkPoint].gameObject;
         path.RemoveAt(walkPoint);

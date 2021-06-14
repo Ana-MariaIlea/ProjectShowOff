@@ -34,19 +34,19 @@ public class SprayPesticides : BaseState
 
     public override void StayPut()
     {
-        Debug.Log(timer);
-        Debug.Log("Waypoint reached");
+       // Debug.Log(timer);
+       // Debug.Log("Waypoint reached");
         agent.SetDestination(agent.transform.position);
         if (!particles.isPlaying)
         {
-            Debug.Log("Play particles");
+           // Debug.Log("Play particles");
             particles.Play();
         }
         if (timer <= 0)
         {
             if (particles.isPlaying)
             {
-                Debug.Log("Stop particles");
+               // Debug.Log("Stop particles");
                 particles.Stop();
             }
             walkPointSet = false;
@@ -70,7 +70,7 @@ public class SprayPesticides : BaseState
         {
             target = path[walkPoint].transform;
             timer = times[walkPoint];
-            Debug.Log("Waypoint new " + path[walkPoint].gameObject.name);
+           // Debug.Log("Waypoint new " + path[walkPoint].gameObject.name);
 
             walkPointSet = true;
         }

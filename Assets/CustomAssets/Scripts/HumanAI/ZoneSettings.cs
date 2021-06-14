@@ -88,7 +88,7 @@ public class ZoneSettings : MonoBehaviour
                 {
                     int rand = Random.Range(0, flowers.Count);
                     currentFlowers.Add(flowers[rand].gameObject);
-                    Debug.Log("Flowers to be collected " + currentFlowers.Count);
+                   // Debug.Log("Flowers to be collected " + currentFlowers.Count);
                     flowers.RemoveAt(rand);
                 }
                 break;

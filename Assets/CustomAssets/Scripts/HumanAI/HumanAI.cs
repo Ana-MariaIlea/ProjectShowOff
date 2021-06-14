@@ -51,17 +51,17 @@ public class HumanAI : MonoBehaviour
             switch (e.zoneSettings.stateOfZone)
             {
                 case HumanStates.PickFlowes:
-                    Debug.Log("Change state to pick Flowers");
+                   // Debug.Log("Change state to pick Flowers");
                     currentState = new PickFlowers(GetComponent<NavMeshAgent>(),e.zoneSettings.currentFlowers);
                     e.zoneSettings.InitializeEventStats();
                     break;
                 case HumanStates.SprayGarden:
-                    Debug.Log("Change state to spray garden");
+                   // Debug.Log("Change state to spray garden");
                     currentState = new SprayPesticides(GetComponent<NavMeshAgent>(),pesticides, e.zoneSettings.currentWaypoints);
                     e.zoneSettings.InitializeEventStats();
                     break;
                 case HumanStates.CutGrass:
-                    Debug.Log("Change state to cut grass "+ e.zoneSettings.gameObject.name);
+                  //  Debug.Log("Change state to cut grass "+ e.zoneSettings.gameObject.name);
                    //Debug.Log(e.zoneSettings.gameObject.name);
                     currentState = new CutGrass(GetComponent<NavMeshAgent>(),smoke,lawnmower,e.zoneSettings.launge,e.zoneSettings.plants, e.zoneSettings.currentWaypoints);
                     e.zoneSettings.InitializeEventStats();
