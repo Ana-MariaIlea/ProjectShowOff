@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     public int mainScreenInterger;
     public GameObject loadingScreen;
     public Action StartGame;
+    public ProgressBar bar;
 
+    [HideInInspector]
     public string playerName = null;
     private void Awake()
     {
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         loadingScreen.SetActive(false);
-        
+
     }
 
     private void Update()
@@ -57,12 +59,24 @@ public class GameManager : MonoBehaviour
         playerName = null;
     }
 
+    float totalProgress;
+
     public IEnumerator GetSceneLoadProgress()
     {
         for (int i = 0; i < scenesLoading.Count; i++)
         {
             while (!scenesLoading[i].isDone)
             {
+
+                totalProgress = 0;
+
+                foreach (AsyncOperation operation in scenesLoading)
+                {
+                    totalProgress += operation.progress;
+                }
+
+                totalProgress = (totalProgress / scenesLoading.Count) * 100;
+                bar.current = Mathf.RoundToInt(totalProgress);
                 yield return null;
 
             }
