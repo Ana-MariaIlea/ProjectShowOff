@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         scenesLoading.Add(SceneManager.LoadSceneAsync(titleScreenInterger, LoadSceneMode.Additive));
 
         StartCoroutine(GetSceneLoadProgress());
+        playerName = null;
     }
 
     public IEnumerator GetSceneLoadProgress()
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeText(string text)
     {
+        Debug.Log("player name is changed in game manager");
         playerName = text;
     }
 }

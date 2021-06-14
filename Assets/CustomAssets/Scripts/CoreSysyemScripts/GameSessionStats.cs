@@ -33,6 +33,7 @@ public class GameSessionStats : MonoBehaviour
     }
     void Start()
     {
+        playerName = GameManager.instance.playerName;
         if (settings.Count != 0)
         {
             for (int i = 0; i < settings.Count; i++)
@@ -52,7 +53,7 @@ public class GameSessionStats : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATESTART, OnChangeStateEvent);
 
-        
+        Debug.Log("Player name in the game stats " + playerName);
     }
 
 

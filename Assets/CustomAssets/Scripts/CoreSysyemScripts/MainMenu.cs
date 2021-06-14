@@ -6,8 +6,14 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        //SceneManager.LoadScene(3);
-        GameManager.instance.LoadGame();
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.LoadGame();
+        }
+        else
+        {
+            Debug.Log("Game manager does not exist");
+        }
     }
 
     public void QuitGame()

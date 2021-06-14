@@ -11,6 +11,7 @@ public class InputName : MonoBehaviour
     }
     public void ChangeText(string text)
     {
+        Debug.Log("name is changed");
         if (GameManager.instance != null)
         {
             GameManager.instance.ChangeText(text);
@@ -19,10 +20,5 @@ public class InputName : MonoBehaviour
         {
             name = text;
         }
-    }
-
-    public void UpdatePlayerName()
-    {
-        
     }
 }
