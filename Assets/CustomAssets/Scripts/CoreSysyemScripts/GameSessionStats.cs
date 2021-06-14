@@ -33,7 +33,8 @@ public class GameSessionStats : MonoBehaviour
     }
     void Start()
     {
-        playerName = GameManager.instance.playerName;
+        if (GameManager.instance !=null)
+            playerName = GameManager.instance.playerName;
         if (settings.Count != 0)
         {
             for (int i = 0; i < settings.Count; i++)
@@ -53,7 +54,7 @@ public class GameSessionStats : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATESTART, OnChangeStateEvent);
 
-        Debug.Log("Player name in the game stats " + playerName);
+       // Debug.Log("Player name in the game stats " + playerName);
     }
 
 
@@ -113,7 +114,7 @@ public class GameSessionStats : MonoBehaviour
             }
             else if (playerScore > e.DifficultyCheck.nectarMax)
             {
-                if (settings.IndexOf(currentDifficulty) + 1 <= settings.Count-1)
+                if (settings.IndexOf(currentDifficulty) + 1 <= settings.Count - 1)
                 {
                     currentDifficulty = settings[settings.IndexOf(currentDifficulty) + 1];
                     EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
