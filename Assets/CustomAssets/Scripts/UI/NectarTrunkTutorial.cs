@@ -33,9 +33,17 @@ public class NectarTrunkTutorial : MonoBehaviour
             NectarIsStoredEventData e = eventData as NectarIsStoredEventData;
             changeNectarAmount(e.nectarAmount);
             GetComponent<NectarTrunk>().enabled = true;
-            Tutorial.instance.EndTutorial();
+            Tutorial.instance.IncreasePanelIndex();
             this.enabled = false;
            // Destroy(this);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && this.enabled == true)
+        {
+            Tutorial.instance.SetIndex(6);
         }
     }
 }

@@ -10,13 +10,13 @@ public class GameSessionStats : MonoBehaviour
     private HumanStates playerPosition;
 
     [SerializeField]
-    private List<DifficultySettings> settings;
+    public List<DifficultySettings> settings;
 
     [SerializeField]
     private DifficultySettings currentDifficulty;
 
 
-    private List<ZoneSettings> zones;
+    public List<ZoneSettings> zones;
 
 
     private int playerScore;
@@ -33,7 +33,7 @@ public class GameSessionStats : MonoBehaviour
     }
     void Start()
     {
-        if (GameManager.instance !=null)
+        if (GameManager.instance != null)
             playerName = GameManager.instance.playerName;
         if (settings.Count != 0)
         {
@@ -50,11 +50,15 @@ public class GameSessionStats : MonoBehaviour
                 }
             }
         }
+        //else
+        //{
+        //    throw new System.ArgumentOutOfRangeException("settings.Count", "No settings in the list");
+        //}
         EventQueue.eventQueue.Subscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
         EventQueue.eventQueue.Subscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATESTART, OnChangeStateEvent);
 
-       // Debug.Log("Player name in the game stats " + playerName);
+        // Debug.Log("Player name in the game stats " + playerName);
     }
 
 
@@ -64,6 +68,10 @@ public class GameSessionStats : MonoBehaviour
         {
             ChangePlayerLocationEventData e = eventData as ChangePlayerLocationEventData;
             SetPlayerPositionZone(e.zone);
+        }
+        else
+        {
+            throw new System.ArgumentOutOfRangeException("eventData", "EventData is not ChangePlayerLocationEventData");
         }
     }
 
@@ -104,22 +112,33 @@ public class GameSessionStats : MonoBehaviour
         if (eventData is CheckDifficultyEventData)
         {
             CheckDifficultyEventData e = eventData as CheckDifficultyEventData;
-            if (playerScore < e.DifficultyCheck.nectarMin)
+            if (settings.Count > 0)
             {
-                if (settings.IndexOf(currentDifficulty) - 1 >= 0)
+                if (playerScore < e.DifficultyCheck.nectarMin)
                 {
-                    currentDifficulty = settings[settings.IndexOf(currentDifficulty) - 1];
-                    EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
+                    if (settings.IndexOf(currentDifficulty) - 1 >= 0)
+                    {
+                        currentDifficulty = settings[settings.IndexOf(currentDifficulty) - 1];
+                        EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
+                    }
+                }
+                else if (playerScore > e.DifficultyCheck.nectarMax)
+                {
+                    if (settings.IndexOf(currentDifficulty) + 1 <= settings.Count - 1)
+                    {
+                        currentDifficulty = settings[settings.IndexOf(currentDifficulty) + 1];
+                        EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
+                    }
                 }
             }
-            else if (playerScore > e.DifficultyCheck.nectarMax)
+            else
             {
-                if (settings.IndexOf(currentDifficulty) + 1 <= settings.Count - 1)
-                {
-                    currentDifficulty = settings[settings.IndexOf(currentDifficulty) + 1];
-                    EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
-                }
+                throw new System.ArgumentOutOfRangeException("settings.Count", "No settings in the list");
             }
+        }
+        else
+        {
+            throw new System.ArgumentOutOfRangeException("eventData", "EventData is not CheckDifficultyEventData");
         }
     }
 
@@ -142,6 +161,14 @@ public class GameSessionStats : MonoBehaviour
                     Debug.Log("not remove zone " + zones[rand].gameObject.name + " number of times" + zones[rand].numberOfTimes);
                 }
             }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("zones.Count", "No Zones in the list");
+            }
+        }
+        else
+        {
+            throw new System.ArgumentOutOfRangeException("eventData", "EventData is not ChangeStateStartEventData");
         }
     }
 }
