@@ -10,7 +10,7 @@ public class SoundOptions : MonoBehaviour
 
     private void Awake()
     {
-        Music = FMODUnity.RuntimeManager.GetBus("bus:/Master/Music"); // Bus lication and name is not determined - NEEDS CHANGE
+        Music = FMODUnity.RuntimeManager.GetBus("bus:/Master/Music"); 
         Sound = FMODUnity.RuntimeManager.GetBus("bus:/Master/Sound");
     }
     public void SetMusicVolume(float value)
