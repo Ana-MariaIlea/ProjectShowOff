@@ -9,7 +9,7 @@ public class Tutorial : MonoBehaviour
     private List<TutorialPanel> panels;
     [Tooltip("time to wait in between the panels")]
     public float time;
-    int index = 5;
+    int index = 0;
     // Start is called before the first frame update
     private void Awake()
     {
