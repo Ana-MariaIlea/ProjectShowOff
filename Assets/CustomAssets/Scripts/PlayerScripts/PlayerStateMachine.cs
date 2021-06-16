@@ -6,7 +6,8 @@ using UnityEngine;
 public enum PlayerStates
 {
     Movement,
-    QTEEvent
+    QTEEvent,
+    Bounderies
 }
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -14,12 +15,14 @@ public class PlayerStateMachine : MonoBehaviour
     PlayerMotor motor;
     QTESystem system;
     NectarCollect collect;
+    BounderyDetection boundery;
     // Start is called before the first frame update
     void Start()
     {
         motor = GetComponent<PlayerMotor>();
         system = GetComponent<QTESystem>();
         collect = GetComponent<NectarCollect>();
+        boundery = GetComponent<BounderyDetection>();
         system.enabled = false;
         EventQueue.eventQueue.Subscribe(EventType.CHANGEPLAYERSTATE, OnStateChange);
     }
@@ -41,6 +44,11 @@ public class PlayerStateMachine : MonoBehaviour
                 motor.enabled = false;
                 collect.enabled = false;
                 system.enabled = true;
+            }else if (e.state == PlayerStates.Bounderies)
+            {
+                motor.enabled = false;
+                collect.enabled = false;
+                system.enabled = false;
             }
         }
     }

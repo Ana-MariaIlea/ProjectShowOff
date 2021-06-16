@@ -24,6 +24,9 @@ public class UnitTest
 
     }
 
+    //------------------------------------------------------------------------------------------------
+    //                                              EventQueue Tests
+    //------------------------------------------------------------------------------------------------
     [UnityTest]
     public IEnumerator EventQueueInstanceInitiated()
     {
@@ -31,5 +34,113 @@ public class UnitTest
 
         //now test if a eventQueue is initiated
         Assert.IsNotNull(EventQueue.eventQueue, "No eventQueue in the scene");
+
+
     }
+    [UnityTest]
+    public IEnumerator EventQueueThrowsExceptionsWhenUnsubscribingWithInvalidEvetType()
+    {
+        //yield return null skips one frame, waits for the Unity scene to load and buyModel to be assigned
+        yield return null;
+
+        //Creates a delegate that call gridBuyView.ShopModel.SelectItemByIndex(-1), the test runner will run the function, and
+        //check if an ArgumentOutOfRangeException is thrown, the unit test would fail if no ArgumentOutOfRangeException
+        //was thrown
+        Assert.Throws<System.ArgumentOutOfRangeException>(delegate
+        {
+            EventQueue.eventQueue.UnSubscribe(EventType.UNITTESTS, null);
+        });
+    }
+
+    [UnityTest]
+    public IEnumerator EventQueueThrowsExceptionsWhenPublishingAnEventWithInvalidEvetType()
+    {
+        //yield return null skips one frame, waits for the Unity scene to load and buyModel to be assigned
+        yield return null;
+
+        //Creates a delegate that call gridBuyView.ShopModel.SelectItemByIndex(-1), the test runner will run the function, and
+        //check if an ArgumentOutOfRangeException is thrown, the unit test would fail if no ArgumentOutOfRangeException
+        //was thrown
+        Assert.Throws<System.ArgumentOutOfRangeException>(delegate
+        {
+            EventQueue.eventQueue.AddEvent(new EventData(EventType.UNITTESTS));
+            EventQueue.eventQueue.PublishEvents();
+        });
+    }
+    //------------------------------------------------------------------------------------------------
+    //                                              System Tests
+    //------------------------------------------------------------------------------------------------
+
+    [UnityTest]
+    public IEnumerator GameSessionStatsInstanceInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(GameSessionStats.instance, "No GameSeesionStats in the scene");
+    }
+
+    //This case tests if the grid buy view displays the correct amount of Items
+    [UnityTest]
+    public IEnumerator ZoneListIsNotEmpty()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        Assert.NotZero(GameSessionStats.instance.GetZoneListCount());
+    }
+
+    //This case tests if the grid buy view displays the correct amount of Items
+    [UnityTest]
+    public IEnumerator SettingsListIsNotEmpty()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        Assert.NotZero(GameSessionStats.instance.GetDifficultyListCount());
+    }
+    //[UnityTest]
+    //public IEnumerator GameSessionStatsStartWithDifficultyListEmptyException()
+    //{
+    //    //yield return null skips one frame, waits for the Unity scene to load and buyModel to be assigned
+    //    yield return null;
+
+
+    //    Assert.Throws<System.ArgumentOutOfRangeException>(delegate
+    //    {
+    //        GameSessionStats.instance.Start();
+    //    });
+    //}
+
+    [UnityTest]
+    public IEnumerator GameSessionStatsChangeDifficultyWithWrongEventException()
+    {
+        //yield return null skips one frame, waits for the Unity scene to load and buyModel to be assigned
+        yield return null;
+
+
+        Assert.Throws<System.ArgumentOutOfRangeException>(delegate
+        {
+            GameSessionStats.instance.OnCheckDifficulty(new EventData(EventType.UNITTESTS));
+        });
+    }
+
+    [UnityTest]
+    public IEnumerator GameSessionStatsChangeDifficultyWithEmptyDifficultyListException()
+    {
+        //yield return null skips one frame, waits for the Unity scene to load and buyModel to be assigned
+        yield return null;
+
+        GameSessionStats.instance.ResetDifficultyList();
+        //CheckDifficultyEventData e =new CheckDifficultyEventData()
+        Assert.Throws<System.ArgumentOutOfRangeException>(delegate
+        {
+            GameSessionStats.instance.OnCheckDifficulty(new EventData(EventType.CHANGEDIFFICULTY));
+        });
+    }
+    //------------------------------------------------------------------------------------------------
+    //                                              Player Tests
+    //------------------------------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------------------------------
+    //                                              HumanAI Tests
+    //------------------------------------------------------------------------------------------------
 }
