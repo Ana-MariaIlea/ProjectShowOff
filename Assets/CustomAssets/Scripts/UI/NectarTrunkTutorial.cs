@@ -34,11 +34,13 @@ public class NectarTrunkTutorial : MonoBehaviour
     }
     public void OnNectarIsStored(EventData eventData)
     {
-        if (eventData is NectarIsStoredEventData)
+        if (eventData is NectarIsStoredEventData && this.enabled == true)
         {
+            Debug.Log("nectar stored in tutorial");
             NectarIsStoredEventData e = eventData as NectarIsStoredEventData;
-            changeNectarAmount(e.nectarAmount);
+            //changeNectarAmount(e.nectarAmount);
             GetComponent<NectarTrunk>().enabled = true;
+            GetComponent<NectarTrunk>().setNectarAmount(e.nectarAmount);
             Tutorial.instance.IncreasePanelIndex();
             this.enabled = false;
            // Destroy(this);

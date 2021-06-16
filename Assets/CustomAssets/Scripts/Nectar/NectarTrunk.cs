@@ -27,7 +27,14 @@ public class NectarTrunk : MonoBehaviour
         if(eventData is NectarIsStoredEventData)
         {
             NectarIsStoredEventData e = eventData as NectarIsStoredEventData;
+            Debug.Log("nectar stored in trunk");
             changeNectarAmount(e.nectarAmount);
         }
+    }
+
+    public void setNectarAmount(int amount)
+    {
+        nectarAmount = amount;
+        text.text = nectarAmount.ToString();
     }
 }
