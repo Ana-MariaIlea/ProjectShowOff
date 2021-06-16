@@ -37,27 +37,39 @@ public class PlayerStateMachine : MonoBehaviour
             ChangePlayerStateEventData e = eventData as ChangePlayerStateEventData;
             if (e.state == PlayerStates.Movement&& currentState != PlayerStates.Movement)
             {
+                if(motor!=null)
                 motor.enabled = true;
-                collect.enabled = true;
-                boundery.enabled = false;
-                system.enabled = false;
+                if (collect != null)
+                    collect.enabled = true;
+                if (boundery != null)
+                    boundery.enabled = false;
+                if (system != null)
+                    system.enabled = false;
                 currentState = PlayerStates.Movement;
             }
             else if(e.state == PlayerStates.QTEEvent && currentState != PlayerStates.QTEEvent)
             {
-                motor.enabled = false;
-                collect.enabled = false;
-                boundery.enabled = false;
-                system.enabled = true;
+                if (motor != null)
+                    motor.enabled = false;
+                if (collect != null)
+                    collect.enabled = false;
+                if (boundery != null)
+                    boundery.enabled = false;
+                if (system != null)
+                    system.enabled = true;
                 currentState = PlayerStates.QTEEvent;
 
             }
             else if (e.state == PlayerStates.Bounderies && currentState != PlayerStates.Bounderies)
             {
-                motor.enabled = false;
-                collect.enabled = false;
-                system.enabled = false;
-                boundery.enabled = true;
+                if (motor != null)
+                    motor.enabled = false;
+                if (collect != null)
+                    collect.enabled = false;
+                if (system != null)
+                    system.enabled = false;
+                if (boundery != null)
+                    boundery.enabled = true;
                 currentState = PlayerStates.Bounderies;
             }
         }
