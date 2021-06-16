@@ -10,13 +10,13 @@ public class GameSessionStats : MonoBehaviour
     private HumanStates playerPosition;
 
     [SerializeField]
-    public List<DifficultySettings> settings;
+    private List<DifficultySettings> settings;
 
     [SerializeField]
     private DifficultySettings currentDifficulty;
 
 
-    public List<ZoneSettings> zones;
+    private List<ZoneSettings> zones;
 
 
     private int playerScore;
@@ -104,6 +104,22 @@ public class GameSessionStats : MonoBehaviour
     public int GetPlayerScore()
     {
         return playerScore;
+    }
+
+    public int GetZoneListCount()
+    {
+        return zones.Count;
+    }
+
+
+    public int GetDifficultyListCount()
+    {
+        return settings.Count;
+    }
+
+    public void ResetDifficultyList()
+    {
+        settings = new List<DifficultySettings>();
     }
 
 

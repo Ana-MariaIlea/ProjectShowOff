@@ -86,7 +86,7 @@ public class UnitTest
     {
         yield return null; //yield return null skips one frame, waits for the Unity scene to load
 
-        Assert.NotZero(GameSessionStats.instance.zones.Count);
+        Assert.NotZero(GameSessionStats.instance.GetZoneListCount());
     }
 
     //This case tests if the grid buy view displays the correct amount of Items
@@ -95,7 +95,7 @@ public class UnitTest
     {
         yield return null; //yield return null skips one frame, waits for the Unity scene to load
 
-        Assert.NotZero(GameSessionStats.instance.settings.Count);
+        Assert.NotZero(GameSessionStats.instance.GetDifficultyListCount());
     }
     //[UnityTest]
     //public IEnumerator GameSessionStatsStartWithDifficultyListEmptyException()
@@ -129,7 +129,7 @@ public class UnitTest
         //yield return null skips one frame, waits for the Unity scene to load and buyModel to be assigned
         yield return null;
 
-        GameSessionStats.instance.settings = new List<DifficultySettings>();
+        GameSessionStats.instance.ResetDifficultyList();
         //CheckDifficultyEventData e =new CheckDifficultyEventData()
         Assert.Throws<System.ArgumentOutOfRangeException>(delegate
         {
