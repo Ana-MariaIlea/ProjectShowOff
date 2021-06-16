@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public enum EventType
 {
-    UNITTESTS,
     CLIENTCONNECT,
     CLIENTDISCONNESCT,
     STARTGAME,
