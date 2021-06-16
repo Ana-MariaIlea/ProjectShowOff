@@ -6,6 +6,8 @@ public class BounderyDetection : MonoBehaviour
 {
     [SerializeField]
     Transform centerOfMap;
+    [SerializeField]
+    float speed;
     CharacterController characterController;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +20,7 @@ public class BounderyDetection : MonoBehaviour
     void Update()
     {
         Vector3 distanceToLocation = centerOfMap.position - transform.position;
-        characterController.Move(distanceToLocation.normalized * 4 * Time.deltaTime);
+        characterController.Move(distanceToLocation.normalized * speed * Time.deltaTime);
     }
 
     private void OnTriggerExit(Collider other)
