@@ -18,7 +18,7 @@ public class Tutorial : MonoBehaviour
     }
     void Start()
     {
-        panels[0].panel.SetActive(true);
+        panels[index].panel.SetActive(true);
     }
     bool[] panel1Condition = new bool[2];
     bool[] panel2Condition = new bool[2];
@@ -42,15 +42,19 @@ public class Tutorial : MonoBehaviour
                 case 5:
                     ChackSpecialConditionBasedOnTime();
                     break;
-                case 6:
-                    ChackConditionBasedOnTime();
-                    break;
                 case 7:
                     ChackConditionBasedOnTime();
+
                     break;
-                //default:
-                //    gameObject.SetActive(false);
-                //    break;
+                case 8:
+                    ChackSpecialConditionBasedOnTime();
+                    break;
+                case 9:
+                    ChackConditionBasedOnTime();
+                    break;
+                    //default:
+                    //    gameObject.SetActive(false);
+                    //    break;
 
 
 
@@ -124,16 +128,25 @@ public class Tutorial : MonoBehaviour
     {
         if (panels[index].timeToShowPanel < 0)
         {
+            panels[index].panel.SetActive(false);
             if (panels[index].timeToShowNextPanel < 0)
             {
-                index++;
+                if (index != 8)
+                {
+                    index = 8;
+                }
+                else
+                {
+                    index = 9;
+                }
                 panels[index].panel.SetActive(true);
+                Debug.Log(panels[index].panel.activeSelf + panels[index].panel.name);
             }
             else
             {
                 panels[index].timeToShowNextPanel -= Time.deltaTime;
             }
-            panels[index].panel.SetActive(false);
+            
         }
         else
         {
@@ -144,9 +157,24 @@ public class Tutorial : MonoBehaviour
     public void IncreasePanelIndex()
     {
         panels[index].panel.SetActive(false);
-        index++;
-        panels[index].panel.SetActive(true);
-        Debug.Log(panels[index].panel.name);
+        Debug.Log(panels[index].panel.activeSelf + panels[index].panel.name);
+        if (index != 7)
+        {
+            index++;
+            if (index < panels.Count)
+            {
+                panels[index].panel.SetActive(true);
+                Debug.Log(panels[index].panel.name);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void SetIndex(int i)
