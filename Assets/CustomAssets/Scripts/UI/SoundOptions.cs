@@ -10,8 +10,10 @@ public class SoundOptions : MonoBehaviour
 
     private void Awake()
     {
-        Music = FMODUnity.RuntimeManager.GetBus("bus:/Master/Music"); 
-        Sound = FMODUnity.RuntimeManager.GetBus("bus:/Master/Sound");
+        Music = FMODUnity.RuntimeManager.GetBus("bus:/Master/Background music"); 
+        Sound = FMODUnity.RuntimeManager.GetBus("bus:/Master/SFX");
+        Debug.Log(Music);
+        Debug.Log(Sound);
     }
     public void SetMusicVolume(float value)
     {
