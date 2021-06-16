@@ -20,10 +20,10 @@ public class CutGrass : BaseState
     private GameObject launge;
     [Tooltip("Add The GameObject that represents the gradd to be eliminated")]
     [SerializeField]
-    private GameObject grass;
+    private List<GameObject> grass;
 
 
-    public CutGrass(NavMeshAgent ag, ParticleSystem particles, GameObject mawer, GameObject launge,GameObject plants, List<Waypoint> path) : base(ag)
+    public CutGrass(NavMeshAgent ag, ParticleSystem particles, GameObject mawer, GameObject launge,List<GameObject> plants, List<Waypoint> path) : base(ag)
     {
         this.particles = particles;
         this.lawnmower = mawer;
@@ -76,10 +76,14 @@ public class CutGrass : BaseState
             {
                 launge.SetActive(true);
             }
-            if (grass.activeSelf == true)
+            foreach (GameObject item in grass)
             {
-                grass.SetActive(false);
+                if (item.activeSelf == true)
+                {
+                    item.SetActive(false);
+                }
             }
+            
 
             FinishState();
         }

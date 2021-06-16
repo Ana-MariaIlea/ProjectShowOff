@@ -63,6 +63,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -87,6 +88,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &169371563027592471
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -128,7 +130,9 @@ MonoBehaviour:
   stateOfZone: 0
   numberOfTimes: 0
   launge: {fileID: 5754801755440340179}
-  plants: {fileID: 3491548598474828012}
+  plants:
+  - {fileID: 2386541510642972698}
+  - {fileID: 3491548598474828012}
   currentFlowers: []
   currentWaypoints: []
 --- !u!1 &2386541510642972698

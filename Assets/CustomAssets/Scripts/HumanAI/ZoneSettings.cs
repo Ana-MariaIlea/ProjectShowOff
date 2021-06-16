@@ -6,11 +6,11 @@ using System.Linq;
 public class ZoneSettings : MonoBehaviour
 {
     public HumanStates stateOfZone;
-    
+
     public int numberOfTimes;
 
     public GameObject launge;
-    public GameObject plants;
+    public List<GameObject> plants;
 
     List<TestFlower> flowers;
     List<Waypoint> waypoints;
@@ -88,7 +88,7 @@ public class ZoneSettings : MonoBehaviour
                 {
                     int rand = Random.Range(0, flowers.Count);
                     currentFlowers.Add(flowers[rand].gameObject);
-                   // Debug.Log("Flowers to be collected " + currentFlowers.Count);
+                    // Debug.Log("Flowers to be collected " + currentFlowers.Count);
                     flowers.RemoveAt(rand);
                 }
                 break;
@@ -98,7 +98,7 @@ public class ZoneSettings : MonoBehaviour
                 {
                     int rand = Random.Range(0, waypoints.Count);
                     currentWaypoints.Add(waypoints[rand]);
-                   // waypoints.RemoveAt(rand);
+                    // waypoints.RemoveAt(rand);
                 }
                 break;
             case HumanStates.CutGrass:
@@ -107,7 +107,7 @@ public class ZoneSettings : MonoBehaviour
                 {
                     int rand = Random.Range(0, waypoints.Count);
                     currentWaypoints.Add(waypoints[rand]);
-                   // waypoints.RemoveAt(rand);
+                    // waypoints.RemoveAt(rand);
                 }
                 break;
         }
