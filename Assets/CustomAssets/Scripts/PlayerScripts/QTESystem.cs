@@ -35,8 +35,8 @@ public class QTESystem : MonoBehaviour
         Debug.Log("Script enabled");
         timer = CountDownTimer;
         atemptes = numberOfAtemptes;
-        Frame.gameObject.SetActive(true);
-        Letter.gameObject.SetActive(true);
+        //Frame.gameObject.SetActive(true);
+        //Letter.gameObject.SetActive(true);
     }
 
     private void OnDisable()
