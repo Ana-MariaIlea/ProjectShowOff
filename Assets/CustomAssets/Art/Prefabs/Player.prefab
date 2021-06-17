@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 3127850797399832127}
   - component: {fileID: 3127850797399832126}
   - component: {fileID: 3127850797399832125}
+  - component: {fileID: 640077135}
+  - component: {fileID: 640077139}
+  - component: {fileID: 640077140}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -50,20 +53,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   ControllerStats:
-    ForwardSpeedFly: 6
-    ForwardSpeedWalk: 6
-    Acceleration: 0.5
-    UpSpeed: 3
+    ForwardSpeedFly: 65
+    ForwardSpeedWalk: 10
+    Acceleration: 12
+    UpSpeed: 15
     UpSpeedSpam: 6
-    Gravity: 1
-    DownSpeed: 1
-    turnSmoothTime: 0.1
+    Gravity: 5
+    DownSpeed: 10
+    turnSmoothTime: 0.5
     spamSpaceKey: 0
   EffectStats:
-    ForwardSpeedSlowed: 6
-    UpSpeedSlowed: 3
-    UpSpeedSpamSlowed: 6
-    slowedTimer: 0
+    ForwardSpeedSlowed: 0.5
+    UpSpeedSlowed: 0.5
+    UpSpeedSpamSlowed: 0.5
+    slowedTimer: 5
   fSpeed: 0
   animator: {fileID: 7671589568647664041}
 --- !u!143 &3127850797399832127
@@ -77,8 +80,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.8
-  m_Radius: 0.4
+  m_Height: 2
+  m_Radius: 2
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -97,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nectarAmount: 0
-  maxNectarAmount: 0
+  maxNectarAmount: 100
   text: {fileID: 0}
 --- !u!114 &3127850797399832125
 MonoBehaviour:
@@ -111,6 +114,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6599e99b53e572d4aa0c8b0c7ae083a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &640077135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127850797399832124}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8acf2062ab48608429a6ebec91b06710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centerOfMap: {fileID: 0}
+  speed: 60
+--- !u!114 &640077139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127850797399832124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b1d13591a5f274fb136f0ea6b0679c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &640077140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127850797399832124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407a1da63b1ae9f4eb254ce71ecaaecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QTEGen: 0
+  WaitingForKey: 0
+  CorrectKey: 0
+  CountingDown: 0
+  WaitTime: 1
+  CountDownTimer: 2.5
+  icons:
+  - {fileID: 21300000, guid: 0f1b8081799d22f41ac2b08c1dbe2c2a, type: 3}
+  - {fileID: 21300000, guid: 6be599a29079dad4388b5f68e029a2e8, type: 3}
+  - {fileID: 21300000, guid: 5dc20c455ca3aad4d88c8a768267fe2e, type: 3}
+  - {fileID: 21300000, guid: 0480fa44fc255134b88d7804a2da3727, type: 3}
+  - {fileID: 21300000, guid: fce7f58a24db2df4fa455001ca4a9e64, type: 3}
+  Frame: {fileID: 0}
+  Letter: {fileID: 0}
+  numberOfAtemptes: 3
+  atemptes: 1
 --- !u!95 &7671589568647664041
 Animator:
   serializedVersion: 3
