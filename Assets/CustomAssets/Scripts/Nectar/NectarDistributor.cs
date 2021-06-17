@@ -73,6 +73,7 @@ public class NectarDistributor : MonoBehaviour
             PickFlowerEventData e = eventData as PickFlowerEventData;
             if (e.distributor.gameObject == this)
             {
+                EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
                 Destroy(this);
             }
         }
@@ -81,5 +82,11 @@ public class NectarDistributor : MonoBehaviour
     public int GetNectarAmount()
     {
         return nectarAmount;
+    }
+
+    public void DestroyDistribuitor()
+    {
+        EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+        Destroy(this.gameObject);
     }
 }

@@ -101,7 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nectarAmount: 0
   maxNectarAmount: 100
-  text: {fileID: 0}
 --- !u!114 &3127850797399832125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +247,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7680537023500721926, guid: 42222b83406b5b243b6488bda71c30d7,
+        type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: -6.6789103
+      objectReference: {fileID: 0}
+    - target: {fileID: -7680537023500721926, guid: 42222b83406b5b243b6488bda71c30d7,
+        type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: -9.259377
+      objectReference: {fileID: 0}
+    - target: {fileID: -7680537023500721926, guid: 42222b83406b5b243b6488bda71c30d7,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: -1.4883537
+      objectReference: {fileID: 0}
+    - target: {fileID: -7680537023500721926, guid: 42222b83406b5b243b6488bda71c30d7,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 29.34121
+      objectReference: {fileID: 0}
+    - target: {fileID: -7680537023500721926, guid: 42222b83406b5b243b6488bda71c30d7,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 27.540714
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 42222b83406b5b243b6488bda71c30d7,
         type: 3}

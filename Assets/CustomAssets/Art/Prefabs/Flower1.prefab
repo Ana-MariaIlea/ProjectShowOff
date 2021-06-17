@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &3350358384786319331
+--- !u!64 &2325434404569909900
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19072af6a09688f4ca3af696455bdb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TestMaterial: {fileID: 0}
 --- !u!1001 &1811938915814237955
 PrefabInstance:
   m_ObjectHideFlags: 0
