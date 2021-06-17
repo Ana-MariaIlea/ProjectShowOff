@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,7 +52,7 @@ public class QTESystem : MonoBehaviour
         {
             if (WaitingForKey == 0)
             {
-                QTEGen = Random.Range(1, 6);
+                QTEGen = UnityEngine.Random.Range(1, 6);
                 CountingDown = 1;
                 StartCoroutine(CountDown());
                 switch (QTEGen)
@@ -117,7 +118,14 @@ public class QTESystem : MonoBehaviour
             if (atemptes == 0)
             {
                 Debug.Log("Collect Nectar in QTE");
-                EventQueue.eventQueue.AddEvent(new CollectNectarEventData());
+                try
+                {
+                    EventQueue.eventQueue.AddEvent(new CollectNectarEventData());
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning(e);
+                }
             }
             Debug.Log(atemptes);
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
