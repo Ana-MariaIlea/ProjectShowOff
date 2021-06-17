@@ -14,6 +14,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8125630680834799205, guid: 92dd8269065aa794fa9b5b7b0d52953c, type: 3}
+--- !u!114 &3473515856330117464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577426493894384210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5061b4772a8053341bba739d493a9648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TestMaterial: {fileID: 2100000, guid: a71d897e6d2c77243b46813f275c656e, type: 2}
+  nectarsHolder: {fileID: 4027192418747429516}
 --- !u!1 &2965569824367617590
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,8 +56,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4575682477231900577}
   - {fileID: 2211256033117798632}
+  - {fileID: 5258431052459831559}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60,6 +74,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TestMaterial: {fileID: 0}
+--- !u!1 &4027192418747429516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5258431052459831559}
+  m_Layer: 9
+  m_Name: NectarHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5258431052459831559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027192418747429516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4575682477231900577}
+  m_Father: {fileID: 2480360413619616908}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1811938915814237955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,7 +115,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 92dd8269065aa794fa9b5b7b0d52953c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92dd8269065aa794fa9b5b7b0d52953c,
         type: 3}
@@ -146,7 +191,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2480360413619616908}
+    m_TransformParent: {fileID: 5258431052459831559}
     m_Modifications:
     - target: {fileID: 6771905500184198139, guid: c39122f7255a38844986a828fe6197a7,
         type: 3}
@@ -196,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 6771905500184198139, guid: c39122f7255a38844986a828fe6197a7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6771905500184198139, guid: c39122f7255a38844986a828fe6197a7,
         type: 3}

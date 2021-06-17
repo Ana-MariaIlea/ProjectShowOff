@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19072af6a09688f4ca3af696455bdb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TestMaterial: {fileID: 0}
 --- !u!1 &4397972543567628501
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,6 +58,7 @@ GameObject:
   - component: {fileID: 5889363109223043529}
   - component: {fileID: 7736786421017422381}
   - component: {fileID: 7466146720672050672}
+  - component: {fileID: 9186012604294308661}
   m_Layer: 9
   m_Name: Dahlia 1 (1)
   m_TagString: Untagged
@@ -101,6 +103,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -125,6 +128,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &7466146720672050672
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -139,6 +143,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6531667911782868964, guid: c4089752ba1c865439ca6fc1929ba5f6, type: 3}
+--- !u!114 &9186012604294308661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4397972543567628501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5061b4772a8053341bba739d493a9648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TestMaterial: {fileID: 2100000, guid: 2b1e9452be9414a49a3743a1ed21c33a, type: 2}
+  nectarsHolder: {fileID: 4555447372743963848}
 --- !u!1 &4555447372743963848
 GameObject:
   m_ObjectHideFlags: 0
