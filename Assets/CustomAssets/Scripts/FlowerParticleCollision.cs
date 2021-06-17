@@ -15,7 +15,7 @@ public class FlowerParticleCollision : MonoBehaviour
         {
             Debug.Log("Particle colision with pesticide");
             // EventQueue.eventQueue.AddEvent(new PlayerPesticideCollisionEventData());
-            //GetComponent<Renderer>().material = TestMaterial;
+            GetComponent<Renderer>().material = TestMaterial;
             List<NectarDistributor> distributors = nectarsHolder.GetComponentsInChildren<NectarDistributor>().ToList();
             for (int i = 0; i < distributors.Count; i++)
             {
