@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="ParameterPreset" id="{7a79c8bd-4b07-4f2a-8cdb-89077b3f6219}">
+		<property name="name">
+			<value>cricets</value>
+		</property>
+		<relationship name="folder">
+			<destination>{7e51dcf2-f0e6-4794-9995-a99f1a86a2a0}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{04443761-e330-43a7-b0d5-2a3384f1f6ce}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{04443761-e330-43a7-b0d5-2a3384f1f6ce}">
+		<property name="initialValue">
+			<value>0.5</value>
+		</property>
+	</object>
+</objects>
