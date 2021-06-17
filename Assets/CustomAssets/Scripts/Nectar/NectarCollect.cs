@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -48,8 +48,16 @@ public class NectarCollect : MonoBehaviour
             if (lastKnownDistribuitor != null)
             {
                 Debug.Log("Start event " + lastKnownDistribuitor);
-                EventQueue.eventQueue.AddEvent(new NectarCollectStartEventData(lastKnownDistribuitor));
-                lastKnownDistribuitor = null;
+                try
+                {
+                    EventQueue.eventQueue.AddEvent(new NectarCollectStartEventData(lastKnownDistribuitor));
+                    lastKnownDistribuitor = null;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning(e);
+                    lastKnownDistribuitor = null;
+                }
             }
         }
     }
