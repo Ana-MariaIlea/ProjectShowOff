@@ -87,6 +87,6 @@ public class NectarDistributor : MonoBehaviour
     public void DestroyDistribuitor()
     {
         EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }
