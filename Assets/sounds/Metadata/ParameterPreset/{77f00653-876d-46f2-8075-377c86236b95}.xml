@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="ParameterPreset" id="{77f00653-876d-46f2-8075-377c86236b95}">
+		<property name="name">
+			<value>Bee volume</value>
+		</property>
+		<relationship name="folder">
+			<destination>{7e51dcf2-f0e6-4794-9995-a99f1a86a2a0}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{5fb169b5-5bd0-4f39-bf0b-17aa972125e5}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{5fb169b5-5bd0-4f39-bf0b-17aa972125e5}">
+		<property name="initialValue">
+			<value>0.5</value>
+		</property>
+	</object>
+</objects>
