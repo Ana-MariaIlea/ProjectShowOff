@@ -29,6 +29,7 @@ public class NectarTrunkTutorial : MonoBehaviour
     {
         if (other.tag == "Player" && this.enabled == true)
         {
+            Tutorial.instance.gameObject.SetActive(true);
             Tutorial.instance.SetIndex(6);
         }
     }

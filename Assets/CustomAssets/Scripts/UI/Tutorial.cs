@@ -168,7 +168,7 @@ public class Tutorial : MonoBehaviour
             }
             else
             {
-               // gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
         else
