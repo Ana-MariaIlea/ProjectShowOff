@@ -7,8 +7,8 @@ public class NectarTrunk : MonoBehaviour
 {
     [SerializeField]
     int nectarAmount = 0;
-    [SerializeField]
-    TextMeshProUGUI text;
+    //[SerializeField]
+    //TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,8 @@ public class NectarTrunk : MonoBehaviour
     {
         nectarAmount += amount;
         Debug.Log("New nectar amount in trunk: " + nectarAmount);
-        text.text = nectarAmount.ToString();
+        EventQueue.eventQueue.AddEvent(new NectarOnTrunkTextChangeEventData(nectarAmount));
+        //text.text = nectarAmount.ToString();
     }
 
     public void OnNectarIsStored(EventData eventData)
@@ -35,6 +36,7 @@ public class NectarTrunk : MonoBehaviour
     public void setNectarAmount(int amount)
     {
         nectarAmount = amount;
-        text.text = nectarAmount.ToString();
+        EventQueue.eventQueue.AddEvent(new NectarOnTrunkTextChangeEventData(nectarAmount));
+        //text.text = nectarAmount.ToString();
     }
 }

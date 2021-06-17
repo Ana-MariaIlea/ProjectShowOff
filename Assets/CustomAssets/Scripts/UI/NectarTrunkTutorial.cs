@@ -7,8 +7,8 @@ public class NectarTrunkTutorial : MonoBehaviour
 {
     [SerializeField]
     int nectarAmount = 0;
-    [SerializeField]
-    TextMeshProUGUI text;
+    //[SerializeField]
+    //TextMeshProUGUI text;
     //[SerializeField]
    // GameObject gameTrunk;
     // Start is called before the first frame update
@@ -19,12 +19,6 @@ public class NectarTrunkTutorial : MonoBehaviour
         //gameTrunk.SetActive(false);
     }
 
-    private void changeNectarAmount(int amount)
-    {
-        nectarAmount += amount;
-        Debug.Log("New nectar amount in trunk: " + nectarAmount);
-        text.text = nectarAmount.ToString();
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && this.enabled == true)

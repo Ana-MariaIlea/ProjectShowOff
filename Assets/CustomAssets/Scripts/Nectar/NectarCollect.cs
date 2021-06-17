@@ -9,8 +9,8 @@ public class NectarCollect : MonoBehaviour
     int nectarAmount = 0;
     [SerializeField]
     int maxNectarAmount;
-    [SerializeField]
-    TextMeshProUGUI text;
+   // [SerializeField]
+    //TextMeshProUGUI text;  
 
     NectarDistributor lastKnownDistribuitor = null;
 
@@ -74,13 +74,15 @@ public class NectarCollect : MonoBehaviour
     {
         nectarAmount += amount;
         Debug.Log("New nectar amount in player: " + nectarAmount);
-        text.text = nectarAmount.ToString();
+        EventQueue.eventQueue.AddEvent(new NectarOnBeeTextChangeEventData(nectarAmount));
+        //text.text = nectarAmount.ToString();
     }
 
     private void resetNectarAmount()
     {
         nectarAmount = 0;
-        text.text =nectarAmount.ToString();
+        EventQueue.eventQueue.AddEvent(new NectarOnBeeTextChangeEventData(nectarAmount));
+        //text.text =nectarAmount.ToString();
     }
 
 
