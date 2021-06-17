@@ -156,8 +156,9 @@ public class Tutorial : MonoBehaviour
 
     public void IncreasePanelIndex()
     {
-        panels[index].panel.SetActive(false);
-        Debug.Log(panels[index].panel.activeSelf + panels[index].panel.name);
+        if (index < panels.Count)
+            panels[index].panel.SetActive(false);
+        //Debug.Log(panels[index].panel.activeSelf + panels[index].panel.name);
         if (index != 7)
         {
             index++;
