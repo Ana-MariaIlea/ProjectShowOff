@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 15398845}
   - component: {fileID: 15398844}
   - component: {fileID: 15398843}
+  - component: {fileID: 15398846}
   m_Layer: 5
   m_Name: Back_btn
   m_TagString: Untagged
@@ -476,6 +477,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 15398846}
+        m_TargetAssemblyTypeName: SoundPlayTest, PSTest
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &15398844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,6 +527,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15398841}
   m_CullTransparentMesh: 1
+--- !u!114 &15398846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15398841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aed252b3119a57439484fc94fde2a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Open&click
 --- !u!1 &16797479
 GameObject:
   m_ObjectHideFlags: 0
@@ -4359,6 +4385,7 @@ GameObject:
   - component: {fileID: 841681002}
   - component: {fileID: 841681001}
   - component: {fileID: 841681004}
+  - component: {fileID: 841681005}
   m_Layer: 5
   m_Name: SettingButton
   m_TagString: Untagged
@@ -4478,6 +4505,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 841681005}
+        m_TargetAssemblyTypeName: SoundPlayTest, PSTest
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &841681002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4530,6 +4569,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonUnpressed: {fileID: 21300000, guid: 8c3bb1280862541ffb6042bc41da6a31, type: 3}
   buttonPressed: {fileID: 21300000, guid: da73efa083b064512aa5bead5e00fc2f, type: 3}
+--- !u!114 &841681005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841680999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aed252b3119a57439484fc94fde2a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Open&click
 --- !u!1 &864290730
 GameObject:
   m_ObjectHideFlags: 0
@@ -4726,6 +4778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894879516}
   - component: {fileID: 894879515}
+  - component: {fileID: 894879517}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -4748,13 +4801,15 @@ MonoBehaviour:
   CollisionTag: 
   Event: event:/Ambience
   PlayEvent: 1
-  StopEvent: 0
+  StopEvent: 2
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
   Params:
   - Name: Ambience volume
     Value: 0.5
+  - Name: Wind sound
+    Value: 0
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
@@ -4772,6 +4827,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &894879517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894879514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Cricets ambience
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &907593330
 GameObject:
   m_ObjectHideFlags: 0
@@ -4920,6 +4998,7 @@ GameObject:
   - component: {fileID: 908792113}
   - component: {fileID: 908792112}
   - component: {fileID: 908792115}
+  - component: {fileID: 908792116}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -5039,6 +5118,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 908792116}
+        m_TargetAssemblyTypeName: SoundPlayTest, PSTest
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &908792113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5091,6 +5182,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonUnpressed: {fileID: 21300000, guid: 8c3bb1280862541ffb6042bc41da6a31, type: 3}
   buttonPressed: {fileID: 21300000, guid: da73efa083b064512aa5bead5e00fc2f, type: 3}
+--- !u!114 &908792116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908792110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aed252b3119a57439484fc94fde2a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Open&click
 --- !u!1 &917431569
 GameObject:
   m_ObjectHideFlags: 0
@@ -9696,6 +9800,7 @@ GameObject:
   - component: {fileID: 1866467592}
   - component: {fileID: 1866467591}
   - component: {fileID: 1866467590}
+  - component: {fileID: 1866467593}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -9791,6 +9896,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1866467593}
+        m_TargetAssemblyTypeName: SoundPlayTest, PSTest
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1866467591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9829,6 +9946,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866467588}
   m_CullTransparentMesh: 0
+--- !u!114 &1866467593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866467588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aed252b3119a57439484fc94fde2a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Open&click
 --- !u!1 &1908118382
 GameObject:
   m_ObjectHideFlags: 0
@@ -9990,6 +10120,7 @@ GameObject:
   - component: {fileID: 1970182167}
   - component: {fileID: 1970182166}
   - component: {fileID: 1970182165}
+  - component: {fileID: 1970182168}
   m_Layer: 5
   m_Name: Next_btn
   m_TagString: Untagged
@@ -10073,6 +10204,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1970182168}
+        m_TargetAssemblyTypeName: SoundPlayTest, PSTest
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1970182166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10111,6 +10254,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1970182163}
   m_CullTransparentMesh: 1
+--- !u!114 &1970182168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970182163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aed252b3119a57439484fc94fde2a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Open&click
 --- !u!1 &1995319902
 GameObject:
   m_ObjectHideFlags: 0
