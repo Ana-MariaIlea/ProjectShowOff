@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class SoundOptions : MonoBehaviour
 {
-
+    public string nameTestSoundSFX;
     FMOD.Studio.Bus Music;
     FMOD.Studio.Bus Sound;
+    FMOD.Studio.EventInstance SFXTestSound;
 
     private void Awake()
     {
         Music = FMODUnity.RuntimeManager.GetBus("bus:/Master/Background music"); 
         Sound = FMODUnity.RuntimeManager.GetBus("bus:/Master/SFX");
+        SFXTestSound = FMODUnity.RuntimeManager.CreateInstance("event:/" + nameTestSoundSFX);
         Debug.Log(Music);
         Debug.Log(Sound);
     }
@@ -23,5 +25,12 @@ public class SoundOptions : MonoBehaviour
     public void SetSoundVolume(float value)
     {
         Sound.setVolume(value);
+
+        FMOD.Studio.PLAYBACK_STATE state;
+        SFXTestSound.getPlaybackState(out state);
+        if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            SFXTestSound.start();
+        }
     }
 }
