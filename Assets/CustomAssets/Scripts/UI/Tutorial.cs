@@ -146,7 +146,7 @@ public class Tutorial : MonoBehaviour
             {
                 panels[index].timeToShowNextPanel -= Time.deltaTime;
             }
-            
+
         }
         else
         {
@@ -179,7 +179,8 @@ public class Tutorial : MonoBehaviour
 
     public void SetIndex(int i)
     {
-        panels[index].panel.SetActive(false);
+        if (index < panels.Count)
+            panels[index].panel.SetActive(false);
         index = i;
         panels[index].panel.SetActive(true);
         Debug.Log(panels[index].panel.name);
