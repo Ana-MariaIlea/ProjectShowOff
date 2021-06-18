@@ -10,10 +10,10 @@ public class FlowerParticleCollision : MonoBehaviour
     public GameObject nectarsHolder;
     private void OnParticleCollision(GameObject other)
     {
-        Debug.Log("Particle colision");
+       // Debug.Log("Particle colision");
         if (other.tag == "Pesticide")
         {
-            Debug.Log("Particle colision with pesticide");
+            //Debug.Log("Particle colision with pesticide");
             // EventQueue.eventQueue.AddEvent(new PlayerPesticideCollisionEventData());
             GetComponent<Renderer>().material = TestMaterial;
             List<NectarDistributor> distributors = nectarsHolder.GetComponentsInChildren<NectarDistributor>().ToList();
@@ -21,7 +21,7 @@ public class FlowerParticleCollision : MonoBehaviour
             {
                 //NectarDistributor d = distributors[i];
                 //distributors.Remove(distributors[i]);
-                Debug.Log("Destroy distrib");
+                //Debug.Log("Destroy distrib");
                 distributors[i].DestroyDistribuitor();
             }
         }

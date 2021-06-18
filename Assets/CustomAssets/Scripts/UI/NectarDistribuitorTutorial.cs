@@ -34,8 +34,10 @@ public class NectarDistribuitorTutorial : MonoBehaviour
 
     public void OnNectarIsCollected(EventData eventData)
     {
-        if (eventData is NectarCollectStartEventData)
+        Debug.Log("Invoke tutorial distribuitor");
+        if (eventData is NectarCollectStartEventData && this.enabled == true)
         {
+            Debug.Log("Trying to make event nectar tutorial");
             NectarCollectStartEventData e = eventData as NectarCollectStartEventData;
            // Debug.Log("distribuitor in event: " + e.dis);
            // Debug.Log("distribuitor in gameobject: " + GetComponent<NectarDistributor>());
@@ -46,13 +48,16 @@ public class NectarDistribuitorTutorial : MonoBehaviour
                 Tutorial.instance.IncreasePanelIndex();
                 //EventQueue.eventQueue.AddEvent(new NectarCollectTutorialEventData());
             }
-            EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+            
             //EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTTUTORIAL, OnNectartCollectTutorialDone);
-            GetComponent<NectarDistributor>().enabled = true;
+           // GetComponent<NectarDistributor>().enabled = true;
             // Debug.Log(this.enabled);
 
-            this.enabled = false;
+           // this.enabled = false;
         }
+        EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+        GetComponent<NectarDistributor>().enabled = true;
+        this.enabled = false;
     }
 
     //public void OnNectartCollectTutorialDone(EventData eventData)
