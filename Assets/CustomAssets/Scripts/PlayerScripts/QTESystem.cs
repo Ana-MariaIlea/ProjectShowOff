@@ -120,6 +120,7 @@ public class QTESystem : MonoBehaviour
                 Debug.Log("Collect Nectar in QTE");
                 try
                 {
+                    GetComponent<QTESounds>().PlayWinSound();
                     EventQueue.eventQueue.AddEvent(new CollectNectarEventData());
                 }
                 catch (Exception e)
@@ -223,6 +224,7 @@ public class QTESystem : MonoBehaviour
             //Screen update correct key;
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
+            GetComponent<QTESounds>().PlayPassSound();
             //Debug.Log("correct key pressed");
             if (atemptes > 0)
                 yield return new WaitForSeconds(WaitTime);
@@ -241,6 +243,7 @@ public class QTESystem : MonoBehaviour
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             atemptes = -4;
+            GetComponent<QTESounds>().PlayLoseSound();
             //Debug.Log("wrong key pressed");
 
             yield return new WaitForSeconds(WaitTime);
@@ -273,6 +276,7 @@ public class QTESystem : MonoBehaviour
             CountingDown = 2;
             //fail update on the screen
             //Debug.Log("wrong key time done");
+            GetComponent<QTESounds>().PlayLoseSound();
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             atemptes = -4;
