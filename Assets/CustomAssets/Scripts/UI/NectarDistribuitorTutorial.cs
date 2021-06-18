@@ -35,8 +35,9 @@ public class NectarDistribuitorTutorial : MonoBehaviour
     public void OnNectarIsCollected(EventData eventData)
     {
         Debug.Log("Invoke tutorial distribuitor");
-        if (eventData is NectarCollectStartEventData)
+        if (eventData is NectarCollectStartEventData && this.enabled == true)
         {
+            Debug.Log("Trying to make event nectar tutorial");
             NectarCollectStartEventData e = eventData as NectarCollectStartEventData;
            // Debug.Log("distribuitor in event: " + e.dis);
            // Debug.Log("distribuitor in gameobject: " + GetComponent<NectarDistributor>());
