@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="ParameterPreset" id="{3bb73312-c20c-4a46-8852-d4927e1173d7}">
+		<property name="name">
+			<value>Minigame adjust</value>
+		</property>
+		<relationship name="folder">
+			<destination>{7e51dcf2-f0e6-4794-9995-a99f1a86a2a0}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{9761f2a7-0e7e-41da-9d26-2b0964d9e57b}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{9761f2a7-0e7e-41da-9d26-2b0964d9e57b}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
