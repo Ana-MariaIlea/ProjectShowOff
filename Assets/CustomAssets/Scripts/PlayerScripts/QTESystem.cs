@@ -118,15 +118,17 @@ public class QTESystem : MonoBehaviour
             if (atemptes == 0)
             {
                 Debug.Log("Collect Nectar in QTE");
+                GetComponent<QTESounds>().PlayWinSound();
                 try
                 {
-                    GetComponent<QTESounds>().PlayWinSound();
+
                     EventQueue.eventQueue.AddEvent(new CollectNectarEventData());
                 }
                 catch (Exception e)
                 {
                     Debug.LogWarning(e);
                 }
+                atemptes=-4;
             }
             Debug.Log(atemptes);
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
@@ -224,7 +226,8 @@ public class QTESystem : MonoBehaviour
             //Screen update correct key;
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
-            GetComponent<QTESounds>().PlayPassSound();
+            //if (atemptes > 1)
+                GetComponent<QTESounds>().PlayPassSound();
             //Debug.Log("correct key pressed");
             if (atemptes > 0)
                 yield return new WaitForSeconds(WaitTime);
@@ -244,7 +247,7 @@ public class QTESystem : MonoBehaviour
             Letter.gameObject.SetActive(false);
             atemptes = -4;
             GetComponent<QTESounds>().PlayLoseSound();
-            //Debug.Log("wrong key pressed");
+            Debug.Log("wrong key pressed");
 
             yield return new WaitForSeconds(WaitTime);
             CorrectKey = 0;
@@ -270,12 +273,12 @@ public class QTESystem : MonoBehaviour
 
         timer = CountDownTimer;
 
-        if (CountingDown == 1)
+        if (CountingDown == 1&&atemptes>1)
         {
             QTEGen = 14;
             CountingDown = 2;
             //fail update on the screen
-            //Debug.Log("wrong key time done");
+            Debug.Log("wrong key time done");
             GetComponent<QTESounds>().PlayLoseSound();
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);

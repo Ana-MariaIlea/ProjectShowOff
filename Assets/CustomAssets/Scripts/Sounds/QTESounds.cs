@@ -21,16 +21,19 @@ public class QTESounds : MonoBehaviour
 
     public void PlayLoseSound()
     {
+        Debug.Log("play lose sound");
         PlaySound(QTESoundLose);
     }
 
     public void PlayPassSound()
     {
+        Debug.Log("play pass sound");
         PlaySound(QTESoundPass);
     }
 
     public void PlayWinSound()
     {
+        Debug.Log("play win sound");
         PlaySound(QTESoundWin);
     }
     private void PlaySound(FMOD.Studio.EventInstance Sound)
