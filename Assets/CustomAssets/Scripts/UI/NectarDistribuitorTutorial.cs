@@ -34,6 +34,7 @@ public class NectarDistribuitorTutorial : MonoBehaviour
 
     public void OnNectarIsCollected(EventData eventData)
     {
+        Debug.Log("Invoke tutorial distribuitor");
         if (eventData is NectarCollectStartEventData)
         {
             NectarCollectStartEventData e = eventData as NectarCollectStartEventData;
@@ -46,13 +47,16 @@ public class NectarDistribuitorTutorial : MonoBehaviour
                 Tutorial.instance.IncreasePanelIndex();
                 //EventQueue.eventQueue.AddEvent(new NectarCollectTutorialEventData());
             }
-            EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+            
             //EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTTUTORIAL, OnNectartCollectTutorialDone);
-            GetComponent<NectarDistributor>().enabled = true;
+           // GetComponent<NectarDistributor>().enabled = true;
             // Debug.Log(this.enabled);
 
-            this.enabled = false;
+           // this.enabled = false;
         }
+        EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+        GetComponent<NectarDistributor>().enabled = true;
+        this.enabled = false;
     }
 
     //public void OnNectartCollectTutorialDone(EventData eventData)

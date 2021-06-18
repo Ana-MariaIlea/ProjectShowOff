@@ -61,14 +61,14 @@ public class EventQueue : MonoBehaviour
             EventData data = eventList[i];
             if (subscriberDictionary.ContainsKey(data.eventType))
             {
-                try
-                {
+              //  try
+               // {
                     subscriberDictionary[data.eventType]?.Invoke(data);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogWarning(e);
-                }
+               // }
+                //catch (Exception e)
+               // {
+               //     Debug.LogWarning(e);
+                //}
             }
             else
             {
