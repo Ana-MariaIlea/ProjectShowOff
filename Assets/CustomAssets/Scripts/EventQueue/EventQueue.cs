@@ -8,8 +8,8 @@ public class EventQueue : MonoBehaviour
     public static EventQueue eventQueue;
 
     public delegate void EventHandler(EventData eventData);
-    private Dictionary<EventType, EventHandler> subscriberDictionary= new Dictionary<EventType, EventHandler>();
-    private List<EventData> eventList=new List<EventData>();
+    private Dictionary<EventType, EventHandler> subscriberDictionary = new Dictionary<EventType, EventHandler>();
+    private List<EventData> eventList = new List<EventData>();
 
 
     private void Awake()
@@ -56,12 +56,19 @@ public class EventQueue : MonoBehaviour
 
     public void PublishEvents()
     {
-        for (int i = eventList.Count-1; i >=0; i--)
+        for (int i = eventList.Count - 1; i >= 0; i--)
         {
             EventData data = eventList[i];
             if (subscriberDictionary.ContainsKey(data.eventType))
             {
-                subscriberDictionary[data.eventType]?.Invoke(data);
+                try
+                {
+                    subscriberDictionary[data.eventType]?.Invoke(data);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning(e);
+                }
             }
             else
             {
