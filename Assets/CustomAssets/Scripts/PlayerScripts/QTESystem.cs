@@ -29,6 +29,7 @@ public class QTESystem : MonoBehaviour
     {
         timer = CountDownTimer;
         atemptes = numberOfAtemptes;
+        GetComponent<QTESounds>().PlayStartSound();
     }
 
     private void OnEnable()
