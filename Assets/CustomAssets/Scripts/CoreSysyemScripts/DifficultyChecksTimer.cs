@@ -17,16 +17,8 @@ public class Timer
     public int seconds;
 }
 
-public class GlobalTimer : MonoBehaviour
+public class DifficultyChecksTimer : MonoBehaviour
 {
-    [SerializeField]
-    Timer time;
-
-    [SerializeField]
-    float timeToStartTheFirstEvent;
-
-    [SerializeField]
-    List<EventStates> eventStates;
 
     [SerializeField]
     private List<DifficultyCheck> checksForDifficulty;
@@ -37,35 +29,10 @@ public class GlobalTimer : MonoBehaviour
     [SerializeField]
     float timer = 0;
 
-
-    [System.Serializable]
-    public class EventStates
-    {
-        [SerializeField]
-        public HumanStates eventType;
-
-        [SerializeField]
-        public bool overridePlayerPosition;
-
-
-        [SerializeField]
-        public HumanStates otherEventType1;
-        [SerializeField]
-        public int chanceForOtherEvent1;
-
-        [SerializeField]
-        public HumanStates otherEventType2;
-        [SerializeField]
-        public int chanceForOtherEvent2;
-
-    }
-
-    float MaxTimer;
     int difficultyCheckIndex = 0;
 
     private void Awake()
     {
-        MaxTimer = time.minutes * 60 + time.seconds;
         if (checksForDifficulty.Count != 0)
         {
             InitializeDifficultyChecks();
@@ -93,7 +60,7 @@ public class GlobalTimer : MonoBehaviour
         }
     }
 
-    bool firstEventFire = false;
+    
     // Update is called once per frame
     void Update()
     {
@@ -105,17 +72,12 @@ public class GlobalTimer : MonoBehaviour
                 difficultyCheckIndex++;
                 EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
             }
-
-        if (timeToStartTheFirstEvent < 0 && firstEventFire == false)
-        {
-            EventQueue.eventQueue.AddEvent(new ChangeStateStartEventData());
-            firstEventFire = true;
-        }
-        else
-        {
-            timeToStartTheFirstEvent -= Time.deltaTime;
-        }
     }
 
+
+    public int GetDifficultyChecksListCount()
+    {
+        return checksForDifficulty.Count;
+    }
 
 }

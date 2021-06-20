@@ -123,7 +123,7 @@ public class QTESystem : MonoBehaviour
                 try
                 {
 
-                    EventQueue.eventQueue.AddEvent(new CollectNectarEventData());
+                    EventQueue.eventQueue.AddEvent(new NectarCollectStartEventData());
                 }
                 catch (Exception e)
                 {

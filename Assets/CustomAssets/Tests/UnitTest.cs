@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class UnitTest
 {
+
+    DifficultyChecksTimer difficultyChecksTimer;
+    PlayerMotor playerMotor;
     //Setup the test scene
     [OneTimeSetUp]
     public void LoadShopScene()
@@ -21,7 +24,8 @@ public class UnitTest
     public IEnumerator SetupTests()
     {
         yield return null; //yield return null skips one frame, this is to make sure that this happens after the scene is loaded
-
+        difficultyChecksTimer = Resources.FindObjectsOfTypeAll<DifficultyChecksTimer>()[0];
+        playerMotor = Resources.FindObjectsOfTypeAll<PlayerMotor>()[0];
     }
 
     //------------------------------------------------------------------------------------------------
@@ -136,10 +140,34 @@ public class UnitTest
             GameSessionStats.instance.OnCheckDifficulty(new EventData(EventType.CHANGEDIFFICULTY));
         });
     }
+
+    [UnityTest]
+    public IEnumerator DifficultyChecksListIsNotEmpty()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        Assert.NotZero(difficultyChecksTimer.GetDifficultyChecksListCount());
+    }
     //------------------------------------------------------------------------------------------------
     //                                              Player Tests
     //------------------------------------------------------------------------------------------------
+    [UnityTest]
+    public IEnumerator PlayerMotorControllerIsInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
 
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(playerMotor.GetPlayerControllerStates(), "No GameSeesionStats in the scene");
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerMotorEffectsIsInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(playerMotor.GetPlayerEffectStates(), "No GameSeesionStats in the scene");
+    }
     //------------------------------------------------------------------------------------------------
     //                                              HumanAI Tests
     //------------------------------------------------------------------------------------------------

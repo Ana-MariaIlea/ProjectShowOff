@@ -25,6 +25,13 @@ public class HumanAI : MonoBehaviour
     GameObject lawnmower;
     [SerializeField]
     GameObject houseLocation;
+
+
+    [SerializeField]
+    float timeToStartTheFirstEvent;
+    bool firstEventFire = false;
+
+
     [Tooltip("Time to stay in the house")]
     [SerializeField]
     float time;
@@ -41,6 +48,16 @@ public class HumanAI : MonoBehaviour
     {
         if (currentState != null)
             currentState.UpdateBehavior();
+
+        if (timeToStartTheFirstEvent < 0 && firstEventFire == false)
+        {
+            EventQueue.eventQueue.AddEvent(new ChangeStateStartEventData());
+            firstEventFire = true;
+        }
+        else
+        {
+            timeToStartTheFirstEvent -= Time.deltaTime;
+        }
     }
 
     public void OnStateChange(EventData eventData)

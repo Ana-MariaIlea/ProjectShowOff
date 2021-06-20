@@ -12,52 +12,22 @@ public class NectarCollect : MonoBehaviour
    // [SerializeField]
     //TextMeshProUGUI text;  
 
-    NectarDistributor lastKnownDistribuitor = null;
+   // NectarDistributor lastKnownDistribuitor = null;
 
     private void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTEND, OnNectarIsCollected);
-        EventQueue.eventQueue.Subscribe(EventType.COLECTNECTAR, OnCollectNectar);
+       // EventQueue.eventQueue.Subscribe(EventType.COLECTNECTAR, OnCollectNectar);
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetButtonDown("NectarKey"))
         {
-            if (other.GetComponent<NectarDistributor>())
-            {
-
-
-                EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.QTEEvent));
-                lastKnownDistribuitor = other.GetComponent<NectarDistributor>();
-
-            }
-
             if (other.GetComponent<NectarTrunk>() && nectarAmount > 0)
             {
                 EventQueue.eventQueue.AddEvent(new NectarIsStoredEventData(nectarAmount));
                 resetNectarAmount();
-            }
-        }
-    }
-
-    public void OnCollectNectar(EventData eventData)
-    {
-        if (eventData is CollectNectarEventData)
-        {
-            if (lastKnownDistribuitor != null)
-            {
-                Debug.Log("Start event " + lastKnownDistribuitor);
-                try
-                {
-                    EventQueue.eventQueue.AddEvent(new NectarCollectStartEventData(lastKnownDistribuitor));
-                    lastKnownDistribuitor = null;
-                }
-                catch (Exception e)
-                {
-                    Debug.LogWarning(e);
-                    lastKnownDistribuitor = null;
-                }
             }
         }
     }
