@@ -14,7 +14,7 @@ public enum HumanStates
     NoState
 }
 
-public class HumanAI : MonoBehaviour
+public class HumanStateMachine : MonoBehaviour
 {
 
     [SerializeField]
@@ -49,6 +49,11 @@ public class HumanAI : MonoBehaviour
         if (currentState != null)
             currentState.UpdateBehavior();
 
+        StartFirstEvent();
+    }
+
+    private void StartFirstEvent()
+    {
         if (timeToStartTheFirstEvent < 0 && firstEventFire == false)
         {
             EventQueue.eventQueue.AddEvent(new ChangeStateStartEventData());
