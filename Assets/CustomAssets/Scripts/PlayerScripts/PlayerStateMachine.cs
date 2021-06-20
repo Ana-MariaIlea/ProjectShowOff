@@ -14,7 +14,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     PlayerMotor motor;
     QTESystem system;
-    NectarCollect collect;
+    PlayerNectarHandler collect;
     BounderyDetection boundery;
     PlayerStates currentState;
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         motor = GetComponent<PlayerMotor>();
         system = GetComponent<QTESystem>();
-        collect = GetComponent<NectarCollect>();
+        collect = GetComponent<PlayerNectarHandler>();
         boundery = GetComponent<BounderyDetection>();
         system.enabled = false;
         currentState = PlayerStates.Movement;
@@ -73,6 +73,27 @@ public class PlayerStateMachine : MonoBehaviour
                 currentState = PlayerStates.Bounderies;
             }
         }
+    }
+
+
+    public QTESystem GetQTESystem()
+    {
+        return system;
+    }
+
+    public PlayerMotor GetPLayerMotor()
+    {
+        return motor;
+    }
+
+    public BounderyDetection GetBounderiesDetection()
+    {
+        return boundery;
+    }
+
+    public PlayerNectarHandler GetNectarHandler()
+    {
+        return collect;
     }
 
 }
