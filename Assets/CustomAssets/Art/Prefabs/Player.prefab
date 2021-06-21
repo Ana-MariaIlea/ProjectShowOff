@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerOfMap: {fileID: 0}
   speed: 60
+  animator: {fileID: 7671589568647664041}
 --- !u!114 &640077139
 MonoBehaviour:
   m_ObjectHideFlags: 0
