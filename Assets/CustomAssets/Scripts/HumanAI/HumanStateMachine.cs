@@ -26,6 +26,8 @@ public class HumanStateMachine : MonoBehaviour
     [SerializeField]
     GameObject houseLocation;
 
+    
+
 
     [SerializeField]
     float timeToStartTheFirstEvent;
@@ -41,6 +43,8 @@ public class HumanStateMachine : MonoBehaviour
     {
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATE, OnStateChange);
         EventQueue.eventQueue.Subscribe(EventType.ENDSTATE, OnGoToHouse);
+
+       //GetComponent<FMODUnity.StudioEventEmitter>();
     }
 
     // Update is called once per frame
@@ -79,7 +83,7 @@ public class HumanStateMachine : MonoBehaviour
                     break;
                 case HumanStates.SprayGarden:
                    // Debug.Log("Change state to spray garden");
-                    currentState = new SprayPesticides(GetComponent<NavMeshAgent>(),pesticides, e.zoneSettings.currentWaypoints);
+                    currentState = new SprayPesticides(GetComponent<NavMeshAgent>(),pesticides, e.zoneSettings.currentWaypoints, GetComponent<FMODUnity.StudioEventEmitter>());
                     e.zoneSettings.InitializeEventStats();
                     break;
                 case HumanStates.CutGrass:
