@@ -29,7 +29,7 @@ public class QTESystem : MonoBehaviour
     {
         timer = CountDownTimer;
         atemptes = numberOfAtemptes;
-        GetComponent<QTESounds>().PlayStartSound();
+        GetComponent<SoundGameManager>().PlayStartMinigameSound();
     }
 
     private void OnEnable()
@@ -152,7 +152,7 @@ public class QTESystem : MonoBehaviour
         if (atemptes == 0)
         {
             Debug.Log("Collect Nectar in QTE");
-            GetComponent<QTESounds>().PlayWinSound();
+            GetComponent<SoundGameManager>().PlayWinMinigameSound();
             try
             {
 
@@ -242,7 +242,7 @@ public class QTESystem : MonoBehaviour
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             //if (atemptes > 1)
-                GetComponent<QTESounds>().PlayPassSound();
+                GetComponent<SoundGameManager>().PlayPassMinigameSound();
             //Debug.Log("correct key pressed");
             if (atemptes > 0)
                 yield return new WaitForSeconds(WaitTime);
@@ -261,7 +261,7 @@ public class QTESystem : MonoBehaviour
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             atemptes = -4;
-            GetComponent<QTESounds>().PlayLoseSound();
+            GetComponent<SoundGameManager>().PlayLoseMinigameSound();
             Debug.Log("wrong key pressed");
 
             yield return new WaitForSeconds(WaitTime);
@@ -271,6 +271,7 @@ public class QTESystem : MonoBehaviour
             WaitingForKey = 0;
             CountingDown = 1;
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
+            EventQueue.eventQueue.AddEvent(new MinigameFailEventData());
 
         }
     }
@@ -294,7 +295,7 @@ public class QTESystem : MonoBehaviour
             CountingDown = 2;
             //fail update on the screen
             Debug.Log("wrong key time done");
-            GetComponent<QTESounds>().PlayLoseSound();
+            GetComponent<SoundGameManager>().PlayLoseMinigameSound();
             Frame.gameObject.SetActive(false);
             Letter.gameObject.SetActive(false);
             atemptes = -4;
@@ -306,7 +307,7 @@ public class QTESystem : MonoBehaviour
             CountingDown = 1;
             timer = CountDownTimer;
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
-
+            EventQueue.eventQueue.AddEvent(new MinigameFailEventData());
         }
     }
 }
