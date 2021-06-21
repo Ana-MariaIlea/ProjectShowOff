@@ -130,12 +130,30 @@ public class PlayerMotor : MonoBehaviour
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDirection.normalized * fSpeed * Time.deltaTime);
-            animator.SetInteger("condition", 1);
+            if (controller.isGrounded)
+            {
+                animator.SetInteger("condition", 3);
+            }
+            else
+            {
+                animator.SetInteger("condition", 1);
+                //isGrounded = false;
+            }
+            //animator.SetInteger("condition", 1);
             //Debug.Log(animator.GetInteger("condition"));
         }
         else
         {
-            animator.SetInteger("condition", 0);
+            if (controller.isGrounded)
+            {
+                animator.SetInteger("condition", 2);
+            }
+            else
+            {
+                animator.SetInteger("condition", 0);
+                //isGrounded = false;
+            }
+            //animator.SetInteger("condition", 0);
             //Debug.Log(animator.GetInteger("condition"));
         }
     }
