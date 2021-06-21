@@ -4110,7 +4110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc6f0bea820ca44f802346cb3c38788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameTestSoundSFX: Open&click
+  fmodSoundEvent: event:/Menu adjust sound
 --- !u!1 &719376255
 GameObject:
   m_ObjectHideFlags: 0
