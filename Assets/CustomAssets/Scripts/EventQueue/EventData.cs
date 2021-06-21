@@ -30,6 +30,7 @@ public enum EventType
     PLAYMINIGAMESOUND,
     PLAYTUTORIALSOUND,
     PLAYSCOREINCREASESOUND,
+    PLAYSPRAYPARTICLESSOUND,
     #endregion
 }
 public class EventData 

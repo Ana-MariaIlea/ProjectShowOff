@@ -4880,9 +4880,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pesticides: {fileID: 4192375007685852741}
   smoke: {fileID: 4192375006760559910}
-  lawnmower: {fileID: 0}
+  lawnmower: {fileID: 3978600007423409858}
   houseLocation: {fileID: 0}
-  timeToStartTheFirstEvent: 0
+  timeToStartTheFirstEvent: 3
   time: 4
 --- !u!195 &4192375007263125077
 NavMeshAgent:
@@ -9882,6 +9882,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6515683eff53f0446b2420fa0562e1b8, type: 3}
+--- !u!1 &3978600007423409858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8824746538397458967, guid: 6515683eff53f0446b2420fa0562e1b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5566765352368430293}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4358643364630291576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8159428046948513965, guid: 6515683eff53f0446b2420fa0562e1b8,

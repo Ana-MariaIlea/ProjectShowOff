@@ -32,6 +32,7 @@ public class SoundGameManager : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.PLAYMINIGAMESOUND, OnPlayMinigameSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYTUTORIALSOUND, OnPlayTutorialSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYSCOREINCREASESOUND, OnPlayScoreInscreaseSound);
+        EventQueue.eventQueue.Subscribe(EventType.PLAYSPRAYPARTICLESSOUND, OnPlaySprayParticlesSound);
     }
 
     public void OnPlayTutorialSound(EventData eventData)
@@ -40,6 +41,15 @@ public class SoundGameManager : MonoBehaviour
         {
             Debug.Log("play tutorial popup sound");
             PlaySound("TutorialPopupSound");
+        }
+    }
+
+    public void OnPlaySprayParticlesSound(EventData eventData)
+    {
+        if (eventData is PlaySprayParticlesSoundEventData)
+        {
+            Debug.Log("play spray bottle sound");
+            PlaySound("SprayBottleSound");
         }
     }
 

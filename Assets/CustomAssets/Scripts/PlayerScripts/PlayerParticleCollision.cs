@@ -8,7 +8,7 @@ public class PlayerParticleCollision : MonoBehaviour
     {
         if (other.tag == "Pesticide")
         {
-            Debug.Log("particle collision");
+           // Debug.Log("particle collision");
             EventQueue.eventQueue.AddEvent(new PlayerPesticideCollisionEventData());
         }
     }

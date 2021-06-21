@@ -35,6 +35,7 @@ public class SprayPesticides : BaseState
         {
            // Debug.Log("Play particles");
             particles.Play();
+            EventQueue.eventQueue.AddEvent(new PlaySprayParticlesSoundEventData());
         }
         if (timer <= 0)
         {
