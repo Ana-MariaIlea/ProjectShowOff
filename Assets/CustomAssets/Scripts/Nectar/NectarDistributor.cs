@@ -23,6 +23,7 @@ public class NectarDistributor : MonoBehaviour
     private void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+        EventQueue.eventQueue.Subscribe(EventType.MINIGAMEFAIL, OnMinigameFailed);
     }
 
     private void Update()
@@ -79,6 +80,15 @@ public class NectarDistributor : MonoBehaviour
         }
     }
 
+    public void OnMinigameFailed(EventData eventData)
+    {
+        if (eventData is MinigameFailEventData)
+        {
+            Debug.Log("ResetNectarIsSelected");
+            isDistribuitorSelected = false;
+        }
+    }
+
     public void OnFlowerIsPicked(EventData eventData)
     {
         if (eventData is PickFlowerEventData)
@@ -105,6 +115,7 @@ public class NectarDistributor : MonoBehaviour
 
     public void SetIsDistribuitorSelectes(bool value)
     {
+        Debug.Log("Set distrib to " + value);
         isDistribuitorSelected = value;
     }
 

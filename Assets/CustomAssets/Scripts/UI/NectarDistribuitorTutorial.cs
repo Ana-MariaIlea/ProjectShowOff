@@ -18,6 +18,7 @@ public class NectarDistribuitorTutorial : MonoBehaviour
     {
         nectarAmount = GetComponent<NectarDistributor>().GetNectarAmount();
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+        EventQueue.eventQueue.Subscribe(EventType.MINIGAMEFAIL, OnMinigameFailed);
         //EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTTUTORIAL, OnNectartCollectTutorialDone);
         GetComponent<NectarDistributor>().enabled = false;
 
@@ -50,12 +51,19 @@ public class NectarDistribuitorTutorial : MonoBehaviour
         }
     }
 
+    public void OnMinigameFailed(EventData eventData)
+    {
+        if (eventData is MinigameFailEventData)
+            GetComponent<NectarDistributor>().OnMinigameFailed(eventData);
+    }
+
     public void OnNectarIsCollected(EventData eventData)
     {
         if (test && this != null)
         {
             Debug.Log("Unsubscribe tutorial");
             EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+            EventQueue.eventQueue.UnSubscribe(EventType.MINIGAMEFAIL, OnMinigameFailed);
             if (eventData is NectarCollectStartEventData)
             {
                 if (GetComponent<NectarDistributor>().GetIsDistribuitorSelectes())
