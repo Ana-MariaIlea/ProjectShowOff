@@ -43,5 +43,8 @@ public class BounderyDetection : MonoBehaviour
         }
     }
 
-
+    public Transform getCenterOfMap()
+    {
+        return centerOfMap;
+    }
 }

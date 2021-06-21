@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class UnitTest
 {
+
+    DifficultyChecksTimer difficultyChecksTimer;
+    PlayerMotor playerMotor;
+    PlayerStateMachine playerStateMachine;
+    BounderyDetection bounderyDetection;
     //Setup the test scene
     [OneTimeSetUp]
     public void LoadShopScene()
@@ -21,7 +26,10 @@ public class UnitTest
     public IEnumerator SetupTests()
     {
         yield return null; //yield return null skips one frame, this is to make sure that this happens after the scene is loaded
-
+        difficultyChecksTimer = Resources.FindObjectsOfTypeAll<DifficultyChecksTimer>()[0];
+        playerMotor = Resources.FindObjectsOfTypeAll<PlayerMotor>()[0];
+        playerStateMachine = Resources.FindObjectsOfTypeAll<PlayerStateMachine>()[0];
+        bounderyDetection = Resources.FindObjectsOfTypeAll<BounderyDetection>()[0];
     }
 
     //------------------------------------------------------------------------------------------------
@@ -136,10 +144,75 @@ public class UnitTest
             GameSessionStats.instance.OnCheckDifficulty(new EventData(EventType.CHANGEDIFFICULTY));
         });
     }
+
+    [UnityTest]
+    public IEnumerator DifficultyChecksListIsNotEmpty()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        Assert.NotZero(difficultyChecksTimer.GetDifficultyChecksListCount());
+    }
     //------------------------------------------------------------------------------------------------
     //                                              Player Tests
     //------------------------------------------------------------------------------------------------
+    [UnityTest]
+    public IEnumerator PlayerMotorControllerIsInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
 
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(playerMotor.GetPlayerControllerStates(), "No PLayerControllerStates");
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerMotorEffectsIsInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(playerMotor.GetPlayerEffectStates(), "No PLayerControllerEffects");
+    }
+    [UnityTest]
+    public IEnumerator PlayerMotorInStateMachineIsInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(playerStateMachine.GetPLayerMotor(), "No GameSeesionStats in the scene");
+    }
+    [UnityTest]
+    public IEnumerator QTEInStateMachineIsInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(playerStateMachine.GetQTESystem(), "No GameSeesionStats in the scene");
+    }
+    [UnityTest]
+    public IEnumerator BounderiessInStateMachineIsInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(playerStateMachine.GetBounderiesDetection(), "No GameSeesionStats in the scene");
+    }
+    [UnityTest]
+    public IEnumerator NectarHandlerInStateMachineIsInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(playerStateMachine.GetNectarHandler(), "No GameSeesionStats in the scene");
+    }
+
+    [UnityTest]
+    public IEnumerator CenterOfMapIsInitiated()
+    {
+        yield return null; //yield return null skips one frame, waits for the Unity scene to load
+
+        //now test if a eventQueue is initiated
+        Assert.IsNotNull(bounderyDetection.getCenterOfMap(), "No GameSeesionStats in the scene");
+    }
     //------------------------------------------------------------------------------------------------
     //                                              HumanAI Tests
     //------------------------------------------------------------------------------------------------

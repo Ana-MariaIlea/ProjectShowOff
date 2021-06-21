@@ -48,7 +48,7 @@ public class PlayerMotor : MonoBehaviour
     {
         if (controller.enabled)
             Move();
-        
+
     }
 
     private void Move()
@@ -84,9 +84,9 @@ public class PlayerMotor : MonoBehaviour
         {
             controller.Move(Vector3.up * -ControllerStats.DownSpeed * Time.deltaTime);
         }
-       // Debug.Log(controller.isGrounded+" Before check");
+        // Debug.Log(controller.isGrounded+" Before check");
 
-        
+
         if (controller.isGrounded)
         {
             isGrounded = true;
@@ -159,4 +159,17 @@ public class PlayerMotor : MonoBehaviour
             EffectStats = e.Difficulty.PlayerEfectsStats;
         }
     }
+
+    public PlayerControllerStats GetPlayerControllerStates()
+    {
+        return ControllerStats;
+    }
+
+
+    public PlayerEfectsStats GetPlayerEffectStates()
+    {
+        return EffectStats;
+    }
+
 }
+

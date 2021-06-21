@@ -5,7 +5,8 @@ using UnityEngine;
 public class NectarDistribuitorTutorial : MonoBehaviour
 {
     private int nectarAmount;
-   // [SerializeField]
+    private bool test = true;
+    // [SerializeField]
     //GameObject gameDistribuitor;
     void OnDrawGizmos()
     {
@@ -26,54 +27,47 @@ public class NectarDistribuitorTutorial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player"&& this.enabled == true)
+        if (other.tag == "Player" && this.enabled == true)
         {
             Tutorial.instance.SetIndex(3);
         }
     }
 
-    public void OnNectarIsCollected(EventData eventData)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Invoke tutorial distribuitor");
-        if (eventData is NectarCollectStartEventData && this.enabled == true)
+        if (test == true)
         {
-            Debug.Log("Trying to make event nectar tutorial");
-            NectarCollectStartEventData e = eventData as NectarCollectStartEventData;
-           // Debug.Log("distribuitor in event: " + e.dis);
-           // Debug.Log("distribuitor in gameobject: " + GetComponent<NectarDistributor>());
-            if (e.dis == GetComponent<NectarDistributor>())
+            if (Input.GetButtonDown("NectarKey"))
             {
-               // Debug.Log("Tutorial nectar is ending");
-                EventQueue.eventQueue.AddEvent(new NectarCollectEndEventData(nectarAmount));
-                Tutorial.instance.IncreasePanelIndex();
-                //EventQueue.eventQueue.AddEvent(new NectarCollectTutorialEventData());
-            }
-            
-            //EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTTUTORIAL, OnNectartCollectTutorialDone);
-           // GetComponent<NectarDistributor>().enabled = true;
-            // Debug.Log(this.enabled);
+                Debug.Log("tutorial nectar key pressed");
+                if (other.tag == "Player")
+                {
+                    EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.QTEEvent));
+                    GetComponent<NectarDistributor>().SetIsDistribuitorSelectes(true);
 
-           // this.enabled = false;
+                }
+            }
         }
-        EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
-        GetComponent<NectarDistributor>().enabled = true;
-        this.enabled = false;
     }
 
-    //public void OnNectartCollectTutorialDone(EventData eventData)
-    //{
-    //    if (eventData is NectarCollectTutorialEventData)
-    //    {
-    //        //Debug.Log("Tutorial nectar end");
-    //        //gameDistribuitor.SetActive(true);
-    //        GetComponent<NectarDistributor>().enabled = true;
-    //       // Debug.Log(this.enabled);
-    //        EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
-    //        EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTTUTORIAL, OnNectartCollectTutorialDone);
-    //        this.enabled = false;
-
-    //        //Debug.Log(this.enabled);
-    //        //Destroy(this);
-    //    }
-    //}
+    public void OnNectarIsCollected(EventData eventData)
+    {
+        if (test && this != null)
+        {
+            Debug.Log("Unsubscribe tutorial");
+            EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+            if (eventData is NectarCollectStartEventData)
+            {
+                if (GetComponent<NectarDistributor>().GetIsDistribuitorSelectes())
+                {
+                    EventQueue.eventQueue.AddEvent(new NectarCollectEndEventData(nectarAmount));
+                    Tutorial.instance.IncreasePanelIndex();
+                    GetComponent<NectarDistributor>().SetIsDistribuitorSelectes(false);
+                }
+            }
+            GetComponent<NectarDistributor>().enabled = true;
+            this.enabled = false;
+            test = false;
+        }
+    }
 }

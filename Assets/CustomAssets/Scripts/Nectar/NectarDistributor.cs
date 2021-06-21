@@ -12,6 +12,8 @@ public class NectarDistributor : MonoBehaviour
     private ParticleSystem polen;
     private bool showParticles = false;
     private float cooldownTimer = 0;
+
+    public bool isDistribuitorSelected = false;
     void OnDrawGizmos()
     {
         // Draw a semitransparent blue cube at the transforms position
@@ -35,24 +37,35 @@ public class NectarDistributor : MonoBehaviour
         }
     }
 
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (this.enabled)
+            if (Input.GetButtonDown("NectarKey"))
+            {
+                if (other.tag == "Player" && cooldownTimer <= 0)
+                {
+                    EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.QTEEvent));
+                    isDistribuitorSelected = true;
+                }
+            }
+    }
     public void OnNectarIsCollected(EventData eventData)
     {
         if (eventData is NectarCollectStartEventData)
         {
-            NectarCollectStartEventData e = eventData as NectarCollectStartEventData;
-            if (e.dis == this)
+            if (isDistribuitorSelected)
             {
-                if (cooldownTimer <= 0)
+                EventQueue.eventQueue.AddEvent(new NectarCollectEndEventData(nectarAmount));
+                cooldownTimer = cooldown;
+                if (showParticles == true && polen.isPlaying)
                 {
-                    EventQueue.eventQueue.AddEvent(new NectarCollectEndEventData(nectarAmount));
-                    cooldownTimer = cooldown;
-                    if (showParticles == true && polen.isPlaying)
-                    {
-                        polen.Stop();
-                    }
+                    polen.Stop();
                 }
             }
         }
+
+        isDistribuitorSelected = false;
     }
 
 
@@ -88,5 +101,15 @@ public class NectarDistributor : MonoBehaviour
     {
         EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
         Destroy(this.gameObject);
+    }
+
+    public void SetIsDistribuitorSelectes(bool value)
+    {
+        isDistribuitorSelected = value;
+    }
+
+    public bool GetIsDistribuitorSelectes()
+    {
+        return isDistribuitorSelected;
     }
 }
