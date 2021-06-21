@@ -44,6 +44,7 @@ public class BounderyDetection : MonoBehaviour
         {
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Bounderies));
             animator.SetInteger("condition", 4);
+            Debug.Log("Change animator to 4");
         }
     }
 
