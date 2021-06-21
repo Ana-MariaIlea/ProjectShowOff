@@ -23,11 +23,11 @@ public class SoundGameManager : MonoBehaviour
         public string fmodSoundEvent;
         public FMOD.Studio.EventInstance Sound;
         [Range(0,1)]
-        public float soundAdjust;
+        public float Adjust;
 
         public void ChangeParameter()
         {
-            Sound.setParameterByName("Minigame adjust", soundAdjust);
+            Sound.setParameterByName("Minigame adjust", Adjust);
         }
     }
     // Start is called before the first frame update
@@ -37,33 +37,34 @@ public class SoundGameManager : MonoBehaviour
         {
             sounds[i].Sound = FMODUnity.RuntimeManager.CreateInstance(sounds[i].fmodSoundEvent);
         }
-        // QTESoundLose = FMODUnity.RuntimeManager.CreateInstance("event:/" + soundLose);
-        //QTESoundPass = FMODUnity.RuntimeManager.CreateInstance("event:/" + soundPass);
-        // QTESoundWin = FMODUnity.RuntimeManager.CreateInstance("event:/" + soundWin);
-        //QTESoundStart = FMODUnity.RuntimeManager.CreateInstance("event:/" + soundStart);
+        EventQueue.eventQueue.Subscribe(EventType.PLAYMINIGAMESOUND, OnPlayMinigameSound);
     }
 
-    public void PlayStartMinigameSound()
+    public void OnPlayMinigameSound(EventData eventData)
     {
-        Debug.Log("play start sound");
-        PlaySound("StartMinigameSound");
-    }
-    public void PlayLoseMinigameSound()
-    {
-        Debug.Log("play lose sound");
-        PlaySound("LoseMinigameSound");
-    }
-
-    public void PlayPassMinigameSound()
-    {
-        Debug.Log("play pass sound");
-        PlaySound("PassMinigameSound");
-    }
-
-    public void PlayWinMinigameSound()
-    {
-        Debug.Log("play win sound");
-        PlaySound("WinMinigameSound");
+        if(eventData is PlayMinigameSoundEventData)
+        {
+            PlayMinigameSoundEventData e = eventData as PlayMinigameSoundEventData;
+            switch (e.type)
+            {
+                case MinigameSounds.Start:
+                    Debug.Log("play start sound");
+                    PlaySound("StartMinigameSound");
+                    break;
+                case MinigameSounds.Lose:
+                    Debug.Log("play lose sound");
+                    PlaySound("LoseMinigameSound");
+                    break;
+                case MinigameSounds.Win:
+                    Debug.Log("play win sound");
+                    PlaySound("WinMinigameSound");
+                    break;
+                case MinigameSounds.Pass:
+                    Debug.Log("play pass sound");
+                    PlaySound("PassMinigameSound");
+                    break;
+            }
+        }
     }
     private void PlaySound(string soundName)
     {

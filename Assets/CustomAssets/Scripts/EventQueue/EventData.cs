@@ -5,8 +5,6 @@ using System.Collections.Generic;
 public enum EventType
 {
     UNITTESTS,
-    CLIENTCONNECT,
-    CLIENTDISCONNESCT,
     STARTGAME,
     COLECTNECTAR,
     NECTARCOLLECTSTART,
@@ -26,7 +24,11 @@ public enum EventType
     NECTARCOLLECTTUTORIAL,
     NECTARONBEETEXTCHANGE,
     NECTARONTRUNKTEXTCHANGE,
-    MINIGAMEFAIL
+    MINIGAMEFAIL,
+
+    #region Sound Events
+    PLAYMINIGAMESOUND
+    #endregion
 }
 public class EventData 
 {
