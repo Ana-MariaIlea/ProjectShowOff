@@ -140,6 +140,7 @@ public class Tutorial : MonoBehaviour
                     index = 9;
                 }
                 panels[index].panel.SetActive(true);
+                EventQueue.eventQueue.AddEvent(new PlayTutorialSoundEventData());
                 Debug.Log(panels[index].panel.activeSelf + panels[index].panel.name);
             }
             else
@@ -165,6 +166,7 @@ public class Tutorial : MonoBehaviour
             if (index < panels.Count)
             {
                 panels[index].panel.SetActive(true);
+                EventQueue.eventQueue.AddEvent(new PlayTutorialSoundEventData());
                 Debug.Log(panels[index].panel.name);
             }
             else
@@ -184,7 +186,13 @@ public class Tutorial : MonoBehaviour
             panels[index].panel.SetActive(false);
         index = i;
         panels[index].panel.SetActive(true);
+        EventQueue.eventQueue.AddEvent(new PlayTutorialSoundEventData());
         Debug.Log(panels[index].panel.name);
+    }
+
+    public int GetIndex()
+    {
+        return index;
     }
 
     public void EndTutorial()

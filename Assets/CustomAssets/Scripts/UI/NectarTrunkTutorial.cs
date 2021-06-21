@@ -25,6 +25,7 @@ public class NectarTrunkTutorial : MonoBehaviour
         {
             Tutorial.instance.gameObject.SetActive(true);
             Tutorial.instance.SetIndex(6);
+            EventQueue.eventQueue.AddEvent(new PlayTutorialSoundEventData());
         }
     }
     public void OnNectarIsStored(EventData eventData)

@@ -27,7 +27,9 @@ public enum EventType
     MINIGAMEFAIL,
 
     #region Sound Events
-    PLAYMINIGAMESOUND
+    PLAYMINIGAMESOUND,
+    PLAYTUTORIALSOUND,
+    PLAYSCOREINCREASESOUND,
     #endregion
 }
 public class EventData 

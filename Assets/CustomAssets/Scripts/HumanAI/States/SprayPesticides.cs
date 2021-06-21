@@ -23,12 +23,6 @@ public class SprayPesticides : BaseState
             times.Add(path[i].timeToStay);
         }
 
-        for (int i = 0; i < times.Count; i++)
-        {
-            Debug.Log(times[i]);
-        }
-        Debug.Log(this.path.Count);
-
     }
 
 

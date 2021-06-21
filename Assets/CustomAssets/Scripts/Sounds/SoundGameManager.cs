@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class SoundGameManager : MonoBehaviour
 {
-    //public string soundLose;
-    //public string soundPass;
-    //public string soundWin;
-    //public string soundStart;
-    //FMOD.Studio.EventInstance QTESoundLose;
-    //FMOD.Studio.EventInstance QTESoundPass;
-    //FMOD.Studio.EventInstance QTESoundWin;
-    //FMOD.Studio.EventInstance QTESoundStart;
     [SerializeField]
     List<SoundInstance> sounds;
 
@@ -38,6 +30,26 @@ public class SoundGameManager : MonoBehaviour
             sounds[i].Sound = FMODUnity.RuntimeManager.CreateInstance(sounds[i].fmodSoundEvent);
         }
         EventQueue.eventQueue.Subscribe(EventType.PLAYMINIGAMESOUND, OnPlayMinigameSound);
+        EventQueue.eventQueue.Subscribe(EventType.PLAYTUTORIALSOUND, OnPlayTutorialSound);
+        EventQueue.eventQueue.Subscribe(EventType.PLAYSCOREINCREASESOUND, OnPlayScoreInscreaseSound);
+    }
+
+    public void OnPlayTutorialSound(EventData eventData)
+    {
+        if (eventData is PlayTutorialSoundEventData)
+        {
+            Debug.Log("play tutorial popup sound");
+            PlaySound("TutorialPopupSound");
+        }
+    }
+
+    public void OnPlayScoreInscreaseSound(EventData eventData)
+    {
+        if (eventData is PlayScoreIncreaseSoundEventData)
+        {
+            Debug.Log("play score increase sound");
+            PlaySound("ScoreInscreaseSound");
+        }
     }
 
     public void OnPlayMinigameSound(EventData eventData)

@@ -30,7 +30,11 @@ public class NectarDistribuitorTutorial : MonoBehaviour
     {
         if (other.tag == "Player" && this.enabled == true)
         {
-            Tutorial.instance.SetIndex(3);
+            if (Tutorial.instance.GetIndex() != 3)
+            {
+                Tutorial.instance.SetIndex(3);
+                EventQueue.eventQueue.AddEvent(new PlayTutorialSoundEventData());
+            }
         }
     }
 
