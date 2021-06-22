@@ -14,8 +14,6 @@ public class SoundGameManager : MonoBehaviour
     public class _2DSoundInstance
     {
         public string SoundName;
-        [Tooltip("Gameobject for the sound to be attached if the sound is 3D")]
-        public GameObject attachment;
         [FMODUnity.EventRef]
         public string fmodSoundEvent;
         public FMOD.Studio.EventInstance Sound;
@@ -45,18 +43,6 @@ public class SoundGameManager : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.PLAYTUTORIALSOUND, OnPlayTutorialSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYSCOREINCREASESOUND, OnPlayScoreInscreaseSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYSPRAYPARTICLESSOUND, OnPlaySprayParticlesSound);
-    }
-
-    private void Update()
-    {
-        //for (int i = 0; i < _2DSounds.Count; i++)
-        //{
-        //    if (_2DSounds[i].type == _2DSoundInstance.SoundType._3D && _2DSounds[i].attachment != null)
-        //    {
-        //        Debug.Log(_2DSounds[i].SoundName+" attach 3d atributes");
-        //        _2DSounds[i].Sound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(_2DSounds[i].attachment));
-        //    }
-        //}
     }
 
     public void OnPlayTutorialSound(EventData eventData)
@@ -141,7 +127,7 @@ public class SoundGameManager : MonoBehaviour
             {
                 Debug.Log("play  sound");
                 //sounds[i].ChangeParameter();
-                _3DSounds[i].Sound.PlayInstance();
+                _3DSounds[i].Sound.Play();
                 break;
             }
         }
