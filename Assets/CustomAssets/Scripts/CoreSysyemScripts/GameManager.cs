@@ -39,11 +39,24 @@ public class GameManager : MonoBehaviour
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     public void LoadGame()
     {
+        LoadScene(titleScreenInterger, mainScreenInterger);
+        //if (playerName != null)
+        //{
+        //    loadingScreen.SetActive(true);
+        //    scenesLoading.Add(SceneManager.UnloadSceneAsync(titleScreenInterger));
+        //    scenesLoading.Add(SceneManager.LoadSceneAsync(mainScreenInterger, LoadSceneMode.Additive));
+
+        //    StartCoroutine(GetSceneLoadProgress());
+        //}
+    }
+
+    public void LoadScene(int scenetoUnload, int sceneToLoad)
+    {
         if (playerName != null)
         {
             loadingScreen.SetActive(true);
-            scenesLoading.Add(SceneManager.UnloadSceneAsync(titleScreenInterger));
-            scenesLoading.Add(SceneManager.LoadSceneAsync(mainScreenInterger, LoadSceneMode.Additive));
+            scenesLoading.Add(SceneManager.UnloadSceneAsync(scenetoUnload));
+            scenesLoading.Add(SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive));
 
             StartCoroutine(GetSceneLoadProgress());
         }
@@ -51,11 +64,12 @@ public class GameManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        loadingScreen.SetActive(true);
-        scenesLoading.Add(SceneManager.UnloadSceneAsync(mainScreenInterger));
-        scenesLoading.Add(SceneManager.LoadSceneAsync(titleScreenInterger, LoadSceneMode.Additive));
+        LoadScene(mainScreenInterger, titleScreenInterger);
+        //loadingScreen.SetActive(true);
+        //scenesLoading.Add(SceneManager.UnloadSceneAsync(mainScreenInterger));
+        //scenesLoading.Add(SceneManager.LoadSceneAsync(titleScreenInterger, LoadSceneMode.Additive));
 
-        StartCoroutine(GetSceneLoadProgress());
+        //StartCoroutine(GetSceneLoadProgress());
         playerName = null;
     }
 
