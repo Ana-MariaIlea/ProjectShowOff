@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1867795956078996989
+--- !u!1 &5049841135062309220
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1342193816434620231}
-  - component: {fileID: 2670552937981327586}
-  - component: {fileID: 210335434554756136}
+  - component: {fileID: 5575301776925197278}
+  - component: {fileID: 8858766250398190715}
+  - component: {fileID: 6707090962719766705}
   m_Layer: 0
   m_Name: LandMowerResized
   m_TagString: Untagged
@@ -18,35 +18,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1342193816434620231
+--- !u!4 &5575301776925197278
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867795956078996989}
+  m_GameObject: {fileID: 5049841135062309220}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2670552937981327586
+--- !u!33 &8858766250398190715
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867795956078996989}
+  m_GameObject: {fileID: 5049841135062309220}
   m_Mesh: {fileID: 5574255633515951518, guid: 613ad4e28ccbea8489cdc135dce28b38, type: 3}
---- !u!23 &210335434554756136
+--- !u!23 &6707090962719766705
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867795956078996989}
+  m_GameObject: {fileID: 5049841135062309220}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
