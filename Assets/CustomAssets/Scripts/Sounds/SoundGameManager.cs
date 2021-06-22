@@ -5,38 +5,41 @@ using UnityEngine;
 public class SoundGameManager : MonoBehaviour
 {
     [SerializeField]
-    List<SoundInstance> sounds;
+    List<_2DSoundInstance> _2DSounds;
+
+    [SerializeField]
+    List<_3DSoundInstance> _3DSounds;
 
     [System.Serializable]
-    public class SoundInstance
+    public class _2DSoundInstance
     {
-        [System.Serializable]
-        public enum SoundType
-        {
-            _2D,
-            _3D
-        }
         public string SoundName;
-        public SoundType type;
         [Tooltip("Gameobject for the sound to be attached if the sound is 3D")]
         public GameObject attachment;
         [FMODUnity.EventRef]
         public string fmodSoundEvent;
         public FMOD.Studio.EventInstance Sound;
         [Range(0, 1)]
-        public float Adjust;
+        public float Adjust=1;
 
         public void ChangeParameter()
         {
             Sound.setParameterByName("Minigame adjust", Adjust);
         }
     }
+
+    [System.Serializable]
+    public class _3DSoundInstance
+    {
+        public string SoundName;
+        public FMODUnity.StudioEventEmitter Sound;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < sounds.Count; i++)
+        for (int i = 0; i < _2DSounds.Count; i++)
         {
-            sounds[i].Sound = FMODUnity.RuntimeManager.CreateInstance(sounds[i].fmodSoundEvent);
+            _2DSounds[i].Sound = FMODUnity.RuntimeManager.CreateInstance(_2DSounds[i].fmodSoundEvent);
         }
         EventQueue.eventQueue.Subscribe(EventType.PLAYMINIGAMESOUND, OnPlayMinigameSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYTUTORIALSOUND, OnPlayTutorialSound);
@@ -46,14 +49,14 @@ public class SoundGameManager : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < sounds.Count; i++)
-        {
-            if (sounds[i].type == SoundInstance.SoundType._3D && sounds[i].attachment != null)
-            {
-                Debug.Log(sounds[i].SoundName+" attach 3d atributes");
-                sounds[i].Sound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(sounds[i].attachment));
-            }
-        }
+        //for (int i = 0; i < _2DSounds.Count; i++)
+        //{
+        //    if (_2DSounds[i].type == _2DSoundInstance.SoundType._3D && _2DSounds[i].attachment != null)
+        //    {
+        //        Debug.Log(_2DSounds[i].SoundName+" attach 3d atributes");
+        //        _2DSounds[i].Sound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(_2DSounds[i].attachment));
+        //    }
+        //}
     }
 
     public void OnPlayTutorialSound(EventData eventData)
@@ -61,7 +64,7 @@ public class SoundGameManager : MonoBehaviour
         if (eventData is PlayTutorialSoundEventData)
         {
             Debug.Log("play tutorial popup sound");
-            PlaySoundWhileCheckingPlayBackState("TutorialPopupSound");
+            Play2DSound("TutorialPopupSound");
         }
     }
 
@@ -70,7 +73,7 @@ public class SoundGameManager : MonoBehaviour
         if (eventData is PlaySprayParticlesSoundEventData)
         {
             Debug.Log("play spray bottle sound");
-            PlaySoundWithoutCheckingPlayBackState("SprayBottleSound");
+            Play3DSound("SprayBottleSound");
         }
     }
 
@@ -79,7 +82,7 @@ public class SoundGameManager : MonoBehaviour
         if (eventData is PlayScoreIncreaseSoundEventData)
         {
             Debug.Log("play score increase sound");
-            PlaySoundWhileCheckingPlayBackState("ScoreInscreaseSound");
+            Play2DSound("ScoreInscreaseSound");
         }
     }
 
@@ -92,53 +95,53 @@ public class SoundGameManager : MonoBehaviour
             {
                 case MinigameSounds.Start:
                     Debug.Log("play start sound");
-                    PlaySoundWhileCheckingPlayBackState("StartMinigameSound");
+                    Play2DSound("StartMinigameSound");
                     break;
                 case MinigameSounds.Lose:
                     Debug.Log("play lose sound");
-                    PlaySoundWhileCheckingPlayBackState("LoseMinigameSound");
+                    Play2DSound("LoseMinigameSound");
                     break;
                 case MinigameSounds.Win:
                     Debug.Log("play win sound");
-                    PlaySoundWhileCheckingPlayBackState("WinMinigameSound");
+                    Play2DSound("WinMinigameSound");
                     break;
                 case MinigameSounds.Pass:
                     Debug.Log("play pass sound");
-                    PlaySoundWhileCheckingPlayBackState("PassMinigameSound");
+                    Play2DSound("PassMinigameSound");
                     break;
             }
         }
     }
-    private void PlaySoundWhileCheckingPlayBackState(string soundName)
+    private void Play2DSound(string soundName)
     {
 
-        for (int i = 0; i < sounds.Count; i++)
+        for (int i = 0; i < _2DSounds.Count; i++)
         {
-            if (sounds[i].SoundName == soundName)
+            if (_2DSounds[i].SoundName == soundName)
             {
                 FMOD.Studio.PLAYBACK_STATE state;
-                sounds[i].Sound.getPlaybackState(out state);
-                sounds[i].ChangeParameter();
+                _2DSounds[i].Sound.getPlaybackState(out state);
+                _2DSounds[i].ChangeParameter();
 
                 if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
                 {
-                    sounds[i].Sound.start();
+                    _2DSounds[i].Sound.start();
                 }
                 break;
             }
         }
     }
 
-    private void PlaySoundWithoutCheckingPlayBackState(string soundName)
+    private void Play3DSound(string soundName)
     {
 
-        for (int i = 0; i < sounds.Count; i++)
+        for (int i = 0; i < _3DSounds.Count; i++)
         {
-            if (sounds[i].SoundName == soundName)
+            if (_3DSounds[i].SoundName == soundName)
             {
                 Debug.Log("play  sound");
                 //sounds[i].ChangeParameter();
-                sounds[i].Sound.start();
+                _3DSounds[i].Sound.PlayInstance();
                 break;
             }
         }
