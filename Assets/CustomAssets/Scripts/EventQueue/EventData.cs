@@ -4,28 +4,37 @@ using System.Collections.Generic;
 
 public enum EventType
 {
+    #region System events
     UNITTESTS,
     STARTGAME,
+    CHECKDIFFICULTY,
+    CHANGEDIFFICULTY,
+    NECTARCOLLECTTUTORIAL,
+    #endregion
+    #region Nectar&Flower events
     COLECTNECTAR,
     NECTARCOLLECTSTART,
     NECTARCOLLECTEND,
     NECTARSTORED,
+    PICKFLOWER,
+    DESTROYFLOWER,
+    FLOWERPESTICIDECOLLISION,
+    #endregion
+    #region Player events
+    CHANGEPLAYERSTATE,
+    PLAYERPESTICIDECOLLISION,
+    CHANGEZONE,
+    MINIGAMEFAIL,
+    #endregion
+    #region Human events
     CHANGESTATESTART,
     CHANGESTATE,
     ENDSTATE,
-    CHANGEZONE,
-    PLAYERPESTICIDECOLLISION,
-    FLOWERPESTICIDECOLLISION,
-    CHECKDIFFICULTY,
-    CHANGEDIFFICULTY,
-    CHANGEPLAYERSTATE,
-    PICKFLOWER,
-    DESTROYFLOWER,
-    NECTARCOLLECTTUTORIAL,
+    #endregion
+    #region UI events
     NECTARONBEETEXTCHANGE,
     NECTARONTRUNKTEXTCHANGE,
-    MINIGAMEFAIL,
-
+    #endregion
     #region Sound Events
     PLAYMINIGAMESOUND,
     PLAYTUTORIALSOUND,
