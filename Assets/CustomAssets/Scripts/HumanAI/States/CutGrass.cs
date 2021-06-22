@@ -12,23 +12,22 @@ public class CutGrass : BaseState
     [Tooltip("Add Smoke Particle Effect attached to the Human")]
     [SerializeField]
     private ParticleSystem particles;
-    [Tooltip("Add LawnMower GameObject attached to the Human")]
-    [SerializeField]
-    private GameObject lawnmower;
+   // [Tooltip("Add LawnMower GameObject attached to the Human")]
+    //[SerializeField]
+    //private GameObject lawnmower;
     [Tooltip("Add The GameObject that represents the launge area")]
     [SerializeField]
     private GameObject launge;
     [Tooltip("Add The GameObject that represents the gradd to be eliminated")]
     [SerializeField]
-    private List<GameObject> grass;
+    private List<GameObject> ObjectsToTurnOff;
 
 
-    public CutGrass(NavMeshAgent ag, ParticleSystem particles, GameObject mawer, GameObject launge,List<GameObject> plants, List<Waypoint> path) : base(ag)
+    public CutGrass(NavMeshAgent ag, ParticleSystem particles, GameObject launge,List<GameObject> objectsToTurnOff, List<Waypoint> path) : base(ag)
     {
         this.particles = particles;
-        this.lawnmower = mawer;
         this.launge = launge;
-        this.grass = plants;
+        this.ObjectsToTurnOff = objectsToTurnOff;
         for (int i = 0; i < path.Count; i++)
         {
             this.path.Add(path[i].gameObject);
@@ -44,39 +43,26 @@ public class CutGrass : BaseState
         {
             if (!particles.isPlaying)
             {
-               // Debug.Log("particles play");
                 particles.Play();
             }
-            else
-            {
-               // Debug.Log("particles not play "+ particles.isPlaying);
-            }
-            if (lawnmower.activeSelf == false)
-            {
-                lawnmower.SetActive(true);
-            }
+
+            EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("Lawnmower", true));
         }
 
         if (path[walkPoint] == pointToEndCutting)
         {
             if (particles.isPlaying)
             {
-                //Debug.Log("particles stop");
                 particles.Stop();
             }
-            else
-            {
-                //Debug.Log("particles not stop "+ particles.isPlaying);
-            }
-            if (lawnmower.activeSelf == true)
-            {
-                lawnmower.SetActive(false);
-            }
+
+            EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("Lawnmower",false));
+
             if (launge.activeSelf == false)
             {
                 launge.SetActive(true);
             }
-            foreach (GameObject item in grass)
+            foreach (GameObject item in ObjectsToTurnOff)
             {
                 if (item.activeSelf == true)
                 {

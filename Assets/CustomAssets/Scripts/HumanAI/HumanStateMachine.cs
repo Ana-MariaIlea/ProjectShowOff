@@ -89,7 +89,7 @@ public class HumanStateMachine : MonoBehaviour
                 case HumanStates.CutGrass:
                   //  Debug.Log("Change state to cut grass "+ e.zoneSettings.gameObject.name);
                    //Debug.Log(e.zoneSettings.gameObject.name);
-                    currentState = new CutGrass(GetComponent<NavMeshAgent>(),smoke,lawnmower,e.zoneSettings.launge,e.zoneSettings.plants, e.zoneSettings.currentWaypoints);
+                    currentState = new CutGrass(GetComponent<NavMeshAgent>(),smoke,e.zoneSettings.launge,e.zoneSettings.plants, e.zoneSettings.currentWaypoints);
                     e.zoneSettings.InitializeEventStats();
                     break;
                 default:

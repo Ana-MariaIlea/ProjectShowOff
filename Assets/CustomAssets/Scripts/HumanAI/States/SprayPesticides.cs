@@ -24,28 +24,21 @@ public class SprayPesticides : BaseState
             times.Add(path[i].timeToStay);
             emitter = e;
         }
-
     }
 
 
     public override void StayPut()
     {
-       // Debug.Log(timer);
-       // Debug.Log("Waypoint reached");
         agent.SetDestination(agent.transform.position);
         if (!particles.isPlaying)
         {
-           // Debug.Log("Play particles");
             particles.Play();
-            //emitter.enabled = true;
             EventQueue.eventQueue.AddEvent(new PlaySprayParticlesSoundEventData());
         }
         if (timer <= 0)
         {
             if (particles.isPlaying)
             {
-                // Debug.Log("Stop particles");
-               // emitter.enabled = false;
                 particles.Stop();
             }
             walkPointSet = false;
@@ -58,19 +51,12 @@ public class SprayPesticides : BaseState
 
     public override void SearchWalkPoint()
     {
-        //if(walkPoint>0)
-        //Debug.Log("Waypoint last "+ path[walkPoint].gameObject.name);
         walkPoint++;
-
-
-        // if (walkPoint > path.Count - 1 || walkPoint < 0) walkPoint = 0;
         if (walkPoint > path.Count - 1) FinishState();
         else
         {
             target = path[walkPoint].transform;
             timer = times[walkPoint];
-           // Debug.Log("Waypoint new " + path[walkPoint].gameObject.name);
-
             walkPointSet = true;
         }
 

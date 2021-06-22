@@ -30,6 +30,8 @@ public enum EventType
     CHANGESTATESTART,
     CHANGESTATE,
     ENDSTATE,
+    HANDLEHUMANOBJECT,
+    HANDLEHUMANPARTICLE,
     #endregion
     #region UI events
     NECTARONBEETEXTCHANGE,

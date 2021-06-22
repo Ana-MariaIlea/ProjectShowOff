@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 4192375006760559911}
   m_Layer: 8
   m_Name: SmokeFromMower
-  m_TagString: Untagged
+  m_TagString: Smoke
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4841,6 +4841,7 @@ GameObject:
   - component: {fileID: 4192375005882616116}
   - component: {fileID: 4192375007263125076}
   - component: {fileID: 4192375007263125077}
+  - component: {fileID: 2131719116275494124}
   m_Layer: 8
   m_Name: Human
   m_TagString: Untagged
@@ -4906,6 +4907,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2131719116275494124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4192375007263125078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10d27d6779b69a4985a0440dcd9f864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - Name: Lawnmower
+    gameObject: {fileID: 2462162230395040057}
+  particles: []
 --- !u!1 &4192375007685852792
 GameObject:
   m_ObjectHideFlags: 0
@@ -9888,7 +9905,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 613ad4e28ccbea8489cdc135dce28b38,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 613ad4e28ccbea8489cdc135dce28b38, type: 3}
