@@ -10,11 +10,20 @@ public class SoundGameManager : MonoBehaviour
     [System.Serializable]
     public class SoundInstance
     {
+        [System.Serializable]
+        public enum SoundType
+        {
+            _2D,
+            _3D
+        }
         public string SoundName;
+        public SoundType type;
+        [Tooltip("Gameobject for the sound to be attached if the sound is 3D")]
+        public GameObject attachment;
         [FMODUnity.EventRef]
         public string fmodSoundEvent;
         public FMOD.Studio.EventInstance Sound;
-        [Range(0,1)]
+        [Range(0, 1)]
         public float Adjust;
 
         public void ChangeParameter()
@@ -35,12 +44,24 @@ public class SoundGameManager : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.PLAYSPRAYPARTICLESSOUND, OnPlaySprayParticlesSound);
     }
 
+    private void Update()
+    {
+        for (int i = 0; i < sounds.Count; i++)
+        {
+            if (sounds[i].type == SoundInstance.SoundType._3D && sounds[i].attachment != null)
+            {
+                Debug.Log(sounds[i].SoundName+" attach 3d atributes");
+                sounds[i].Sound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(sounds[i].attachment));
+            }
+        }
+    }
+
     public void OnPlayTutorialSound(EventData eventData)
     {
         if (eventData is PlayTutorialSoundEventData)
         {
             Debug.Log("play tutorial popup sound");
-            PlaySound("TutorialPopupSound");
+            PlaySoundWhileCheckingPlayBackState("TutorialPopupSound");
         }
     }
 
@@ -49,7 +70,7 @@ public class SoundGameManager : MonoBehaviour
         if (eventData is PlaySprayParticlesSoundEventData)
         {
             Debug.Log("play spray bottle sound");
-            PlaySound("SprayBottleSound");
+            PlaySoundWithoutCheckingPlayBackState("SprayBottleSound");
         }
     }
 
@@ -58,37 +79,37 @@ public class SoundGameManager : MonoBehaviour
         if (eventData is PlayScoreIncreaseSoundEventData)
         {
             Debug.Log("play score increase sound");
-            PlaySound("ScoreInscreaseSound");
+            PlaySoundWhileCheckingPlayBackState("ScoreInscreaseSound");
         }
     }
 
     public void OnPlayMinigameSound(EventData eventData)
     {
-        if(eventData is PlayMinigameSoundEventData)
+        if (eventData is PlayMinigameSoundEventData)
         {
             PlayMinigameSoundEventData e = eventData as PlayMinigameSoundEventData;
             switch (e.type)
             {
                 case MinigameSounds.Start:
                     Debug.Log("play start sound");
-                    PlaySound("StartMinigameSound");
+                    PlaySoundWhileCheckingPlayBackState("StartMinigameSound");
                     break;
                 case MinigameSounds.Lose:
                     Debug.Log("play lose sound");
-                    PlaySound("LoseMinigameSound");
+                    PlaySoundWhileCheckingPlayBackState("LoseMinigameSound");
                     break;
                 case MinigameSounds.Win:
                     Debug.Log("play win sound");
-                    PlaySound("WinMinigameSound");
+                    PlaySoundWhileCheckingPlayBackState("WinMinigameSound");
                     break;
                 case MinigameSounds.Pass:
                     Debug.Log("play pass sound");
-                    PlaySound("PassMinigameSound");
+                    PlaySoundWhileCheckingPlayBackState("PassMinigameSound");
                     break;
             }
         }
     }
-    private void PlaySound(string soundName)
+    private void PlaySoundWhileCheckingPlayBackState(string soundName)
     {
 
         for (int i = 0; i < sounds.Count; i++)
@@ -103,6 +124,21 @@ public class SoundGameManager : MonoBehaviour
                 {
                     sounds[i].Sound.start();
                 }
+                break;
+            }
+        }
+    }
+
+    private void PlaySoundWithoutCheckingPlayBackState(string soundName)
+    {
+
+        for (int i = 0; i < sounds.Count; i++)
+        {
+            if (sounds[i].SoundName == soundName)
+            {
+                Debug.Log("play  sound");
+                sounds[i].ChangeParameter();
+                sounds[i].Sound.start();
                 break;
             }
         }

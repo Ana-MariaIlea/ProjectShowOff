@@ -37,15 +37,15 @@ public class SprayPesticides : BaseState
         {
            // Debug.Log("Play particles");
             particles.Play();
-            emitter.enabled = true;
-            //EventQueue.eventQueue.AddEvent(new PlaySprayParticlesSoundEventData());
+            //emitter.enabled = true;
+            EventQueue.eventQueue.AddEvent(new PlaySprayParticlesSoundEventData());
         }
         if (timer <= 0)
         {
             if (particles.isPlaying)
             {
                 // Debug.Log("Stop particles");
-                emitter.enabled = false;
+               // emitter.enabled = false;
                 particles.Stop();
             }
             walkPointSet = false;
