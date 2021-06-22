@@ -9,8 +9,8 @@ public class BounderyDetection : MonoBehaviour
     [SerializeField]
     float speed;
     CharacterController characterController;
-    [SerializeField]
-    Animator animator;
+   // [SerializeField]
+   // Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +31,8 @@ public class BounderyDetection : MonoBehaviour
         if (other.tag == "BounderyInner")
         {
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Movement));
-            animator.SetInteger("condition", 0);
+            GetComponent<PlayerAnimationState>().ChangeAnimatorState(PlayerAnimationStates.FLYIDLE);
+            //animator.SetInteger("condition", 0);
         }
 
         
@@ -43,7 +44,8 @@ public class BounderyDetection : MonoBehaviour
         if (other.tag == "BounderyOuter")
         {
             EventQueue.eventQueue.AddEvent(new ChangePlayerStateEventData(PlayerStates.Bounderies));
-            animator.SetInteger("condition", 4);
+            GetComponent<PlayerAnimationState>().ChangeAnimatorState(PlayerAnimationStates.PUSHBACK);
+           // animator.SetInteger("condition", 4);
             Debug.Log("Change animator to 4");
         }
     }

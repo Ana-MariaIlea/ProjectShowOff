@@ -137,7 +137,7 @@ public class SoundGameManager : MonoBehaviour
             if (sounds[i].SoundName == soundName)
             {
                 Debug.Log("play  sound");
-                sounds[i].ChangeParameter();
+                //sounds[i].ChangeParameter();
                 sounds[i].Sound.start();
                 break;
             }

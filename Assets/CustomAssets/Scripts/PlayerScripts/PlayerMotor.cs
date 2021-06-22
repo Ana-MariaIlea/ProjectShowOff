@@ -13,8 +13,8 @@ public class PlayerMotor : MonoBehaviour
     [Tooltip("Do NOT modify. Exposed parameter for testing purposes ONLY")]
     [SerializeField]
     private float fSpeed;
-    [SerializeField]
-    Animator animator;
+   // [SerializeField]
+    //Animator animator;
     private float uSpeed;
     private float turnSmoothVelocity = 0.1f;
 
@@ -132,11 +132,13 @@ public class PlayerMotor : MonoBehaviour
             controller.Move(moveDirection.normalized * fSpeed * Time.deltaTime);
             if (controller.isGrounded)
             {
-                animator.SetInteger("condition", 3);
+                GetComponent<PlayerAnimationState>().ChangeAnimatorState(PlayerAnimationStates.WALK);
+               // animator.SetInteger("condition", 3);
             }
             else
             {
-                animator.SetInteger("condition", 1);
+                GetComponent<PlayerAnimationState>().ChangeAnimatorState(PlayerAnimationStates.FLYFORWARD);
+                //animator.SetInteger("condition", 1);
                 //isGrounded = false;
             }
             //animator.SetInteger("condition", 1);
@@ -146,11 +148,13 @@ public class PlayerMotor : MonoBehaviour
         {
             if (controller.isGrounded)
             {
-                animator.SetInteger("condition", 2);
+                GetComponent<PlayerAnimationState>().ChangeAnimatorState(PlayerAnimationStates.STANDIDLE);
+                //animator.SetInteger("condition", 2);
             }
             else
             {
-                animator.SetInteger("condition", 0);
+                GetComponent<PlayerAnimationState>().ChangeAnimatorState(PlayerAnimationStates.FLYIDLE);
+                //animator.SetInteger("condition", 0);
                 //isGrounded = false;
             }
             //animator.SetInteger("condition", 0);

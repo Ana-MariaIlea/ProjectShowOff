@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 640077135}
   - component: {fileID: 640077139}
   - component: {fileID: 640077140}
+  - component: {fileID: 8126908299773942272}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -68,7 +69,6 @@ MonoBehaviour:
     UpSpeedSpamSlowed: 0.5
     slowedTimer: 5
   fSpeed: 0
-  animator: {fileID: 7671589568647664041}
 --- !u!143 &3127850797399832127
 CharacterController:
   m_ObjectHideFlags: 0
@@ -168,6 +168,19 @@ MonoBehaviour:
   Letter: {fileID: 0}
   numberOfAtemptes: 3
   atemptes: 1
+--- !u!114 &8126908299773942272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127850797399832124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4690b2775914443bdccd91dad2aaac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7671589568647664041}
 --- !u!95 &7671589568647664041
 Animator:
   serializedVersion: 3
