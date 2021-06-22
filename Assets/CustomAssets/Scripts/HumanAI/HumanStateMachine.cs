@@ -44,7 +44,7 @@ public class HumanStateMachine : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATE, OnStateChange);
         EventQueue.eventQueue.Subscribe(EventType.ENDSTATE, OnGoToHouse);
 
-       //GetComponent<FMODUnity.StudioEventEmitter>();
+       GetComponent<FMODUnity.StudioEventEmitter>().PlayInstance();
     }
 
     // Update is called once per frame

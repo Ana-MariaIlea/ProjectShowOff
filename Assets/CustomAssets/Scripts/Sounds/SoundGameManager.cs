@@ -43,6 +43,8 @@ public class SoundGameManager : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.PLAYTUTORIALSOUND, OnPlayTutorialSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYSCOREINCREASESOUND, OnPlayScoreInscreaseSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYSPRAYPARTICLESSOUND, OnPlaySprayParticlesSound);
+        EventQueue.eventQueue.Subscribe(EventType.PLAYBEETAKEOFFSOUND, OnPlayBeeTakeOffSound);
+        EventQueue.eventQueue.Subscribe(EventType.PLAYBEELANDINGSOUND, OnPlayBeeLandingSound);
     }
 
     public void OnPlayTutorialSound(EventData eventData)
@@ -69,6 +71,24 @@ public class SoundGameManager : MonoBehaviour
         {
             Debug.Log("play score increase sound");
             Play2DSound("ScoreInscreaseSound");
+        }
+    }
+
+    public void OnPlayBeeTakeOffSound(EventData eventData)
+    {
+        if (eventData is PlayBeeTakeOffSoundEventData)
+        {
+            Debug.Log("play bee takeoff sound");
+            Play2DSound("BeeTakeOff");
+        }
+    }
+
+    public void OnPlayBeeLandingSound(EventData eventData)
+    {
+        if (eventData is PlayBeeLandingSoundEventData)
+        {
+            Debug.Log("play bee landing sound");
+            Play2DSound("BeeLanding");
         }
     }
 
