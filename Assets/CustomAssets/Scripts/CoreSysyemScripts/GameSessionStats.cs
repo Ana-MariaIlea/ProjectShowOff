@@ -41,7 +41,7 @@ public class GameSessionStats : MonoBehaviour
             {
                 for (int j = i + 1; j < settings.Count; j++)
                 {
-                    if (settings[j].DifficultyLevel > settings[i].DifficultyLevel)
+                    if (settings[j].DifficultyLevel < settings[i].DifficultyLevel)
                     {
                         DifficultySettings aux = settings[i];
                         settings[i] = settings[j];
@@ -121,24 +121,36 @@ public class GameSessionStats : MonoBehaviour
     {
         if (eventData is CheckDifficultyEventData)
         {
-
+            Debug.Log("Difficulty check in game states");
             CheckDifficultyEventData e = eventData as CheckDifficultyEventData;
             if (settings.Count > 0)
             {
                 if (playerScore < e.DifficultyCheck.nectarMin)
                 {
+                    Debug.Log("Nectar too small");
                     if (settings.IndexOf(currentDifficulty) - 1 >= 0)
                     {
+                        Debug.Log("Change diff below");
                         currentDifficulty = settings[settings.IndexOf(currentDifficulty) - 1];
                         EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
+                    }
+                    else
+                    {
+                        Debug.Log("No Difficulty below");
                     }
                 }
                 else if (playerScore > e.DifficultyCheck.nectarMax)
                 {
+                    Debug.Log("Nectar too big");
                     if (settings.IndexOf(currentDifficulty) + 1 <= settings.Count - 1)
                     {
+                        Debug.Log("Change diff above");
                         currentDifficulty = settings[settings.IndexOf(currentDifficulty) + 1];
                         EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
+                    }
+                    else
+                    {
+                        Debug.Log("No Difficulty above");
                     }
                 }
             }

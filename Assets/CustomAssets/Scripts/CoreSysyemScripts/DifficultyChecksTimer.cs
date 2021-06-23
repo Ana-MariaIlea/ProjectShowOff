@@ -28,7 +28,9 @@ public class DifficultyChecksTimer : MonoBehaviour
     [Tooltip("Do NOT modify, preview avaliable for testing only")]
     [SerializeField]
     float timer = 0;
-
+    [Tooltip("Do NOT modify, preview avaliable for testing only")]
+    [SerializeField]
+    float maxTimer = 0;
     int difficultyCheckIndex = 0;
 
     private void Awake()
@@ -50,7 +52,7 @@ public class DifficultyChecksTimer : MonoBehaviour
         {
             for (int j = i + 1; j < checksForDifficulty.Count; j++)
             {
-                if (checksForDifficulty[j].time > checksForDifficulty[i].time)
+                if (checksForDifficulty[j].time < checksForDifficulty[i].time)
                 {
                     DifficultyCheck aux = checksForDifficulty[i];
                     checksForDifficulty[i] = checksForDifficulty[j];
@@ -58,20 +60,33 @@ public class DifficultyChecksTimer : MonoBehaviour
                 }
             }
         }
+
+        for (int i = 0; i < checksForDifficulty.Count; i++)
+        {
+            Debug.Log(checksForDifficulty[i].time);
+            maxTimer += checksForDifficulty[i].time;
+        }
+
     }
 
-    
+
     // Update is called once per frame
     void Update()
     {
-        if (timer > 0)
-            timer -= Time.deltaTime;
+        // if (timer > 0)
+        //  timer -= Time.deltaTime;
         if (checksForDifficulty.Count != 0)
-            if (timer < timer - checksForDifficulty[difficultyCheckIndex].time)
-            {
-                difficultyCheckIndex++;
-                EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
-            }
+            if (timer < maxTimer)
+                if (timer > checksForDifficulty[difficultyCheckIndex].time)
+                {
+                    Debug.Log("Start difficulty check");
+                    difficultyCheckIndex++;
+                    EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
+                }
+                else
+                {
+                    timer += Time.deltaTime;
+                }
     }
 
 
