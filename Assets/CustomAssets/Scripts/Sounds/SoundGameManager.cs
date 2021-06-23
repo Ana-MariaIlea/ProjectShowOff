@@ -18,6 +18,7 @@ public class SoundGameManager : MonoBehaviour
         public string fmodSoundEvent;
         public FMOD.Studio.EventInstance Sound;
         [Range(0, 1)]
+        public bool HasParameter = true;
         public float Adjust=1;
 
         public void ChangeParameter()
@@ -45,6 +46,8 @@ public class SoundGameManager : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.PLAYSPRAYPARTICLESSOUND, OnPlaySprayParticlesSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYBEETAKEOFFSOUND, OnPlayBeeTakeOffSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYBEELANDINGSOUND, OnPlayBeeLandingSound);
+        EventQueue.eventQueue.Subscribe(EventType.PLAYLAWNMOWERSOUND, OnPlayLawnmowerSound);
+        EventQueue.eventQueue.Subscribe(EventType.STOPLAWNMOWERSOUND, OnStopLawnmowerSound);
     }
 
     public void OnPlayTutorialSound(EventData eventData)
@@ -62,6 +65,28 @@ public class SoundGameManager : MonoBehaviour
         {
             Debug.Log("play spray bottle sound");
             Play3DSound("SprayBottleSound");
+        }
+    }
+    public void OnPlayLawnmowerSound(EventData eventData)
+    {
+        if (eventData is PlayLawnmowerSoundEventData)
+        {
+            Debug.Log("play Lawnmower sound");
+            Play3DSound("Lawnmower");
+        }
+    }
+    public void OnStopLawnmowerSound(EventData eventData)
+    {
+        if (eventData is StopLawnmowerSoundEventData)
+        {
+            Debug.Log("stop Lawnmower sound");
+            for (int i = 0; i < _3DSounds.Count; i++)
+            {
+                if (_3DSounds[i].SoundName == "Lawnmower")
+                {
+                    _3DSounds[i].Sound.EventInstance.setParameterByName("Lawn_mower", 1);
+                }
+            }
         }
     }
 
@@ -127,8 +152,10 @@ public class SoundGameManager : MonoBehaviour
             {
                 FMOD.Studio.PLAYBACK_STATE state;
                 _2DSounds[i].Sound.getPlaybackState(out state);
-                _2DSounds[i].ChangeParameter();
-
+                if (_2DSounds[i].HasParameter)
+                {
+                    _2DSounds[i].ChangeParameter();
+                }
                 if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
                 {
                     _2DSounds[i].Sound.start();
@@ -151,5 +178,7 @@ public class SoundGameManager : MonoBehaviour
                 break;
             }
         }
+
+        
     }
 }
