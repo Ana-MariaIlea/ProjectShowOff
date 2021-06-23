@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public int titleScreenInterger;
     public int mainScreenInterger;
+    public int bonusScreenInterger;
     public GameObject loadingScreen;
     public Action StartGame;
     public ProgressBar bar;
@@ -40,14 +41,6 @@ public class GameManager : MonoBehaviour
     public void LoadGame()
     {
         LoadScene(titleScreenInterger, mainScreenInterger);
-        //if (playerName != null)
-        //{
-        //    loadingScreen.SetActive(true);
-        //    scenesLoading.Add(SceneManager.UnloadSceneAsync(titleScreenInterger));
-        //    scenesLoading.Add(SceneManager.LoadSceneAsync(mainScreenInterger, LoadSceneMode.Additive));
-
-        //    StartCoroutine(GetSceneLoadProgress());
-        //}
     }
 
     public void LoadScene(int scenetoUnload, int sceneToLoad)
@@ -62,14 +55,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GoToBonusLevel()
+    {
+        LoadScene(titleScreenInterger, bonusScreenInterger);
+        playerName = null;
+    }
+
     public void BackToMenu()
     {
         LoadScene(mainScreenInterger, titleScreenInterger);
-        //loadingScreen.SetActive(true);
-        //scenesLoading.Add(SceneManager.UnloadSceneAsync(mainScreenInterger));
-        //scenesLoading.Add(SceneManager.LoadSceneAsync(titleScreenInterger, LoadSceneMode.Additive));
-
-        //StartCoroutine(GetSceneLoadProgress());
         playerName = null;
     }
 
