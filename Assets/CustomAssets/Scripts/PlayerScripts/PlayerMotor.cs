@@ -9,6 +9,8 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField]
     private PlayerControllerStats ControllerStats;
     [SerializeField]
+    private PlayerControllerStats ControllerStatsInHive;
+    [SerializeField]
     private PlayerEfectsStats EffectStats;
     [Tooltip("Do NOT modify. Exposed parameter for testing purposes ONLY")]
     [SerializeField]
@@ -22,19 +24,22 @@ public class PlayerMotor : MonoBehaviour
     private float sTimer;
     private CharacterController controller;
     private bool isGrounded = false;
+    
+    private PlayerControllerStats currentControllerStats;
     // Start is called before the first frame update
     void Awake()
     {
+        currentControllerStats = ControllerStatsInHive;
         controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
         {
-            fSpeed = ControllerStats.ForwardSpeedWalk;
+            fSpeed = currentControllerStats.ForwardSpeedWalk;
         }
         else
         {
-            fSpeed = ControllerStats.ForwardSpeedFly;
+            fSpeed = currentControllerStats.ForwardSpeedFly;
         }
-        uSpeed = ControllerStats.UpSpeed;
+        uSpeed = currentControllerStats.UpSpeed;
         sTimer = EffectStats.slowedTimer;
     }
     private void Start()
@@ -61,14 +66,14 @@ public class PlayerMotor : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-            ControllerStats.spamSpaceKey = !ControllerStats.spamSpaceKey;
+            currentControllerStats.spamSpaceKey = !currentControllerStats.spamSpaceKey;
         }
 
-        if (ControllerStats.spamSpaceKey == false)
+        if (currentControllerStats.spamSpaceKey == false)
         {
             if (Input.GetButton("FlyUp"))
             {
-                controller.Move(Vector3.up * ControllerStats.UpSpeed * Time.deltaTime);
+                controller.Move(Vector3.up * currentControllerStats.UpSpeed * Time.deltaTime);
                 isGrounded = false;
             }
         }
@@ -76,7 +81,7 @@ public class PlayerMotor : MonoBehaviour
         {
             if (Input.GetButtonDown("FlyUp"))
             {
-                controller.Move(Vector3.up * ControllerStats.UpSpeedSpam * Time.deltaTime);
+                controller.Move(Vector3.up * currentControllerStats.UpSpeedSpam * Time.deltaTime);
                 isGrounded = false;
 
             }
@@ -84,7 +89,7 @@ public class PlayerMotor : MonoBehaviour
 
         if (Input.GetButton("FlyDown"))
         {
-            controller.Move(Vector3.up * -ControllerStats.DownSpeed * Time.deltaTime);
+            controller.Move(Vector3.up * -currentControllerStats.DownSpeed * Time.deltaTime);
         }
         // Debug.Log(controller.isGrounded+" Before check");
 
@@ -92,13 +97,13 @@ public class PlayerMotor : MonoBehaviour
         if (controller.isGrounded)
         {
             isGrounded = true;
-            fSpeed = ControllerStats.ForwardSpeedWalk;
+            fSpeed = currentControllerStats.ForwardSpeedWalk;
         }
         else
         {
-            controller.Move(Vector3.up * ControllerStats.Gravity * -1 * Time.deltaTime);
-            if (fSpeed < ControllerStats.ForwardSpeedFly)
-                fSpeed += ControllerStats.Acceleration * Time.deltaTime;
+            controller.Move(Vector3.up * currentControllerStats.Gravity * -1 * Time.deltaTime);
+            if (fSpeed < currentControllerStats.ForwardSpeedFly)
+                fSpeed += currentControllerStats.Acceleration * Time.deltaTime;
             //isGrounded = false;
         }
 
@@ -110,12 +115,12 @@ public class PlayerMotor : MonoBehaviour
                 sTimer = EffectStats.slowedTimer;
                 if (controller.isGrounded)
                 {
-                    fSpeed = ControllerStats.ForwardSpeedWalk;
+                    fSpeed = currentControllerStats.ForwardSpeedWalk;
                 }
                 else
                 {
-                    if (fSpeed < ControllerStats.ForwardSpeedFly)
-                        fSpeed += ControllerStats.Acceleration * Time.deltaTime;
+                    if (fSpeed < currentControllerStats.ForwardSpeedFly)
+                        fSpeed += currentControllerStats.Acceleration * Time.deltaTime;
                 }
             }
             else
@@ -127,7 +132,7 @@ public class PlayerMotor : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, ControllerStats.turnSmoothTime);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, currentControllerStats.turnSmoothTime);
             transform.rotation = Quaternion.Euler(0, angle, 0);
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
@@ -181,6 +186,24 @@ public class PlayerMotor : MonoBehaviour
             ChangeDifficultyEventData e = eventData as ChangeDifficultyEventData;
             ControllerStats = e.Difficulty.PlayerControllerStats;
             EffectStats = e.Difficulty.PlayerEfectsStats;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Hive")
+        {
+            Debug.Log("Player in hive change controlles");
+            currentControllerStats = ControllerStatsInHive;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Hive")
+        {
+            Debug.Log("Player outside of hive change controlles");
+            currentControllerStats = ControllerStats;
         }
     }
 
