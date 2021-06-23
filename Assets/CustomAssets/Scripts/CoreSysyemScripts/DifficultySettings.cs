@@ -23,7 +23,9 @@ public class DifficultyCheck
 {
     public int minutes;
     public int seconds;
+    [Tooltip("nectarMin")]
     public int nectarMin;
+    [Tooltip("nectarMax")]
     public int nectarMax;
     [HideInInspector]
     public float time;
