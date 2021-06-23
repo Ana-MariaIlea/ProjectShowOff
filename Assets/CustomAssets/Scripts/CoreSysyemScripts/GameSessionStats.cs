@@ -18,7 +18,7 @@ public class GameSessionStats : MonoBehaviour
 
     private List<ZoneSettings> zones;
 
-
+    [SerializeField]
     private int playerScore;
     private string playerName;
     // Start is called before the first frame update

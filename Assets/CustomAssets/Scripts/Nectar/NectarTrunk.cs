@@ -19,6 +19,7 @@ public class NectarTrunk : MonoBehaviour
     {
         nectarAmount += amount;
         Debug.Log("New nectar amount in trunk: " + nectarAmount);
+        GameSessionStats.instance.SetPlayerScore(nectarAmount);
         EventQueue.eventQueue.AddEvent(new PlayScoreIncreaseSoundEventData());
         EventQueue.eventQueue.AddEvent(new NectarOnTrunkTextChangeEventData(nectarAmount));
         //text.text = nectarAmount.ToString();
