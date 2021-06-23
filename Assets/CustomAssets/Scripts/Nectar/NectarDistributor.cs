@@ -10,7 +10,7 @@ public class NectarDistributor : MonoBehaviour
     private float cooldown;
     [SerializeField]
     private ParticleSystem polen;
-    private bool showParticles = false;
+    private bool showParticles = true;
     private float cooldownTimer = 0;
 
     public bool isDistribuitorSelected = false;
