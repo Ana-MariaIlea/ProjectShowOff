@@ -24,6 +24,7 @@ public class NectarDistributor : MonoBehaviour
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
         EventQueue.eventQueue.Subscribe(EventType.MINIGAMEFAIL, OnMinigameFailed);
+        EventQueue.eventQueue.Subscribe(EventType.CHANGEDIFFICULTY, OnChangeCooldoenTime);
     }
 
     private void Update()

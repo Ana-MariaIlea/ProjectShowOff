@@ -43,8 +43,10 @@ public class HumanStateMachine : MonoBehaviour
     {
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATE, OnStateChange);
         EventQueue.eventQueue.Subscribe(EventType.ENDSTATE, OnGoToHouse);
+        EventQueue.eventQueue.Subscribe(EventType.CHANGEDIFFICULTY, OnDifficultyChange);
 
-       GetComponent<FMODUnity.StudioEventEmitter>().PlayInstance();
+
+        //GetComponent<FMODUnity.StudioEventEmitter>().PlayInstance();
     }
 
     // Update is called once per frame
@@ -105,6 +107,15 @@ public class HumanStateMachine : MonoBehaviour
         if (eventData is EndStateEventData)
         {
             currentState = new GoToHouse(GetComponent<NavMeshAgent>(),houseLocation,time);
+        }
+    }
+
+    public void OnDifficultyChange(EventData eventData)
+    {
+        if (eventData is ChangeDifficultyEventData)
+        {
+            ChangeDifficultyEventData e = eventData as ChangeDifficultyEventData;
+            GetComponent<NavMeshAgent>().speed = e.Difficulty.HumanSpeed;
         }
     }
 }

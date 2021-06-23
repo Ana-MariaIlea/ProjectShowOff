@@ -12,10 +12,10 @@ public class DifficultySettings:ScriptableObject
     public int DifficultyLevel;
     public PlayerControllerStats PlayerControllerStats;
     public PlayerEfectsStats PlayerEfectsStats;
-    public bool FlowersGlow;
     public bool FlowersHaveParticles;
     public bool MinigameActive;
     public int NectarCooldownTime;
+    public float HumanSpeed;
 }
 
 [System.Serializable]

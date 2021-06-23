@@ -41,6 +41,8 @@ public class PlayerMotor : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         EventQueue.eventQueue.Subscribe(EventType.PLAYERPESTICIDECOLLISION, OnPlayerColidesWithPesticides);
+        EventQueue.eventQueue.Subscribe(EventType.CHANGEDIFFICULTY, OnChangeCooldoenTime);
+
     }
 
     // Update is called once per frame
