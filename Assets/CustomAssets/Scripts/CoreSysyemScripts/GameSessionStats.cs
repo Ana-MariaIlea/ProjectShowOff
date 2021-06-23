@@ -125,6 +125,7 @@ public class GameSessionStats : MonoBehaviour
             CheckDifficultyEventData e = eventData as CheckDifficultyEventData;
             if (settings.Count > 0)
             {
+                Debug.Log("Settings list not 0");
                 if (playerScore < e.DifficultyCheck.nectarMin)
                 {
                     Debug.Log("Nectar too small");
@@ -152,6 +153,10 @@ public class GameSessionStats : MonoBehaviour
                     {
                         Debug.Log("No Difficulty above");
                     }
+                }
+                else
+                {
+                    Debug.Log("Nectar amount "+playerScore+" in range "+ e.DifficultyCheck.nectarMin+" and "+e.DifficultyCheck.nectarMax);
                 }
             }
             else

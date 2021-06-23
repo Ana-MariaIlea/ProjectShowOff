@@ -80,8 +80,8 @@ public class DifficultyChecksTimer : MonoBehaviour
                 if (timer > checksForDifficulty[difficultyCheckIndex].time)
                 {
                     Debug.Log("Start difficulty check");
-                    difficultyCheckIndex++;
                     EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
+                    difficultyCheckIndex++;
                 }
                 else
                 {
