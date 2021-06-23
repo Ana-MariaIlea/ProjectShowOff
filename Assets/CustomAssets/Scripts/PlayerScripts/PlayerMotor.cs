@@ -195,6 +195,7 @@ public class PlayerMotor : MonoBehaviour
         {
             Debug.Log("Player in hive change controlles");
             currentControllerStats = ControllerStatsInHive;
+            fSpeed = currentControllerStats.ForwardSpeedWalk;
         }
     }
 
