@@ -22,13 +22,16 @@ public class CutGrass : BaseState
     [SerializeField]
     private List<GameObject> ObjectsToTurnOff;
 
-
+    bool firstState;
+    bool secondState;
     public CutGrass(NavMeshAgent ag, ParticleSystem particles, GameObject launge, List<GameObject> objectsToTurnOff, List<Waypoint> path) : base(ag)
     {
         this.particles = particles;
 
 
         this.particles.Stop();
+        firstState = false;
+        secondState = false;
 
         this.launge = launge;
         this.ObjectsToTurnOff = objectsToTurnOff;
@@ -47,8 +50,9 @@ public class CutGrass : BaseState
     {
         if (path[walkPoint] == pointToStartCutting)
         {
-            if (!particles.isPlaying)
+            if (firstState==false)
             {
+                firstState = true;
                 particles.Play();
                 Debug.Log("cut grass change walk mower animation");
                 agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALKMOWER);
@@ -65,8 +69,9 @@ public class CutGrass : BaseState
 
         if (path[walkPoint] == pointToEndCutting)
         {
-            if (particles.isPlaying)
+            if (secondState==false)
             {
+                secondState = true;
                 particles.Stop();
                 Debug.Log("cut grass change walk  animation");
                 //agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
