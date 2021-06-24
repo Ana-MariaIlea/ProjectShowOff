@@ -6,6 +6,7 @@ public class GoToMenuButtonLink : MonoBehaviour
 {
     public void OnButtonIsCLicked()
     {
+        if(GameManager.instance)
         GameManager.instance.BackToMenu();
     }
 }

@@ -66,7 +66,11 @@ public class UIManager : MonoBehaviour
             //Time.timeScale = 0f;
 
             GameEndEventData e = eventData as GameEndEventData;
-            if (HighscoreTable.instance)
+            if (GameManager.instance)
+            {
+                GameManager.instance.playerScore = e.score;
+            }
+                if (HighscoreTable.instance)
                 HighscoreTable.instance.AddHighScoreEntry(e.score, e.name);
             else Debug.Log("No highscore table");
             resolutionScoreText.text = "Score: " + e.score.ToString();
@@ -84,6 +88,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("Corutine done");
         Time.timeScale = 0f;
         //player.Stop();
+        Cursor.lockState = CursorLockMode.None;
         cutsceneScreen.SetActive(false);
         resolutionScreen.SetActive(true);
     }

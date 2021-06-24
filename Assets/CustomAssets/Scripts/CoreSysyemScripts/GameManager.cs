@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public string playerName = null;
+    [HideInInspector]
+    public int playerScore = 0;
     private void Awake()
     {
         if (instance == null)
@@ -58,7 +60,6 @@ public class GameManager : MonoBehaviour
     public void GoToBonusLevel()
     {
         LoadScene(titleScreenInterger, bonusScreenInterger);
-        playerName = null;
     }
 
     public void BackToMenu()
