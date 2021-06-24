@@ -23,11 +23,15 @@ public class UIManager : MonoBehaviour
     VideoPlayer player;
     [SerializeField]
     GameObject cutsceneScreen;
+    [SerializeField]
+    GameObject warningScreen;
 
     private void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARONBEETEXTCHANGE, OnNectarOnBeeTextChange);
         EventQueue.eventQueue.Subscribe(EventType.NECTARONTRUNKTEXTCHANGE, OnNectarOnTrunkTextChange);
+        EventQueue.eventQueue.Subscribe(EventType.STARTWARNING, OnStartWarning);
+        EventQueue.eventQueue.Subscribe(EventType.ENDWARNING, OnEndWarning);
         EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
 
         if (player != null)
@@ -47,6 +51,21 @@ public class UIManager : MonoBehaviour
         {
             NectarOnBeeTextChangeEventData e = eventData as NectarOnBeeTextChangeEventData;
             nectarOnBeeText.text = e.number.ToString();
+        }
+    }
+    public void OnStartWarning(EventData eventData)
+    {
+        if (eventData is StartWarningEventData)
+        {
+            warningScreen.SetActive(true);
+        }
+    }
+    public void OnEndWarning(EventData eventData)
+    {
+        if (eventData is EndWarningEventData)
+        {
+            warningScreen.SetActive(false);
+
         }
     }
 
@@ -100,6 +119,8 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1f;
             EventQueue.eventQueue.UnSubscribe(EventType.NECTARONBEETEXTCHANGE, OnNectarOnBeeTextChange);
             EventQueue.eventQueue.UnSubscribe(EventType.NECTARONTRUNKTEXTCHANGE, OnNectarOnTrunkTextChange);
+            EventQueue.eventQueue.UnSubscribe(EventType.STARTWARNING, OnStartWarning);
+            EventQueue.eventQueue.UnSubscribe(EventType.ENDWARNING, OnEndWarning);
             EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
             GameManager.instance.GoToBonusLevel();
         }

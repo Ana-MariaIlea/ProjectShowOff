@@ -185,6 +185,10 @@ public class GameSessionStats : MonoBehaviour
         {
             if (zones.Count > 0)
             {
+                if (zones.Count == 1)
+                {
+                    EventQueue.eventQueue.AddEvent(new StartWarningEventData());
+                }
                 int rand = Random.Range(0, zones.Count - 1);
                 EventQueue.eventQueue.AddEvent(new ChangeStateEventData(zones[rand]));
                 if (zones[rand].numberOfTimes == 0)
@@ -199,6 +203,7 @@ public class GameSessionStats : MonoBehaviour
             }
             else
             {
+                EventQueue.eventQueue.AddEvent(new EndWarningEventData());
                 EventQueue.eventQueue.UnSubscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
                 EventQueue.eventQueue.UnSubscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
                 EventQueue.eventQueue.UnSubscribe(EventType.CHANGESTATESTART, OnChangeStateEvent);

@@ -38,6 +38,8 @@ public enum EventType
     #region UI events
     NECTARONBEETEXTCHANGE,
     NECTARONTRUNKTEXTCHANGE,
+    STARTWARNING,
+    ENDWARNING,
     #endregion
     #region Sound Events
     PLAYMINIGAMESOUND,
