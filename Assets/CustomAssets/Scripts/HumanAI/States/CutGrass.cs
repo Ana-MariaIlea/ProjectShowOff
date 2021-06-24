@@ -51,7 +51,7 @@ public class CutGrass : BaseState
             {
                 particles.Play();
                 Debug.Log("cut grass change walk mower animation");
-                //agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALKMOWER);
+                agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALKMOWER);
                 EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("Lawnmower", true));
                 EventQueue.eventQueue.AddEvent(new PlayLawnmowerSoundEventData());
             }
@@ -89,7 +89,9 @@ public class CutGrass : BaseState
 
             FinishState();
         }
-        base.HandleTargetreached();
+        agent.SetDestination(agent.transform.position);
+        walkPointSet = false;
+        //base.HandleTargetreached();
     }
 
 

@@ -101,6 +101,8 @@ public class HumanStateMachine : MonoBehaviour
                     break;
             }
 
+            GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
+
         }
     }
 
