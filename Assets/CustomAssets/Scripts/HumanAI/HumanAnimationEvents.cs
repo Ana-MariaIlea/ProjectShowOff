@@ -12,6 +12,11 @@ public class HumanAnimationEvents : MonoBehaviour
 
     public void PickFlower()
     {
+        EventQueue.eventQueue.AddEvent(new PickFlowerAnimationEventData());
+    }
 
+    public void ChangeWaypoint()
+    {
+        EventQueue.eventQueue.AddEvent(new ChangeWaypointAnimationEventData());
     }
 }
