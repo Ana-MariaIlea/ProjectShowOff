@@ -44,10 +44,11 @@ public class CutGrass : BaseState
             if (!particles.isPlaying)
             {
                 particles.Play();
+                EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("Lawnmower", true));
+                EventQueue.eventQueue.AddEvent(new PlayLawnmowerSoundEventData());
             }
 
-            EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("Lawnmower", true));
-            EventQueue.eventQueue.AddEvent(new PlayLawnmowerSoundEventData());
+            
         }
 
         if (path[walkPoint] == pointToEndCutting)
@@ -55,10 +56,11 @@ public class CutGrass : BaseState
             if (particles.isPlaying)
             {
                 particles.Stop();
+                EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("Lawnmower", false));
+                EventQueue.eventQueue.AddEvent(new StopLawnmowerSoundEventData());
             }
 
-            EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("Lawnmower",false));
-            EventQueue.eventQueue.AddEvent(new StopLawnmowerSoundEventData());
+            
 
 
             if (launge.activeSelf == false)

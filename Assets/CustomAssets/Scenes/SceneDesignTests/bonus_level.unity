@@ -9579,7 +9579,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153727681}
-  m_LocalRotation: {x: 0.32674637, y: 0.000000012471472, z: -0.000000004362905, w: 0.9451121}
+  m_LocalRotation: {x: 0.32674634, y: 0.000000018299811, z: -0.000000006401836, w: 0.9451121}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15656,8 +15656,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 267099381}
-        m_TargetAssemblyTypeName: GoToMenuButtonLink, Assembly-CSharp
-        m_MethodName: OnButtonIsCLicked
+        m_TargetAssemblyTypeName: GoToMenuButtonLink, PSTest
+        m_MethodName: OnButtonIsCLickedBonus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23392,7 +23392,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 402532803}
         m_TargetAssemblyTypeName: GoToMenuButtonLink, PSTest
-        m_MethodName: OnButtonIsCLicked
+        m_MethodName: OnButtonIsCLickedBonus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -106505,7 +106505,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836686587}
-  m_LocalRotation: {x: 0.32847777, y: 0.000000012479446, z: -0.000000004340042, w: 0.9445117}
+  m_LocalRotation: {x: 0.32847777, y: 0.000000033580612, z: -0.0000000116785035, w: 0.9445117}
   m_LocalPosition: {x: 20.6, y: 34.33, z: -124.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -114829,7 +114829,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973532078}
-  m_LocalRotation: {x: 0.3013323, y: -0.0000000163875, z: 0.000000005244935, w: 0.95351917}
+  m_LocalRotation: {x: 0.3013323, y: 0.000000016387501, z: -0.0000000052449356, w: 0.95351917}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
