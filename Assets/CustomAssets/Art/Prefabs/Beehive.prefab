@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8429039760143640370}
   - component: {fileID: 4852114671212062871}
   - component: {fileID: 7256103687873797213}
+  - component: {fileID: 5552056042822939092}
   m_Layer: 0
   m_Name: Beehive
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5552056042822939092
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9201460609025129864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5289073641183115058, guid: 6ef89e2dde556b949ac7a551a5e9fc34, type: 3}
