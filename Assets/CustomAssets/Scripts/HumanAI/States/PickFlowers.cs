@@ -29,7 +29,7 @@ public class PickFlowers : BaseState
         agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.PICKFLOWER);
         //if (timer <= 0)
         //{
-        //    pickUpFlower();
+            pickUpFlower();
             
         //}
         //else

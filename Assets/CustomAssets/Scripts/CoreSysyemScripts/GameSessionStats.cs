@@ -129,42 +129,42 @@ public class GameSessionStats : MonoBehaviour
     {
         if (eventData is CheckDifficultyEventData)
         {
-            Debug.Log("Difficulty check in game states");
+           // Debug.Log("Difficulty check in game states");
             CheckDifficultyEventData e = eventData as CheckDifficultyEventData;
             if (settings.Count > 0)
             {
-                Debug.Log("Settings list not 0");
+                //Debug.Log("Settings list not 0");
                 if (playerScore < e.DifficultyCheck.nectarMin)
                 {
-                    Debug.Log("Nectar too small");
+                    //Debug.Log("Nectar too small");
                     if (settings.IndexOf(currentDifficulty) - 1 >= 0)
                     {
-                        Debug.Log("Change diff below");
+                       // Debug.Log("Change diff below");
                         currentDifficulty = settings[settings.IndexOf(currentDifficulty) - 1];
                         EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
                     }
                     else
                     {
-                        Debug.Log("No Difficulty below");
+                        //Debug.Log("No Difficulty below");
                     }
                 }
                 else if (playerScore > e.DifficultyCheck.nectarMax)
                 {
-                    Debug.Log("Nectar too big");
+                   // Debug.Log("Nectar too big");
                     if (settings.IndexOf(currentDifficulty) + 1 <= settings.Count - 1)
-                    {
-                        Debug.Log("Change diff above");
+                    {//
+                       // Debug.Log("Change diff above");
                         currentDifficulty = settings[settings.IndexOf(currentDifficulty) + 1];
                         EventQueue.eventQueue.AddEvent(new ChangeDifficultyEventData(currentDifficulty));
                     }
                     else
                     {
-                        Debug.Log("No Difficulty above");
+                        //Debug.Log("No Difficulty above");
                     }
                 }
                 else
                 {
-                    Debug.Log("Nectar amount " + playerScore + " in range " + e.DifficultyCheck.nectarMin + " and " + e.DifficultyCheck.nectarMax);
+                   // Debug.Log("Nectar amount " + playerScore + " in range " + e.DifficultyCheck.nectarMin + " and " + e.DifficultyCheck.nectarMax);
                 }
             }
             else

@@ -31,13 +31,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-    }
 
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     public void LoadGame()
