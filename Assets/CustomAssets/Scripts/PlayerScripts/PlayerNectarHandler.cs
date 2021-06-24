@@ -13,6 +13,7 @@ public class PlayerNectarHandler : MonoBehaviour
     private void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTEND, OnNectarIsCollected);
+        EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
     }
 
     private void OnTriggerStay(Collider other)
@@ -59,5 +60,15 @@ public class PlayerNectarHandler : MonoBehaviour
     public int GetNectarAmount()
     {
         return nectarAmount;
+    }
+
+    public void OnGameEnd(EventData eventData)
+    {
+        if (eventData is GameEndEventData)
+        {
+            EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTEND, OnNectarIsCollected);
+
+            EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
+        }
     }
 }

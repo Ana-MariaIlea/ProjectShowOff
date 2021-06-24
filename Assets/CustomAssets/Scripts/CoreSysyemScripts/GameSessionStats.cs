@@ -191,6 +191,9 @@ public class GameSessionStats : MonoBehaviour
             }
             else
             {
+                EventQueue.eventQueue.UnSubscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
+                EventQueue.eventQueue.UnSubscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
+                EventQueue.eventQueue.UnSubscribe(EventType.CHANGESTATESTART, OnChangeStateEvent);
                 EventQueue.eventQueue.AddEvent(new GameEndEventData(playerName, playerScore));
                 //throw new System.ArgumentOutOfRangeException("zones.Count", "No Zones in the list");
             }

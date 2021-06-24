@@ -44,6 +44,8 @@ public class HumanStateMachine : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATE, OnStateChange);
         EventQueue.eventQueue.Subscribe(EventType.ENDSTATE, OnGoToHouse);
         EventQueue.eventQueue.Subscribe(EventType.CHANGEDIFFICULTY, OnDifficultyChange);
+        EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
+
 
 
         //GetComponent<FMODUnity.StudioEventEmitter>().PlayInstance();
@@ -116,6 +118,17 @@ public class HumanStateMachine : MonoBehaviour
         {
             ChangeDifficultyEventData e = eventData as ChangeDifficultyEventData;
             GetComponent<NavMeshAgent>().speed = e.Difficulty.HumanSpeed;
+        }
+    }
+
+    public void OnGameEnd(EventData eventData)
+    {
+        if (eventData is GameEndEventData)
+        {
+            EventQueue.eventQueue.UnSubscribe(EventType.CHANGESTATE, OnStateChange);
+            EventQueue.eventQueue.UnSubscribe(EventType.ENDSTATE, OnGoToHouse);
+            EventQueue.eventQueue.UnSubscribe(EventType.CHANGEDIFFICULTY, OnDifficultyChange);
+            EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
         }
     }
 }

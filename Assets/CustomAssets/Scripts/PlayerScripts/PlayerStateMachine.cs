@@ -90,6 +90,8 @@ public class PlayerStateMachine : MonoBehaviour
                 boundery.enabled = false;
             if (system != null)
                 system.enabled = false;
+            EventQueue.eventQueue.UnSubscribe(EventType.CHANGEPLAYERSTATE, OnStateChange);
+            EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
         }
     }
 

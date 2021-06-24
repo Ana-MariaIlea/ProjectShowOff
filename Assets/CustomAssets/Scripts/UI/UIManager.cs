@@ -64,6 +64,7 @@ public class UIManager : MonoBehaviour
         if (eventData is GameEndEventData)
         {
             //Time.timeScale = 0f;
+
             GameEndEventData e = eventData as GameEndEventData;
             if (HighscoreTable.instance)
                 HighscoreTable.instance.AddHighScoreEntry(e.score, e.name);
@@ -92,6 +93,9 @@ public class UIManager : MonoBehaviour
         if (GameManager.instance)
         {
             Time.timeScale = 1f;
+            EventQueue.eventQueue.UnSubscribe(EventType.NECTARONBEETEXTCHANGE, OnNectarOnBeeTextChange);
+            EventQueue.eventQueue.UnSubscribe(EventType.NECTARONTRUNKTEXTCHANGE, OnNectarOnTrunkTextChange);
+            EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
             GameManager.instance.GoToBonusLevel();
         }
         else Debug.Log("No game manager");

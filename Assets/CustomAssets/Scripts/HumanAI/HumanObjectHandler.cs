@@ -27,6 +27,8 @@ public class HumanObjectHandler : MonoBehaviour
     void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.HANDLEHUMANOBJECT, OnHandleStateOfObject);
+        EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
+
     }
 
     public void OnHandleStateOfObject(EventData eventData)
@@ -72,6 +74,15 @@ public class HumanObjectHandler : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void OnGameEnd(EventData eventData)
+    {
+        if (eventData is GameEndEventData)
+        {
+            EventQueue.eventQueue.UnSubscribe(EventType.HANDLEHUMANOBJECT, OnHandleStateOfObject);
+            EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
         }
     }
 

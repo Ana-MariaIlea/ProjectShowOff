@@ -13,6 +13,8 @@ public class NectarTrunk : MonoBehaviour
     void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARSTORED, OnNectarIsStored);
+        EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
+
     }
 
     private void changeNectarAmount(int amount)
@@ -41,5 +43,15 @@ public class NectarTrunk : MonoBehaviour
         EventQueue.eventQueue.AddEvent(new PlayScoreIncreaseSoundEventData());
         EventQueue.eventQueue.AddEvent(new NectarOnTrunkTextChangeEventData(nectarAmount));
         //text.text = nectarAmount.ToString();
+    }
+
+    public void OnGameEnd(EventData eventData)
+    {
+        if (eventData is GameEndEventData)
+        {
+            EventQueue.eventQueue.UnSubscribe(EventType.NECTARSTORED, OnNectarIsStored);
+
+            EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
+        }
     }
 }

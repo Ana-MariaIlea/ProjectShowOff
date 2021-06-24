@@ -25,6 +25,8 @@ public class NectarDistributor : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
         EventQueue.eventQueue.Subscribe(EventType.MINIGAMEFAIL, OnMinigameFailed);
         EventQueue.eventQueue.Subscribe(EventType.CHANGEDIFFICULTY, OnChangeCooldoenTime);
+        EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
+
     }
 
     private void Update()
@@ -98,6 +100,7 @@ public class NectarDistributor : MonoBehaviour
             if (e.distributor.gameObject == this)
             {
                 EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+                EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
                 Destroy(this);
             }
         }
@@ -123,5 +126,16 @@ public class NectarDistributor : MonoBehaviour
     public bool GetIsDistribuitorSelectes()
     {
         return isDistribuitorSelected;
+    }
+
+    public void OnGameEnd(EventData eventData)
+    {
+        if (eventData is GameEndEventData)
+        {
+            EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTSTART, OnNectarIsCollected);
+            EventQueue.eventQueue.UnSubscribe(EventType.MINIGAMEFAIL, OnMinigameFailed);
+            EventQueue.eventQueue.UnSubscribe(EventType.CHANGEDIFFICULTY, OnChangeCooldoenTime);
+            EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
+        }
     }
 }
