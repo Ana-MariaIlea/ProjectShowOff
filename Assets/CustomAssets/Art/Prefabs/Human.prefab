@@ -4865,6 +4865,7 @@ GameObject:
   - component: {fileID: 4192375007263125076}
   - component: {fileID: 4192375007263125077}
   - component: {fileID: 2131719116275494124}
+  - component: {fileID: 4424945569681054702}
   m_Layer: 8
   m_Name: Human
   m_TagString: Untagged
@@ -4947,6 +4948,19 @@ MonoBehaviour:
   - Name: Lawnmower
     gameObject: {fileID: 2462162230395040057}
   particles: []
+--- !u!114 &4424945569681054702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4192375007263125078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b4c467fa2aee94d929217a4fdc78d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2228277834914230226}
 --- !u!1 &4192375007685852792
 GameObject:
   m_ObjectHideFlags: 0
@@ -10027,6 +10041,12 @@ PrefabInstance:
 --- !u!4 &5191597270407951784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 75d729718650df84da9b33b76d57c540,
+    type: 3}
+  m_PrefabInstance: {fileID: 5730543877315678787}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2228277834914230226 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 75d729718650df84da9b33b76d57c540,
     type: 3}
   m_PrefabInstance: {fileID: 5730543877315678787}
   m_PrefabAsset: {fileID: 0}

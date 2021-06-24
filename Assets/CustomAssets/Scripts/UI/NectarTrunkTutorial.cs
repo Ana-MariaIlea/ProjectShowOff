@@ -21,7 +21,7 @@ public class NectarTrunkTutorial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && this.enabled == true)
+        if (other.tag == "Player" && this.enabled == true&&Tutorial.instance.GetIndex()>1)
         {
             Tutorial.instance.gameObject.SetActive(true);
             Tutorial.instance.SetIndex(6);
