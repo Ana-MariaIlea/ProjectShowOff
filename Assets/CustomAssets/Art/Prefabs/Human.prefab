@@ -10017,6 +10017,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: human_rigged_model
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 75d729718650df84da9b33b76d57c540,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: be73d5eaf9ef5f44b9a2e802609d362c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75d729718650df84da9b33b76d57c540, type: 3}
 --- !u!4 &5191597270407951784 stripped
