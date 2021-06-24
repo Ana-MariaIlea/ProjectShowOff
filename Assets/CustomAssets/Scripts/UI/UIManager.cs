@@ -89,9 +89,7 @@ public class UIManager : MonoBehaviour
             {
                 GameManager.instance.playerScore = e.score;
             }
-                if (HighscoreTable.instance)
-                HighscoreTable.instance.AddHighScoreEntry(e.score, e.name);
-            else Debug.Log("No highscore table");
+               
             resolutionScoreText.text = "Score: " + e.score.ToString();
             cutsceneScreen.SetActive(true);
             player.Play();

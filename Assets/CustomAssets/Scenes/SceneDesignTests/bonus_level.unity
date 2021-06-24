@@ -25659,6 +25659,7 @@ MonoBehaviour:
   screen: {fileID: 991548031}
   minutes: 0
   seconds: 10
+  scoreText: {fileID: 702575324}
 --- !u!4 &434528895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f8cd9d05caf1f2341979677d36a817e4,
@@ -40565,7 +40566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &702575323
 RectTransform:
   m_ObjectHideFlags: 0
@@ -77676,6 +77677,7 @@ MonoBehaviour:
   dutchCutscene: {fileID: 0}
   player: {fileID: 0}
   cutsceneScreen: {fileID: 0}
+  warningScreen: {fileID: 0}
 --- !u!1001 &1331692901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115976,7 +115978,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973532078}
-  m_LocalRotation: {x: 0.3013323, y: 0.0000000163875, z: -0.000000005244935, w: 0.95351917}
+  m_LocalRotation: {x: 0.3013323, y: -0.000000016387503, z: 0.000000005244936, w: 0.95351917}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

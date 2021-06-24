@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BunusLevelTimer : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class BunusLevelTimer : MonoBehaviour
     int minutes;
     [SerializeField]
     int seconds;
+    [SerializeField]
+    TextMeshProUGUI scoreText;
 
     private int playerScore;
     private string playerName;
@@ -36,7 +39,10 @@ public class BunusLevelTimer : MonoBehaviour
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
             EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTEND, OnNectarIsCollected);
-
+            scoreText.text = "Score: " + playerScore.ToString();
+            if (HighscoreTable.instance)
+                HighscoreTable.instance.AddHighScoreEntry(playerScore,playerName);
+            else Debug.Log("No highscore table");
             screen.SetActive(true);
         }
         else
