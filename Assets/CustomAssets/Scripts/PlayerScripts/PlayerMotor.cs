@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
+    [System.Serializable]
+    public enum PlayerStartSpeed
+    {
+        HIVE,
+        OUTSIDE
+    }
     [SerializeField]
     private Transform cam;
+    [SerializeField]
+    PlayerStartSpeed type;
     [SerializeField]
     private PlayerControllerStats ControllerStats;
     [SerializeField]
@@ -29,7 +37,16 @@ public class PlayerMotor : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        currentControllerStats = ControllerStatsInHive;
+        switch (type)
+        {
+            case PlayerStartSpeed.HIVE:
+                currentControllerStats = ControllerStatsInHive;
+                break;
+            case PlayerStartSpeed.OUTSIDE:
+                currentControllerStats = ControllerStats;
+                break;
+        }
+        
         controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
         {
