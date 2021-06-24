@@ -49,6 +49,7 @@ public class SoundGameManager : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.PLAYBEELANDINGSOUND, OnPlayBeeLandingSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYLAWNMOWERSOUND, OnPlayLawnmowerSound);
         EventQueue.eventQueue.Subscribe(EventType.STOPLAWNMOWERSOUND, OnStopLawnmowerSound);
+        EventQueue.eventQueue.Subscribe(EventType.PLAYFOOTSTEPSSOUND, OnPlayFootstepsSound);
         EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
 
     }
@@ -118,6 +119,15 @@ public class SoundGameManager : MonoBehaviour
         {
             Debug.Log("play bee landing sound");
             Play2DSound("BeeLanding");
+        }
+    }
+
+    public void OnPlayFootstepsSound(EventData eventData)
+    {
+        if (eventData is PlayFootstepsSoundEventData)
+        {
+            Debug.Log("play footsteps sound");
+            Play3DSound("Footsteps");
         }
     }
 
@@ -197,6 +207,7 @@ public class SoundGameManager : MonoBehaviour
             EventQueue.eventQueue.UnSubscribe(EventType.PLAYBEELANDINGSOUND, OnPlayBeeLandingSound);
             EventQueue.eventQueue.UnSubscribe(EventType.PLAYLAWNMOWERSOUND, OnPlayLawnmowerSound);
             EventQueue.eventQueue.UnSubscribe(EventType.STOPLAWNMOWERSOUND, OnStopLawnmowerSound);
+            EventQueue.eventQueue.UnSubscribe(EventType.PLAYFOOTSTEPSSOUND, OnPlayFootstepsSound);
             EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
         }
     }
