@@ -59,14 +59,22 @@ public class GameManager : MonoBehaviour
 
     public void GoToBonusLevel()
     {
-        LoadScene(titleScreenInterger, bonusScreenInterger);
+        LoadScene(mainScreenInterger, bonusScreenInterger);
     }
 
-    public void BackToMenu()
+    public void BackToMenuFromMainScene()
     {
         LoadScene(mainScreenInterger, titleScreenInterger);
         playerName = null;
     }
+
+
+    public void BackToMenuFromBonusScene()
+    {
+        LoadScene(bonusScreenInterger, titleScreenInterger);
+        playerName = null;
+    }
+
 
     float totalProgress;
 
