@@ -87,6 +87,7 @@ public class SoundGameManager : MonoBehaviour
             {
                 if (_3DSounds[i].SoundName == "Lawnmower")
                 {
+                    _3DSounds[i].Sound.Stop();
                     _3DSounds[i].Sound.EventInstance.setParameterByName("Lawn_mower", 1);
                 }
             }
@@ -175,7 +176,7 @@ public class SoundGameManager : MonoBehaviour
         {
             if (_3DSounds[i].SoundName == soundName)
             {
-                Debug.Log("play  sound");
+               // Debug.Log("play  sound");
                 //sounds[i].ChangeParameter();
                 _3DSounds[i].Sound.Play();
                 break;

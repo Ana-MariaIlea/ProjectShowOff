@@ -24,6 +24,7 @@ public class NectarTrunk : MonoBehaviour
         GameSessionStats.instance.SetPlayerScore(nectarAmount);
         EventQueue.eventQueue.AddEvent(new PlayScoreIncreaseSoundEventData());
         EventQueue.eventQueue.AddEvent(new NectarOnTrunkTextChangeEventData(nectarAmount));
+        EventQueue.eventQueue.AddEvent(new ChangePlayerScoreEventData(nectarAmount));
         //text.text = nectarAmount.ToString();
     }
 
@@ -42,6 +43,7 @@ public class NectarTrunk : MonoBehaviour
         nectarAmount = amount;
         EventQueue.eventQueue.AddEvent(new PlayScoreIncreaseSoundEventData());
         EventQueue.eventQueue.AddEvent(new NectarOnTrunkTextChangeEventData(nectarAmount));
+        EventQueue.eventQueue.AddEvent(new ChangePlayerScoreEventData(nectarAmount));
         //text.text = nectarAmount.ToString();
     }
 

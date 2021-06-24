@@ -30,7 +30,7 @@ public class QTESystem : MonoBehaviour
         timer = CountDownTimer;
         atemptes = numberOfAtemptes;
         //GetComponent<SoundGameManager>().PlayStartMinigameSound();
-        
+
     }
 
     private void OnEnable()
@@ -45,8 +45,10 @@ public class QTESystem : MonoBehaviour
 
     private void OnDisable()
     {
-        Frame.gameObject.SetActive(false);
-        Letter.gameObject.SetActive(false);
+        if (Frame.gameObject != null)
+            Frame.gameObject.SetActive(false);
+        if (Letter.gameObject != null)
+            Letter.gameObject.SetActive(false);
     }
 
     void Update()
@@ -294,7 +296,7 @@ public class QTESystem : MonoBehaviour
 
         timer = CountDownTimer;
 
-        if (CountingDown == 1&&atemptes>1)
+        if (CountingDown == 1 && atemptes > 1)
         {
             QTEGen = 14;
             CountingDown = 2;
