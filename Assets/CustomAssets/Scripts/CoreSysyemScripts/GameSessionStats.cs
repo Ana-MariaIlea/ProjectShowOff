@@ -53,11 +53,19 @@ public class GameSessionStats : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
         EventQueue.eventQueue.Subscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
         EventQueue.eventQueue.Subscribe(EventType.CHANGESTATESTART, OnChangeStateEvent);
+        EventQueue.eventQueue.Subscribe(EventType.SCORESET, OnNectarIsStored);
 
         // Debug.Log("Player name in the game stats " + playerName);
     }
 
-
+    public void OnNectarIsStored(EventData eventData)
+    {
+        if (eventData is ChangePlayerScoreEventData)
+        {
+            ChangePlayerScoreEventData e = eventData as ChangePlayerScoreEventData;
+            playerScore = e.nectarAmount;
+        }
+    }
     public void OnPlayerZoneChanged(EventData eventData)
     {
         if (eventData is ChangePlayerLocationEventData)
@@ -156,7 +164,7 @@ public class GameSessionStats : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Nectar amount "+playerScore+" in range "+ e.DifficultyCheck.nectarMin+" and "+e.DifficultyCheck.nectarMax);
+                    Debug.Log("Nectar amount " + playerScore + " in range " + e.DifficultyCheck.nectarMin + " and " + e.DifficultyCheck.nectarMax);
                 }
             }
             else
@@ -194,6 +202,7 @@ public class GameSessionStats : MonoBehaviour
                 EventQueue.eventQueue.UnSubscribe(EventType.CHANGEZONE, OnPlayerZoneChanged);
                 EventQueue.eventQueue.UnSubscribe(EventType.CHECKDIFFICULTY, OnCheckDifficulty);
                 EventQueue.eventQueue.UnSubscribe(EventType.CHANGESTATESTART, OnChangeStateEvent);
+                EventQueue.eventQueue.UnSubscribe(EventType.SCORESET, OnNectarIsStored);
                 EventQueue.eventQueue.AddEvent(new GameEndEventData(playerName, playerScore));
                 //throw new System.ArgumentOutOfRangeException("zones.Count", "No Zones in the list");
             }
