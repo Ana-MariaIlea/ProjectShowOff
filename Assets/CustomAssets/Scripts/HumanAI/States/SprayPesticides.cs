@@ -11,10 +11,10 @@ public class SprayPesticides : BaseState
     [SerializeField]
     private ParticleSystem particles;
     private List<float> times=new List<float>();
-    private FMODUnity.StudioEventEmitter emitter;
+   // private FMODUnity.StudioEventEmitter emitter;
 
 
-    public SprayPesticides(NavMeshAgent ag, ParticleSystem particle, List<Waypoint> path, FMODUnity.StudioEventEmitter e) : base(ag)
+    public SprayPesticides(NavMeshAgent ag, ParticleSystem particle, List<Waypoint> path) : base(ag)
     {
         this.particles = particle;
         
@@ -22,8 +22,8 @@ public class SprayPesticides : BaseState
         {
             this.path.Add(path[i].gameObject);
             times.Add(path[i].timeToStay);
-            emitter = e;
-            ag.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
+           // emitter = e;
+            //ag.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
         }
     }
 

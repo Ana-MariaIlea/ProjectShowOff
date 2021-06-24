@@ -126,7 +126,7 @@ public class SoundGameManager : MonoBehaviour
     {
         if (eventData is PlayFootstepsSoundEventData)
         {
-            Debug.Log("play footsteps sound");
+            //Debug.Log("play footsteps sound");
             Play3DSound("Footsteps");
         }
     }

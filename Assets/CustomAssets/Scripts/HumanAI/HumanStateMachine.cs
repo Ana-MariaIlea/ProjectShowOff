@@ -87,7 +87,7 @@ public class HumanStateMachine : MonoBehaviour
                     break;
                 case HumanStates.SprayGarden:
                    // Debug.Log("Change state to spray garden");
-                    currentState = new SprayPesticides(GetComponent<NavMeshAgent>(),pesticides, e.zoneSettings.currentWaypoints, GetComponent<FMODUnity.StudioEventEmitter>());
+                    currentState = new SprayPesticides(GetComponent<NavMeshAgent>(),pesticides, e.zoneSettings.currentWaypoints);
                     e.zoneSettings.InitializeEventStats();
                     break;
                 case HumanStates.CutGrass:
