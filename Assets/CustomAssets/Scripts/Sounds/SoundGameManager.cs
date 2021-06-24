@@ -17,8 +17,9 @@ public class SoundGameManager : MonoBehaviour
         [FMODUnity.EventRef]
         public string fmodSoundEvent;
         public FMOD.Studio.EventInstance Sound;
-        [Range(0, 1)]
+        
         public bool HasParameter = true;
+        [Range(0, 1)]
         public float Adjust = 1;
 
         public void ChangeParameter()
