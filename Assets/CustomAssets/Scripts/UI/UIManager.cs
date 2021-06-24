@@ -90,7 +90,10 @@ public class UIManager : MonoBehaviour
     public void GoToBonusLevel()
     {
         if (GameManager.instance)
+        {
+            Time.timeScale = 1f;
             GameManager.instance.GoToBonusLevel();
+        }
         else Debug.Log("No game manager");
     }
 }
