@@ -14,14 +14,7 @@ public class GoToHouse : BaseState
         houseLocation = house.transform;
         target = house.transform;
         timerToStay = time;
-    }
-    private void OnDrawGizmos()
-    {
-
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(houseLocation.position, .3f);
-        
-
+        ag.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
     }
     public override void UpdateBehavior()
     {
@@ -47,6 +40,7 @@ public class GoToHouse : BaseState
     {
         base.FinishState();
         target = agent.transform;
+        agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.IDLE);
         if (timerToStay < 0)
         {
             if (sendEvent == false)

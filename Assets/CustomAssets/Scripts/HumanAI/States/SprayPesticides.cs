@@ -23,6 +23,7 @@ public class SprayPesticides : BaseState
             this.path.Add(path[i].gameObject);
             times.Add(path[i].timeToStay);
             emitter = e;
+            ag.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
         }
     }
 
@@ -33,6 +34,7 @@ public class SprayPesticides : BaseState
         if (!particles.isPlaying)
         {
             particles.Play();
+            agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.SPRAY);
             EventQueue.eventQueue.AddEvent(new PlaySprayParticlesSoundEventData());
         }
         if (timer <= 0)
@@ -40,6 +42,7 @@ public class SprayPesticides : BaseState
             if (particles.isPlaying)
             {
                 particles.Stop();
+                agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
             }
             walkPointSet = false;
         }

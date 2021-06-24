@@ -44,6 +44,7 @@ public class CutGrass : BaseState
             if (!particles.isPlaying)
             {
                 particles.Play();
+                agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALKMOWER);
                 EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("Lawnmower", true));
                 EventQueue.eventQueue.AddEvent(new PlayLawnmowerSoundEventData());
             }
@@ -56,12 +57,10 @@ public class CutGrass : BaseState
             if (particles.isPlaying)
             {
                 particles.Stop();
+                agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
                 EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("Lawnmower", false));
                 EventQueue.eventQueue.AddEvent(new StopLawnmowerSoundEventData());
             }
-
-            
-
 
             if (launge.activeSelf == false)
             {

@@ -11,6 +11,7 @@ public class PickFlowers : BaseState
     public PickFlowers(NavMeshAgent ag,List<GameObject> path) : base(ag) 
     {
         this.path = path;
+        ag.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
     }
     public override void UpdateBehavior()
     {
@@ -25,23 +26,26 @@ public class PickFlowers : BaseState
     {
         //Debug.Log("Pick flower-Destination reached");
         agent.SetDestination(agent.transform.position);
-        if (timer <= 0)
-        {
-            pickUpFlower();
-            walkPointSet = false;
-        }
-        else
-        {
-            timer -= Time.fixedDeltaTime;
-        }
+        agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.PICKFLOWER);
+        //if (timer <= 0)
+        //{
+        //    pickUpFlower();
+            
+        //}
+        //else
+        //{
+        //    timer -= Time.fixedDeltaTime;
+        //}
     }
 
     void pickUpFlower()
     {
         //Debug.Log("Pick flower");
         target = null;
+        walkPointSet = false;
         GameObject f = path[walkPoint].gameObject;
         path.RemoveAt(walkPoint);
+        agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
         EventQueue.eventQueue.AddEvent(new FlowerDestroyEventData(f));
         //Destroy(f);
     }
