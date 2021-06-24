@@ -50,10 +50,14 @@ public enum EventType
     PLAYBEELANDINGSOUND,
     PLAYLAWNMOWERSOUND,
     STOPLAWNMOWERSOUND,
-    PLAYFOOTSTEPSSOUND
+    PLAYFOOTSTEPSSOUND,
+    #endregion
+    #region Animation Events
+    PICKFLOWERANIMATION,
+    CHANGEWAYPOINTANIMATION
     #endregion
 }
-public class EventData 
+public class EventData
 {
     public EventType eventType;
     public EventData(EventType type)
