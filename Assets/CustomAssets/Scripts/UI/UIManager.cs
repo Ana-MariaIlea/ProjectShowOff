@@ -30,16 +30,16 @@ public class UIManager : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.NECTARONTRUNKTEXTCHANGE, OnNectarOnTrunkTextChange);
         EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
 
-        switch (LocalisationSystem.language)
-        {
-            case LocalisationSystem.Language.English:
-                player.clip = englishCutscene;
-                break;
-            case LocalisationSystem.Language.Dutch:
-                player.clip = dutchCutscene;
-                break;
-        }
-        //StartCoroutine(ExampleCoroutine());
+        if (player != null)
+            switch (LocalisationSystem.language)
+            {
+                case LocalisationSystem.Language.English:
+                    player.clip = englishCutscene;
+                    break;
+                case LocalisationSystem.Language.Dutch:
+                    player.clip = dutchCutscene;
+                    break;
+            }
     }
     public void OnNectarOnBeeTextChange(EventData eventData)
     {
@@ -71,22 +71,9 @@ public class UIManager : MonoBehaviour
             resolutionScoreText.text = "Score: " + e.score.ToString();
             cutsceneScreen.SetActive(true);
             player.Play();
-            //resolutionScreen.SetActive(true);
             StartCoroutine(ExampleCoroutine());
         }
     }
-
-    //IEnumerator ExampleCoroutine()
-    //{
-    //    //Print the time of when the function is first called.
-    //    Debug.Log("Started Coroutine at timestamp : " + Time.time);
-
-    //    //yield on a new YieldInstruction that waits for 5 seconds.
-    //    yield return new WaitForSeconds(5);
-
-    //    //After we have waited 5 seconds print the time again.
-    //    Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-    //}
 
     IEnumerator ExampleCoroutine()
     {
@@ -104,6 +91,6 @@ public class UIManager : MonoBehaviour
     {
         if (GameManager.instance)
             GameManager.instance.GoToBonusLevel();
-    else Debug.Log("No game manager");
+        else Debug.Log("No game manager");
     }
 }
