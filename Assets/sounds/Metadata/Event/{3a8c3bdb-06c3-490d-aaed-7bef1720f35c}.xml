@@ -106,8 +106,14 @@
 	</object>
 	<object class="SingleSound" id="{37dea629-4f5a-4163-a74f-a863f0334fcc}">
 		<property name="length">
-			<value>0.60734693877551016</value>
+			<value>0.19999999999999996</value>
 		</property>
+		<property name="timelockedOffset">
+			<value>0.090000000000000011</value>
+		</property>
+		<relationship name="fadeOutCurve">
+			<destination>{26b99855-dd06-49b5-b945-ad6456f0a974}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{429963ff-918b-47d9-8fc4-289430ba0935}</destination>
 		</relationship>
@@ -136,6 +142,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{202bafbd-5943-4458-8d65-36edd513e874}" />
 	<object class="MixerBusFader" id="{ba6e824b-9a75-4b75-92b1-99cfb7bfe32b}" />
+	<object class="FadeCurve" id="{26b99855-dd06-49b5-b945-ad6456f0a974}">
+		<relationship name="startPoint">
+			<destination>{7d2247e1-d0fe-4906-9ace-2fd7e636dcbb}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{96a43bc3-5f98-4895-a9af-31bfc4b119b5}</destination>
+		</relationship>
+	</object>
 	<object class="Automator" id="{9e917725-b55b-41ec-bd44-90b481265440}">
 		<property name="nameOfPropertyBeingAutomated">
 			<value>volume</value>
@@ -152,6 +166,25 @@
 	</object>
 	<object class="MixerBusPanner" id="{0272f62a-c1ae-4236-b2f4-b7760715bfef}" />
 	<object class="MixerBusFader" id="{380cfa70-470a-4d31-a625-24552d237357}" />
+	<object class="AutomationPoint" id="{7d2247e1-d0fe-4906-9ace-2fd7e636dcbb}">
+		<property name="position">
+			<value>0.070000000000000021</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+		<property name="curveShape">
+			<value>0.514628828</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{96a43bc3-5f98-4895-a9af-31bfc4b119b5}">
+		<property name="position">
+			<value>0.1999999999999999</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="AutomationCurve" id="{cfd03ca5-4ea9-4b37-8465-ac6931f353a9}">
 		<relationship name="parameter">
 			<destination>{e12f6fbd-ad6b-4733-a9dd-7fcc28053753}</destination>
