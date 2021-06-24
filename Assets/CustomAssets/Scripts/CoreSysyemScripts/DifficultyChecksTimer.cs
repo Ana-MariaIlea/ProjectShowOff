@@ -31,7 +31,7 @@ public class DifficultyChecksTimer : MonoBehaviour
     [Tooltip("Do NOT modify, preview avaliable for testing only")]
     [SerializeField]
     float maxTimer = 0;
-    int difficultyCheckIndex = 0;
+    public int difficultyCheckIndex = 0;
 
     private void Awake()
     {
@@ -61,11 +61,13 @@ public class DifficultyChecksTimer : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < checksForDifficulty.Count; i++)
-        {
-            Debug.Log(checksForDifficulty[i].time);
-            maxTimer += checksForDifficulty[i].time;
-        }
+        //for (int i = 0; i < checksForDifficulty.Count; i++)
+        //{
+        //    Debug.Log(checksForDifficulty[i].time);
+        //    maxTimer += checksForDifficulty[i].time;
+        //}
+
+        maxTimer = checksForDifficulty[checksForDifficulty.Count-1].time+1;
 
     }
 
@@ -76,10 +78,10 @@ public class DifficultyChecksTimer : MonoBehaviour
         // if (timer > 0)
         //  timer -= Time.deltaTime;
         if (checksForDifficulty.Count != 0)
-            if (timer < maxTimer)
+            if (difficultyCheckIndex<checksForDifficulty.Count)
                 if (timer > checksForDifficulty[difficultyCheckIndex].time)
                 {
-                    Debug.Log("Start difficulty check");
+                    Debug.Log("Start difficulty check "+ difficultyCheckIndex);
                     EventQueue.eventQueue.AddEvent(new CheckDifficultyEventData(checksForDifficulty[difficultyCheckIndex]));
                     difficultyCheckIndex++;
                 }
