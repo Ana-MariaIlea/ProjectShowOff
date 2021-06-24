@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARONBEETEXTCHANGE, OnNectarOnBeeTextChange);
         EventQueue.eventQueue.Subscribe(EventType.NECTARONTRUNKTEXTCHANGE, OnNectarOnTrunkTextChange);
+        EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
 
         switch (LocalisationSystem.language)
         {
@@ -38,6 +39,7 @@ public class UIManager : MonoBehaviour
                 player.clip = dutchCutscene;
                 break;
         }
+        //StartCoroutine(ExampleCoroutine());
     }
     public void OnNectarOnBeeTextChange(EventData eventData)
     {
@@ -61,7 +63,7 @@ public class UIManager : MonoBehaviour
     {
         if (eventData is GameEndEventData)
         {
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             GameEndEventData e = eventData as GameEndEventData;
             if (HighscoreTable.instance)
                 HighscoreTable.instance.AddHighScoreEntry(e.score, e.name);
@@ -69,20 +71,39 @@ public class UIManager : MonoBehaviour
             resolutionScoreText.text = "Score: " + e.score.ToString();
             cutsceneScreen.SetActive(true);
             player.Play();
-
+            //resolutionScreen.SetActive(true);
             StartCoroutine(ExampleCoroutine());
         }
     }
 
+    //IEnumerator ExampleCoroutine()
+    //{
+    //    //Print the time of when the function is first called.
+    //    Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+    //    //yield on a new YieldInstruction that waits for 5 seconds.
+    //    yield return new WaitForSeconds(5);
+
+    //    //After we have waited 5 seconds print the time again.
+    //    Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    //}
+
     IEnumerator ExampleCoroutine()
     {
+        Debug.Log("Corutine " + player.clip.length);
         yield return new WaitForSeconds((float)(player.clip.length));
+        //yield return new WaitForSeconds(5);
+        Debug.Log("Corutine done");
+        Time.timeScale = 0f;
+        //player.Stop();
         cutsceneScreen.SetActive(false);
         resolutionScreen.SetActive(true);
     }
 
     public void GoToBonusLevel()
     {
-        GameManager.instance.GoToBonusLevel();
+        if (GameManager.instance)
+            GameManager.instance.GoToBonusLevel();
+    else Debug.Log("No game manager");
     }
 }
