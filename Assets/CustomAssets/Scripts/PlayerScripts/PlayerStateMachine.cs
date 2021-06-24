@@ -27,6 +27,8 @@ public class PlayerStateMachine : MonoBehaviour
         system.enabled = false;
         currentState = PlayerStates.Movement;
         EventQueue.eventQueue.Subscribe(EventType.CHANGEPLAYERSTATE, OnStateChange);
+        EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
+
     }
 
     public void OnStateChange(EventData eventData)
@@ -76,7 +78,22 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
 
-    public QTESystem GetQTESystem()
+    public void OnGameEnd(EventData eventData)
+    {
+        if (eventData is GameEndEventData)
+        {
+            if (motor != null)
+                motor.enabled = false;
+            if (collect != null)
+                collect.enabled = false;
+            if (boundery != null)
+                boundery.enabled = false;
+            if (system != null)
+                system.enabled = false;
+        }
+    }
+
+            public QTESystem GetQTESystem()
     {
         return system;
     }
