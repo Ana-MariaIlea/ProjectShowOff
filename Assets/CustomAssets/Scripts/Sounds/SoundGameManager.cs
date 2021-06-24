@@ -74,7 +74,7 @@ public class SoundGameManager : MonoBehaviour
     {
         if (eventData is PlayLawnmowerSoundEventData)
         {
-           // Debug.Log("play Lawnmower sound");
+            Debug.Log("play Lawnmower sound");
             Play3DSound("Lawnmower");
         }
     }
@@ -87,6 +87,7 @@ public class SoundGameManager : MonoBehaviour
             {
                 if (_3DSounds[i].SoundName == "Lawnmower")
                 {
+                    _3DSounds[i].Sound.Stop();
                     _3DSounds[i].Sound.EventInstance.setParameterByName("Lawn_mower", 1);
                 }
             }

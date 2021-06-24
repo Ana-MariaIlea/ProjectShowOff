@@ -6,7 +6,7 @@ public class BunusLevelTimer : MonoBehaviour
 {
     [SerializeField]
     GameObject screen;
-    [SerializeField] 
+    [SerializeField]
     int minutes;
     [SerializeField]
     int seconds;
@@ -24,6 +24,8 @@ public class BunusLevelTimer : MonoBehaviour
             playerName = GameManager.instance.playerName;
             playerScore = GameManager.instance.playerScore;
         }
+        EventQueue.eventQueue.Subscribe(EventType.NECTARCOLLECTEND, OnNectarIsCollected);
+
     }
 
     // Update is called once per frame
@@ -33,11 +35,24 @@ public class BunusLevelTimer : MonoBehaviour
         {
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
+            EventQueue.eventQueue.UnSubscribe(EventType.NECTARCOLLECTEND, OnNectarIsCollected);
+
             screen.SetActive(true);
         }
         else
         {
             time -= Time.deltaTime;
+        }
+    }
+
+    public void OnNectarIsCollected(EventData eventData)
+    {
+        if (eventData is NectarCollectEndEventData)
+        {
+            NectarCollectEndEventData e = eventData as NectarCollectEndEventData;
+            playerScore += e.nectarAmount;
+            EventQueue.eventQueue.AddEvent(new NectarOnTrunkTextChangeEventData(playerScore));
+
         }
     }
 }
