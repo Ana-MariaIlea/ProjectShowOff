@@ -19,7 +19,7 @@ public class SoundGameManager : MonoBehaviour
         public FMOD.Studio.EventInstance Sound;
         [Range(0, 1)]
         public bool HasParameter = true;
-        public float Adjust=1;
+        public float Adjust = 1;
 
         public void ChangeParameter()
         {
@@ -48,6 +48,8 @@ public class SoundGameManager : MonoBehaviour
         EventQueue.eventQueue.Subscribe(EventType.PLAYBEELANDINGSOUND, OnPlayBeeLandingSound);
         EventQueue.eventQueue.Subscribe(EventType.PLAYLAWNMOWERSOUND, OnPlayLawnmowerSound);
         EventQueue.eventQueue.Subscribe(EventType.STOPLAWNMOWERSOUND, OnStopLawnmowerSound);
+        EventQueue.eventQueue.Subscribe(EventType.GAMEEND, OnGameEnd);
+
     }
 
     public void OnPlayTutorialSound(EventData eventData)
@@ -179,6 +181,21 @@ public class SoundGameManager : MonoBehaviour
             }
         }
 
-        
+
+    }
+    public void OnGameEnd(EventData eventData)
+    {
+        if (eventData is GameEndEventData)
+        {
+            EventQueue.eventQueue.UnSubscribe(EventType.PLAYMINIGAMESOUND, OnPlayMinigameSound);
+            EventQueue.eventQueue.UnSubscribe(EventType.PLAYTUTORIALSOUND, OnPlayTutorialSound);
+            EventQueue.eventQueue.UnSubscribe(EventType.PLAYSCOREINCREASESOUND, OnPlayScoreInscreaseSound);
+            EventQueue.eventQueue.UnSubscribe(EventType.PLAYSPRAYPARTICLESSOUND, OnPlaySprayParticlesSound);
+            EventQueue.eventQueue.UnSubscribe(EventType.PLAYBEETAKEOFFSOUND, OnPlayBeeTakeOffSound);
+            EventQueue.eventQueue.UnSubscribe(EventType.PLAYBEELANDINGSOUND, OnPlayBeeLandingSound);
+            EventQueue.eventQueue.UnSubscribe(EventType.PLAYLAWNMOWERSOUND, OnPlayLawnmowerSound);
+            EventQueue.eventQueue.UnSubscribe(EventType.STOPLAWNMOWERSOUND, OnStopLawnmowerSound);
+            EventQueue.eventQueue.UnSubscribe(EventType.GAMEEND, OnGameEnd);
+        }
     }
 }
