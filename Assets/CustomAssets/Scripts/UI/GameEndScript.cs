@@ -28,5 +28,6 @@ public class GameEndScript : MonoBehaviour
     public void PlayCutscene()
     {
         player.Play();
+        
     }
 }

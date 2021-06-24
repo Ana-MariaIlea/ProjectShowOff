@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Video;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -9,11 +11,33 @@ public class UIManager : MonoBehaviour
     TextMeshProUGUI nectarOnBeeText;
     [SerializeField]
     TextMeshProUGUI nectarOnTrunkText;
+    [SerializeField]
+    TextMeshProUGUI resolutionScoreText;
+    [SerializeField]
+    GameObject resolutionScreen;
+    [SerializeField]
+    VideoClip englishCutscene;
+    [SerializeField]
+    VideoClip dutchCutscene;
+    [SerializeField]
+    VideoPlayer player;
+    [SerializeField]
+    GameObject cutsceneScreen;
 
     private void Start()
     {
         EventQueue.eventQueue.Subscribe(EventType.NECTARONBEETEXTCHANGE, OnNectarOnBeeTextChange);
         EventQueue.eventQueue.Subscribe(EventType.NECTARONTRUNKTEXTCHANGE, OnNectarOnTrunkTextChange);
+
+        switch (LocalisationSystem.language)
+        {
+            case LocalisationSystem.Language.English:
+                player.clip = englishCutscene;
+                break;
+            case LocalisationSystem.Language.Dutch:
+                player.clip = dutchCutscene;
+                break;
+        }
     }
     public void OnNectarOnBeeTextChange(EventData eventData)
     {
@@ -31,5 +55,34 @@ public class UIManager : MonoBehaviour
             NectarOnTrunkTextChangeEventData e = eventData as NectarOnTrunkTextChangeEventData;
             nectarOnTrunkText.text = e.number.ToString();
         }
+    }
+
+    public void OnGameEnd(EventData eventData)
+    {
+        if (eventData is GameEndEventData)
+        {
+            Time.timeScale = 0f;
+            GameEndEventData e = eventData as GameEndEventData;
+            if (HighscoreTable.instance)
+                HighscoreTable.instance.AddHighScoreEntry(e.score, e.name);
+            else Debug.Log("No highscore table");
+            resolutionScoreText.text = "Score: " + e.score.ToString();
+            cutsceneScreen.SetActive(true);
+            player.Play();
+
+            StartCoroutine(ExampleCoroutine());
+        }
+    }
+
+    IEnumerator ExampleCoroutine()
+    {
+        yield return new WaitForSeconds((float)(player.clip.length));
+        cutsceneScreen.SetActive(false);
+        resolutionScreen.SetActive(true);
+    }
+
+    public void GoToBonusLevel()
+    {
+        GameManager.instance.GoToBonusLevel();
     }
 }

@@ -10,6 +10,7 @@ public enum EventType
     CHECKDIFFICULTY,
     CHANGEDIFFICULTY,
     NECTARCOLLECTTUTORIAL,
+    GAMEEND,
     #endregion
     #region Nectar&Flower events
     COLECTNECTAR,

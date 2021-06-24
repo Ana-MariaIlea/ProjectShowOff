@@ -191,7 +191,8 @@ public class GameSessionStats : MonoBehaviour
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException("zones.Count", "No Zones in the list");
+                EventQueue.eventQueue.AddEvent(new GameEndEventData(playerName, playerScore));
+                //throw new System.ArgumentOutOfRangeException("zones.Count", "No Zones in the list");
             }
         }
         else
