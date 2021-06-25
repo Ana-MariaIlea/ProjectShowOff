@@ -35,6 +35,7 @@ public class SprayPesticides : BaseState
         {
             particles.Play();
             agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.SPRAY);
+            EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("SprayBottle", true));
             EventQueue.eventQueue.AddEvent(new PlaySprayParticlesSoundEventData());
         }
         if (timer <= 0)
@@ -42,6 +43,7 @@ public class SprayPesticides : BaseState
             if (particles.isPlaying)
             {
                 particles.Stop();
+                EventQueue.eventQueue.AddEvent(new HandleHumanObjectStateEventData("SprayBottle", false));
                 agent.gameObject.GetComponent<HumanAnimatorState>().ChangeAnimatorState(HumanAnimationStates.WALK);
             }
             walkPointSet = false;
