@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: fa95802f80bd745cfb5e9c89f7e22341, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f5d489e2e49f11841b524b1d31719343, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1133195675}
-  m_IndirectSpecularColor: {r: 0.33683792, g: 0.81792736, b: 0.9307098, a: 1}
+  m_IndirectSpecularColor: {r: 0.21561016, g: 0.33410686, b: 0.26406753, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -325,6 +325,7 @@ MonoBehaviour:
   loadingScreen: {fileID: 1529933403}
   bar: {fileID: 403426680}
   playerName: 
+  playerScore: 0
 --- !u!4 &864063617
 Transform:
   m_ObjectHideFlags: 0
